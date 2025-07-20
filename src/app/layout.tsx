@@ -4,11 +4,15 @@ import './globals.css';
 
 const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
-  subsets: ['latin']
+  subsets: ['latin'],
+  display: 'swap'
 });
 
 export const metadata: Metadata = {
-  title: 'Next Pizza',
+  title: {
+    template: '%s - Next Pizza',
+    default: 'Next Pizza'
+  },
   description: 'Pizza store created with NextJS'
 };
 
@@ -19,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.variable} antialiased`}>{children}</body>
+      <body className={`${spaceGrotesk.className} antialiased`}>{children}</body>
     </html>
   );
 }

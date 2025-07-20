@@ -1,3 +1,9 @@
+import Header from '@/elements/header';
+
 export default function Home() {
-  return <div>1</div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 }
