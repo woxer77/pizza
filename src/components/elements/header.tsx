@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Search from '@/ui/search';
 import Image from 'next/image';
 import { Button } from '@/ui/button';
 import { User, ShoppingCart, MoveRight } from 'lucide-react';
@@ -22,6 +23,7 @@ const Header: React.FC<ClassProps> = ({ className }) => {
           <h3 className="-mt-1.5 text-neutral-500">fast. cheap. tasty.</h3>
         </div>
       </div>
+      <Search placeholder="I would like..." />
       <div className="flex gap-3">
         <Button variant="outline">
           <User size={16} />
