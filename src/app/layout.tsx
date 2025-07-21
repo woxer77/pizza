@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk } from 'next/font/google';
+import { Nunito } from 'next/font/google';
 import './globals.css';
 
-const spaceGrotesk = Space_Grotesk({
-  variable: '--font-space-grotesk',
+const nunito = Nunito({
+  variable: '--font-nunito',
   subsets: ['latin'],
   display: 'swap'
 });
@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.className} antialiased`}>{children}</body>
+      <body className={`${nunito.className} antialiased`}>{children}</body>
     </html>
   );
 }
