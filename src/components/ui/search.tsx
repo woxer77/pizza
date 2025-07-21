@@ -7,11 +7,13 @@ import { Search as SearchIcon } from 'lucide-react';
 
 import type { ClassProps } from '@/types/common';
 import { cn } from '@/lib/utils';
+import useDebounce from '@/hooks/useDebounce';
 
 interface ISearch extends ClassProps, React.ComponentProps<'input'> {}
 
 const Search: React.FC<ISearch> = ({ className, placeholder }) => {
   const [inputText, setInputText] = React.useState('');
+  const debouncedValue = useDebounce(inputText, 500);
 
   return (
     <div className={cn('relative mx-16 w-full', className)}>
