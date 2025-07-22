@@ -22,7 +22,7 @@ const Search: React.FC<ISearch> = ({ className, placeholder }) => {
         placeholder={placeholder}
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
-        className="border-2 border-neutral-300 px-10 py-4 !text-base"
+        className="border-1 border-neutral-300 px-10 py-4 !text-base"
       />
       <SearchIcon
         size={20}

@@ -17,7 +17,13 @@ const Header: React.FC<ClassProps> = ({ className }) => {
       className={cn('container mx-auto flex items-center py-10', className)}
     >
       <div className="flex shrink-0 gap-x-4">
-        <Image src="/icon.svg" alt="logo" width={42} height={42}></Image>
+        <Image
+          src="/icon.svg"
+          alt="logo"
+          width={42}
+          height={42}
+          priority
+        ></Image>
         <div className="flex flex-col">
           <h1 className="text-2xl font-black">NEXT PIZZA</h1>
           <h3 className="-mt-1.5 text-neutral-500">fast. cheap. tasty.</h3>
