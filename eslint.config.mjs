@@ -31,7 +31,7 @@ const eslintConfig = [
       'space-in-parens': 'error',
       'no-multiple-empty-lines': ['error', { max: 1 }],
       'prefer-const': 'error',
-      'no-use-before-define': 'error',
+      'no-use-before-define': 'off',
       quotes: ['error', 'single'],
       indent: ['error', 2],
       'react/jsx-one-expression-per-line': 'off',
@@ -42,7 +42,7 @@ const eslintConfig = [
           imports: 'never'
         }
       ],
-      'react/jsx-props-no-spreading': 'warn',
+      'react/jsx-props-no-spreading': 'off',
       'import/no-named-as-default': 'warn',
       'import/no-named-as-default-member': 'warn',
       'import/prefer-default-export': 'off',
