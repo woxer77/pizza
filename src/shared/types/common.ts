@@ -5,3 +5,8 @@ export interface ClassProps {
 export interface ICategory {
   name: string;
 }
+
+export interface IOption {
+  value: string;
+  content: string;
+}

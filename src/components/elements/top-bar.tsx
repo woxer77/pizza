@@ -2,7 +2,9 @@
 
 import React from 'react';
 
+import { ChevronDown } from 'lucide-react';
 import TopBarCategory from '@/elements/top-bar-category';
+import Select from '@/ui/select';
 
 import type { ClassProps, ICategory } from '@/types/common';
 import { cn } from '@/lib/utils';
@@ -67,16 +69,38 @@ const TopBar: React.FC<TopBarProps> = ({
         ref={parentElemRef}
         className="flex-center relative gap-1 rounded-xl bg-neutral-100 p-1.5"
       >
-        {processedCategories.map((category, idx) => (
-          <TopBarCategory
-            key={category.name}
-            category={category}
-            ref={idx === 0 ? firstElemRef : null}
-            onClick={handleCategoryClick(category.name)}
-            isActive={category.name === activeCategory}
-            className="z-10 rounded-xl px-4 py-2 capitalize"
-          />
-        ))}
+        {processedCategories.map((category, idx) => {
+          if (category.name === 'more') {
+            return (
+              <React.Fragment key={category.name}>
+                <Select
+                  options={[
+                    { value: '1', content: 'test 1 value' },
+                    { value: '2', content: '2' },
+                    { value: '3', content: 'test 3' },
+                    { value: '4', content: 'test 4 value' }
+                  ]}
+                  onClick={handleCategoryClick(category.name)}
+                  isActive={category.name === activeCategory}
+                  endAdornment={<ChevronDown />}
+                  placeholder="More"
+                  className="z-10 rounded-xl px-4 py-2 capitalize"
+                />
+              </React.Fragment>
+            );
+          } else {
+            return (
+              <TopBarCategory
+                key={category.name}
+                category={category}
+                ref={idx === 0 ? firstElemRef : null}
+                onClick={handleCategoryClick(category.name)}
+                isActive={category.name === activeCategory}
+                className="z-10 rounded-xl px-4 py-2 capitalize"
+              />
+            );
+          }
+        })}
         <div
           ref={moveableElemRef}
           className="bg-background absolute top-1/2 left-0 -translate-y-1/2 rounded-xl transition-all"
