@@ -24,7 +24,7 @@ const TopBarCategory: React.FC<TopBarCategoryProps> = ({
   return (
     <button
       className={cn(
-        'focus-visible:border-ring focus-visible:ring-ring/50 flex cursor-pointer gap-2 font-semibold duration-300 outline-none focus-visible:ring-[3px]',
+        'focus-ring flex cursor-pointer gap-2 font-semibold duration-300',
         isActive && 'text-red-700',
         className
       )}

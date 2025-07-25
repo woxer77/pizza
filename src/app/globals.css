@@ -125,3 +125,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .focus-ring {
+    @apply focus-visible:border-ring focus-visible:ring-ring/50 outline-none focus-visible:ring-[3px];
+  }
+}
