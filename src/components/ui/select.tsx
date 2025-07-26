@@ -4,18 +4,27 @@ import type { ClassProps, IOption } from '@/shared/types/common';
 import { cn } from '@/lib/utils';
 
 interface SelectProps extends ClassProps {
+  contentClassName?: string;
   options: IOption[];
   onSelect?: (value: string) => void;
-  endAdornment?: React.ReactNode;
+  prefixContent?: React.ReactNode;
+  postfixContent?: React.ReactNode;
   placeholder?: string;
   ref?: React.Ref<HTMLButtonElement>;
 }
 
-const Select: React.FC<SelectProps> = ({ className, options, onSelect, endAdornment, placeholder, ref }) => {
+const Select: React.FC<SelectProps> = ({
+  className,
+  contentClassName,
+  options,
+  onSelect,
+  prefixContent,
+  postfixContent,
+  placeholder,
+  ref
+}) => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [selectedOption, setSelectedOption] = React.useState<IOption | null>(() =>
-    placeholder ? null : options[0]
-  );
+  const [selectedOption, setSelectedOption] = React.useState<IOption | null>(placeholder ? null : options[0]);
 
   const dropdownRef = React.useRef<HTMLUListElement>(null);
 
@@ -66,16 +75,16 @@ const Select: React.FC<SelectProps> = ({ className, options, onSelect, endAdornm
       onClick={toggleDropdown}
       onKeyDown={onKeyDownSelect}
       className={cn('flex-center focus-ring relative cursor-pointer gap-1 font-semibold', className)}>
-      {placeholder && !selectedOption?.content ? (
-        <span>{placeholder}</span>
-      ) : (
-        <span>{selectedOption?.content}</span>
-      )}
+      <span className="flex-center flex gap-1">
+        {prefixContent}
+        <span className={contentClassName}>{selectedOption?.content || placeholder}</span>
+        {postfixContent}
+      </span>
       <ul
         ref={dropdownRef}
         className={cn(
-          'bg-background text-foreground invisible absolute top-full left-0 -z-10 flex min-w-34 -translate-x-1 -translate-y-2 flex-col rounded-sm border p-1 opacity-0 shadow-md transition-all',
-          isOpen && 'visible z-10 w-full translate-x-0 translate-y-1 opacity-100'
+          'bg-background text-foreground invisible absolute top-full left-0 -z-10 flex w-full min-w-34 -translate-x-1 -translate-y-2 flex-col rounded-sm border p-1 opacity-0 shadow-md transition-all',
+          isOpen && 'visible z-10 translate-x-0 translate-y-1 opacity-100'
         )}>
         {options.map((option) => (
           <li
@@ -91,8 +100,6 @@ const Select: React.FC<SelectProps> = ({ className, options, onSelect, endAdornm
           </li>
         ))}
       </ul>
-
-      {endAdornment && <span>{endAdornment}</span>}
     </button>
   );
 };

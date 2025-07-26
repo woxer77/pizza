@@ -19,7 +19,7 @@ const useCategory = (
 
   const displayedCategories = [{ name: 'all' } as ICategory, ...categories.slice(0, limit)];
   if (categories.length > limit) {
-    displayedCategories.push({ name: 'more' } as ICategory);
+    displayedCategories.push({ name: 'other' } as ICategory);
   }
 
   const dropdownOptions =

@@ -29,8 +29,7 @@ const TopBarCategory: React.FC<TopBarCategoryProps> = ({
         className
       )}
       ref={ref}
-      onClick={onClick}
-    >
+      onClick={onClick}>
       {startAdornment && <span>{startAdornment}</span>}
       {category.name}
       {endAdornment && <span>{endAdornment}</span>}
