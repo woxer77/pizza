@@ -8,47 +8,48 @@ import Select from '@/ui/select';
 
 import type { ClassProps, ICategory } from '@/types/common';
 import { cn } from '@/lib/utils';
-import useSegmentedControl from '@/hooks/useSegmentedControl';
+import useCategory from '@/hooks/useCategory';
 
 interface TopBarProps extends ClassProps {
   categories: ICategory[];
   limit?: number;
 }
 
-const TopBar: React.FC<TopBarProps> = ({
-  className,
-  categories,
-  limit = 5
-}) => {
+const TopBar: React.FC<TopBarProps> = ({ className, categories, limit = 5 }) => {
   const [activeCategory, setActiveCategory] = React.useState('all');
+  const [shouldMoveToSelect, setShouldMoveToSelect] = React.useState(false);
 
   const moveableElemRef = React.useRef<HTMLDivElement>(null);
   const parentElemRef = React.useRef<HTMLDivElement>(null);
   const firstElemRef = React.useRef<HTMLButtonElement>(null);
+  const selectRef = React.useRef<HTMLButtonElement>(null);
 
-  const { moveSegment } = useSegmentedControl(parentElemRef, moveableElemRef);
+  const { moveSegment, displayedCategories, dropdownOptions } = useCategory(
+    parentElemRef,
+    moveableElemRef,
+    categories,
+    limit
+  );
 
-  const processedCategories = React.useMemo(() => {
-    const result = [{ name: 'all' }, ...categories.slice(0, limit)];
-    if (categories.length > limit) {
-      result.push({ name: 'more' });
+  const onCategoryClick = (categoryName: string) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    moveSegment(e.currentTarget);
+    setActiveCategory(categoryName);
+  };
+
+  const onDropdownChange = (categoryName: string) => {
+    setActiveCategory(categoryName);
+    setShouldMoveToSelect(true);
+  };
+
+  React.useLayoutEffect(() => {
+    if (shouldMoveToSelect && selectRef.current) {
+      moveSegment(selectRef.current);
+      setShouldMoveToSelect(false);
     }
-    return result;
-  }, [categories, limit]);
-
-  const handleCategoryClick =
-    (categoryName: string) =>
-    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      moveSegment(e.currentTarget);
-      setActiveCategory(categoryName);
-    };
+  }, [shouldMoveToSelect, moveSegment]);
 
   React.useEffect(() => {
-    if (
-      moveableElemRef.current &&
-      firstElemRef.current &&
-      parentElemRef.current
-    ) {
+    if (moveableElemRef.current && firstElemRef.current && parentElemRef.current) {
       const firstElemRect = firstElemRef.current.getBoundingClientRect();
       const parentElemRect = parentElemRef.current.getBoundingClientRect();
 
@@ -58,35 +59,23 @@ const TopBar: React.FC<TopBarProps> = ({
     }
   }, []);
 
+  const isSelectActive = dropdownOptions.some((opt) => opt.value === activeCategory);
+
   return (
-    <div
-      className={cn(
-        'flex-space-between container mx-auto mt-10 max-h-14',
-        className
-      )}
-    >
-      <div
-        ref={parentElemRef}
-        className="flex-center relative gap-1 rounded-xl bg-neutral-100 p-1.5"
-      >
-        {processedCategories.map((category, idx) => {
+    <div className={cn('flex-space-between container mx-auto mt-10 max-h-14', className)}>
+      <div ref={parentElemRef} className="flex-center relative gap-1 rounded-xl bg-neutral-100 p-1.5">
+        {displayedCategories.map((category, idx) => {
           if (category.name === 'more') {
             return (
-              <React.Fragment key={category.name}>
-                <Select
-                  options={[
-                    { value: '1', content: 'test 1 value' },
-                    { value: '2', content: '2' },
-                    { value: '3', content: 'test 3' },
-                    { value: '4', content: 'test 4 value' }
-                  ]}
-                  onClick={handleCategoryClick(category.name)}
-                  isActive={category.name === activeCategory}
-                  endAdornment={<ChevronDown />}
-                  placeholder="More"
-                  className="z-10 rounded-xl px-4 py-2 capitalize"
-                />
-              </React.Fragment>
+              <Select
+                key={category.name}
+                ref={selectRef}
+                options={dropdownOptions}
+                onSelect={onDropdownChange}
+                endAdornment={<ChevronDown />}
+                placeholder="More"
+                className={cn('z-10 rounded-xl px-4 py-2 capitalize', isSelectActive && 'text-red-700')}
+              />
             );
           } else {
             return (
@@ -94,7 +83,7 @@ const TopBar: React.FC<TopBarProps> = ({
                 key={category.name}
                 category={category}
                 ref={idx === 0 ? firstElemRef : null}
-                onClick={handleCategoryClick(category.name)}
+                onClick={onCategoryClick(category.name)}
                 isActive={category.name === activeCategory}
                 className="z-10 rounded-xl px-4 py-2 capitalize"
               />
@@ -103,8 +92,7 @@ const TopBar: React.FC<TopBarProps> = ({
         })}
         <div
           ref={moveableElemRef}
-          className="bg-background absolute top-1/2 left-0 -translate-y-1/2 rounded-xl transition-all"
-        ></div>
+          className="bg-background absolute top-1/2 left-0 -translate-y-1/2 rounded-xl transition-all"></div>
       </div>
     </div>
   );
