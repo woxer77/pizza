@@ -63,7 +63,7 @@ const TopBar: React.FC<TopBarProps> = ({ className, categories, limit = 5 }) => 
   const isSelectActive = dropdownOptions.some((opt) => opt.value === activeCategory);
 
   return (
-    <div className={cn('flex-space-between container mx-auto mt-10 max-h-14', className)}>
+    <div className={cn('flex-space-between sticky top-4 container mx-auto mt-10 max-h-14', className)}>
       <div ref={parentElemRef} className="flex-center relative gap-1 rounded-xl bg-neutral-100 p-1.5">
         {displayedCategories.map((category, idx) => {
           if (category.name === 'other') {
