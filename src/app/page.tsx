@@ -1,3 +1,4 @@
+import FilterAside from '@/components/elements/filter-aside';
 import TopBar from '@/elements/top-bar';
 
 const TEMP_CATEGORIES = [
@@ -15,6 +16,9 @@ export default function Home() {
   return (
     <div>
       <TopBar categories={TEMP_CATEGORIES} />
+      <div className="container mx-auto h-[3000px]">
+        <FilterAside />
+      </div>
     </div>
   );
 }

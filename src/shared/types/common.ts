@@ -10,3 +10,9 @@ export interface IOption {
   value: string;
   content: string;
 }
+
+export interface ChoiceItemProps extends ClassProps {
+  id: string;
+  value: string;
+  text?: string;
+}
