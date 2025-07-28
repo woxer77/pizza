@@ -3,27 +3,29 @@
 import React from 'react';
 
 import CheckboxGroup from '@/ui/checkbox-group';
-import CheckboxItem from '@/components/ui/checkbox-item';
 import { RadioGroup } from '@/ui/radio-group';
 import RadioItem from '@/ui/radio-item';
 import { Button } from '@/ui/button';
 import PriceFilter from '@/ui/price-filter';
 
-import type { ClassProps } from '@/types/common';
+import type { ClassProps, FilterItem } from '@/types/common';
 import { cn, upFirstLetter } from '@/lib/utils';
 
-const ingredients = [
-  'pepperoni',
-  'mushrooms',
-  'onions',
-  'sausage',
-  'bacon',
-  'extra cheese',
-  'black olives',
-  'green peppers',
-  'pineapple',
-  'spinach'
+const ingredients: FilterItem[] = [
+  { value: 'pepperoni', text: 'Pepperoni' },
+  { value: 'mushrooms', text: 'Mushrooms' },
+  { value: 'onions', text: 'Onions' },
+  { value: 'sausage', text: 'Sausage' },
+  { value: 'bacon', text: 'Bacon' },
+  { value: 'extra cheese', text: 'Extra Cheese' },
+  { value: 'black olives', text: 'Black Olives' },
+  { value: 'green peppers', text: 'Green Peppers' },
+  { value: 'pineapple', text: 'Pineapple' },
+  { value: 'spinach', text: 'Spinach' },
+  { value: 'spinach2', text: 'Spinach 2' }
 ];
+
+const topFilters = [{ value: 'ready to go', text: 'Ready to go' }];
 
 const FilterAside: React.FC<ClassProps> = ({ className }) => {
   return (
@@ -33,19 +35,12 @@ const FilterAside: React.FC<ClassProps> = ({ className }) => {
         className
       )}>
       <h3 className="mb-6 text-2xl font-bold">Filtration</h3>
-      <CheckboxGroup className="mb-6">
-        <CheckboxItem value="readyToBuild" text="Ready to build" />
-        <CheckboxItem value="new" text="New" />
-      </CheckboxGroup>
+      <CheckboxGroup items={topFilters} className="mb-6" />
       <hr className="my-6" />
       <h4 className="mb-2 font-bold">Price</h4>
       <PriceFilter max={100} step={1} />
       <hr className="my-6" />
-      <CheckboxGroup title="Ingredients" className="mb-6">
-        {ingredients.map((elem) => (
-          <CheckboxItem key={elem} value={elem} text={upFirstLetter(elem)} />
-        ))}
-      </CheckboxGroup>
+      <CheckboxGroup items={ingredients} title="Ingredients" className="mb-6" />
       <hr className="my-6" />
       <RadioGroup defaultValue="traditional" title="Dough type" className="mb-6">
         <RadioItem value="traditional" text={upFirstLetter('traditional')} />

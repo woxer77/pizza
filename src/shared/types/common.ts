@@ -17,3 +17,8 @@ export interface ChoiceItemProps extends ClassProps {
   checked?: boolean;
   onCheckedChange?: (checked: boolean) => void;
 }
+
+export interface FilterItem {
+  value: string;
+  text: string;
+}

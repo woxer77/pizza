@@ -15,6 +15,7 @@ const prefixSortNode = (
 );
 
 const Sort: React.FC<ClassProps> = ({ className }) => {
+  // TODO: add startAdornment to each option in select
   return (
     <div className={cn('rounded-xl bg-neutral-100 p-1.5', className)}>
       <Select
