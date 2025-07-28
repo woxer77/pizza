@@ -34,22 +34,22 @@ const FilterAside: React.FC<ClassProps> = ({ className }) => {
       )}>
       <h3 className="mb-6 text-2xl font-bold">Filtration</h3>
       <CheckboxGroup className="mb-6">
-        <CheckboxItem id="readyToBuild" value="readyToBuild" text="Ready to build" />
-        <CheckboxItem id="new" value="new" text="New" />
+        <CheckboxItem value="readyToBuild" text="Ready to build" />
+        <CheckboxItem value="new" text="New" />
       </CheckboxGroup>
       <hr className="my-6" />
       <h4 className="mb-2 font-bold">Price</h4>
-      <PriceFilter max={5000} step={2} />
+      <PriceFilter max={100} step={1} />
       <hr className="my-6" />
       <CheckboxGroup title="Ingredients" className="mb-6">
         {ingredients.map((elem) => (
-          <CheckboxItem key={elem} id={elem} value={elem} text={upFirstLetter(elem)} />
+          <CheckboxItem key={elem} value={elem} text={upFirstLetter(elem)} />
         ))}
       </CheckboxGroup>
       <hr className="my-6" />
       <RadioGroup defaultValue="traditional" title="Dough type" className="mb-6">
-        <RadioItem id="traditional" value="traditional" text={upFirstLetter('traditional')} />
-        <RadioItem id="slim" value="slim" text={upFirstLetter('slim')} />
+        <RadioItem value="traditional" text={upFirstLetter('traditional')} />
+        <RadioItem value="slim" text={upFirstLetter('slim')} />
       </RadioGroup>
       <Button className="w-full">Submit</Button>
     </aside>
