@@ -84,19 +84,19 @@ const PriceFilter: React.FC<PriceFilterProps> = ({ className, step, min = 0, max
     <div className={cn('', className)}>
       <div className="flex-space-between mb-4 flex gap-5">
         <Input
-          type="number"
           min={min}
           max={priceRange[1] - minStepsBetweenThumbs}
           value={inputValues[0]}
+          placeholder="0"
           onChange={(e) => onInputChange(e.currentTarget.value, InputType.MIN)}
           onBlur={(e) => onInputBlur(e.currentTarget.value, InputType.MIN)}
         />
         -
         <Input
-          type="number"
           min={priceRange[0] + minStepsBetweenThumbs}
           max={max}
           value={inputValues[1]}
+          placeholder="100"
           onChange={(e) => onInputChange(e.currentTarget.value, InputType.MAX)}
           onBlur={(e) => onInputBlur(e.currentTarget.value, InputType.MAX)}
         />
