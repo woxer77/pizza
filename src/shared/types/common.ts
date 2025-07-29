@@ -22,3 +22,11 @@ export interface FilterItem {
   value: string;
   text: string;
 }
+
+export interface IProduct {
+  id: number;
+  name: string;
+  description: string;
+  startPrice: number;
+  image: string;
+}
