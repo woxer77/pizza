@@ -25,15 +25,15 @@ const ingredients: FilterItem[] = [
   { value: 'spinach2', text: 'Spinach 2' }
 ];
 
-const topFilters = [{ value: 'ready to go', text: 'Ready to go' }];
+const topFilters = [
+  { value: 'ready to go', text: 'Ready to go' },
+  { value: 'new', text: 'New' }
+];
 
 const FilterAside: React.FC<ClassProps> = ({ className }) => {
   return (
     <aside
-      className={cn(
-        'sticky top-[108px] mt-10 h-[calc(100vh-108px)] max-w-[244px] overflow-y-auto p-2', // TODO: make all elem height fit the screen
-        className
-      )}>
+      className={cn('sticky top-[132px] h-[calc(90vh-132px)] max-w-[244px] overflow-y-auto px-2 pb-2', className)}>
       <h3 className="mb-6 text-2xl font-bold">Filtration</h3>
       <CheckboxGroup items={topFilters} className="mb-6" />
       <hr className="my-6" />

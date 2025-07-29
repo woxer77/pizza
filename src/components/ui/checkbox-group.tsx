@@ -49,7 +49,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ className, title, items, 
   }, [debouncedValue, inputVisibility, items]);
 
   return (
-    <section className={cn('flex flex-col gap-2', className)}>
+    <section className={cn('flex max-h-96 flex-col gap-2 overflow-y-auto', className)}>
       {title && <h4 className="font-bold">{title}</h4>}
       {inputVisibility && <Input value={inputText} onChange={(e) => filterItems(e.target.value)} />}
       <div className="flex flex-col gap-1.5">
