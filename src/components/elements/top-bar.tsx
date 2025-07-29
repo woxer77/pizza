@@ -63,39 +63,41 @@ const TopBar: React.FC<TopBarProps> = ({ className, categories, limit = 5 }) => 
   const isSelectActive = dropdownOptions.some((opt) => opt.value === activeCategory);
 
   return (
-    <div className={cn('flex-space-between sticky top-4 container mx-auto mt-10 max-h-14', className)}>
-      <div ref={parentElemRef} className="flex-center relative gap-1 rounded-xl bg-neutral-100 p-1.5">
-        {displayedCategories.map((category, idx) => {
-          if (category.name === 'other') {
-            return (
-              <Select
-                key={category.name}
-                ref={selectRef}
-                options={dropdownOptions}
-                onSelect={onDropdownChange}
-                postfixContent={<ChevronDown />}
-                placeholder="Other"
-                className={cn('z-10 rounded-xl px-4 py-2 capitalize', isSelectActive && 'text-red-700')}
-              />
-            );
-          } else {
-            return (
-              <TopBarCategory
-                key={category.name}
-                category={category}
-                ref={idx === 0 ? firstElemRef : null}
-                onClick={onCategoryClick(category.name)}
-                isActive={category.name === activeCategory}
-                className="z-10 rounded-xl px-4 py-2 capitalize"
-              />
-            );
-          }
-        })}
-        <div
-          ref={moveableElemRef}
-          className="bg-background absolute top-1/2 left-0 -translate-y-1/2 rounded-xl transition-all"></div>
+    <div className="bg-background sticky top-0 p-6 shadow-lg shadow-neutral-200">
+      <div className={cn('flex-space-between container mx-auto max-h-14', className)}>
+        <div ref={parentElemRef} className="flex-center relative gap-1 rounded-xl bg-neutral-100 p-1.5">
+          {displayedCategories.map((category, idx) => {
+            if (category.name === 'other') {
+              return (
+                <Select
+                  key={category.name}
+                  ref={selectRef}
+                  options={dropdownOptions}
+                  onSelect={onDropdownChange}
+                  postfixContent={<ChevronDown />}
+                  placeholder="Other"
+                  className={cn('z-10 rounded-xl px-4 py-2 capitalize', isSelectActive && 'text-red-700')}
+                />
+              );
+            } else {
+              return (
+                <TopBarCategory
+                  key={category.name}
+                  category={category}
+                  ref={idx === 0 ? firstElemRef : null}
+                  onClick={onCategoryClick(category.name)}
+                  isActive={category.name === activeCategory}
+                  className="z-10 rounded-xl px-4 py-2 capitalize"
+                />
+              );
+            }
+          })}
+          <div
+            ref={moveableElemRef}
+            className="bg-background absolute top-1/2 left-0 -translate-y-1/2 rounded-xl transition-all"></div>
+        </div>
+        <Sort />
       </div>
-      <Sort />
     </div>
   );
 };
