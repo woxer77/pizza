@@ -17,7 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ className, name, description,
       </div>
       <div className="mb-3 flex flex-col gap-2">
         <h5 className="text-2xl font-bold">{name}</h5>
-        <p className="min-h-[60px] text-sm text-neutral-400">{description}</p>
+        <p className="min-h-[60px] text-neutral-400">{description}</p>
       </div>
       <div className="flex-space-between">
         <span className="text-lg">
