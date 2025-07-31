@@ -28,6 +28,7 @@ const TopBarCategory: React.FC<TopBarCategoryProps> = ({
         isActive && 'text-red-700',
         className
       )}
+      id={`top-bar-${category.id}`}
       ref={ref}
       onClick={onClick}>
       {startAdornment && <span>{startAdornment}</span>}

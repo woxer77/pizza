@@ -1,40 +1,45 @@
 import React from 'react';
 
 import ProductCard from '@/elements/product-card';
+import ProductGroup from '@/elements/product-group';
 
 import type { ClassProps } from '@/types/common';
 import { cn } from '@/lib/utils';
 import { products } from '@/constants/common';
-import ProductGroup from './product-group';
+import { TEMP_CATEGORIES } from '@/constants/common';
 
 const Products: React.FC<ClassProps> = ({ className }) => {
-  const GLOBAL_STATE_CATEGORY = 'all';
-
   return (
     <main className={cn('', className)}>
-      <ProductGroup title={GLOBAL_STATE_CATEGORY}>
-        {products.map(({ id, name, description, startPrice, image }) => (
-          <ProductCard
-            key={id}
-            id={id}
-            name={name}
-            description={description}
-            startPrice={startPrice}
-            image={image}
-          />
-        ))}
+      <ProductGroup title={TEMP_CATEGORIES[0].name} categoryId={TEMP_CATEGORIES[0].id}>
+        {products
+          .filter((e) => e.categoryId === TEMP_CATEGORIES[0].id)
+          .map(({ id, categoryId, name, description, startPrice, image }) => (
+            <ProductCard
+              key={id}
+              id={id}
+              categoryId={categoryId}
+              name={name}
+              description={description}
+              startPrice={startPrice}
+              image={image}
+            />
+          ))}
       </ProductGroup>
-      <ProductGroup title="meat">
-        {products.map(({ id, name, description, startPrice, image }) => (
-          <ProductCard
-            key={id}
-            id={id}
-            name={name}
-            description={description}
-            startPrice={startPrice}
-            image={image}
-          />
-        ))}
+      <ProductGroup title={TEMP_CATEGORIES[2].name} categoryId={TEMP_CATEGORIES[2].id}>
+        {products
+          .filter((e) => e.categoryId === TEMP_CATEGORIES[2].id)
+          .map(({ id, categoryId, name, description, startPrice, image }) => (
+            <ProductCard
+              key={id}
+              id={id}
+              categoryId={categoryId}
+              name={name}
+              description={description}
+              startPrice={startPrice}
+              image={image}
+            />
+          ))}
       </ProductGroup>
     </main>
   );

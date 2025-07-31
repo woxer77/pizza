@@ -1,4 +1,4 @@
-import type { ICategory } from '@/shared/types/common';
+import type { ICategory, IOption } from '@/shared/types/common';
 
 const useCategory = (
   parentElemRef: React.RefObject<HTMLDivElement | null>,
@@ -17,18 +17,18 @@ const useCategory = (
     }
   };
 
-  const displayedCategories = [{ name: 'all' } as ICategory, ...categories.slice(0, limit)];
+  const displayedCategories = [{ id: 'all', name: 'all' }, ...categories.slice(0, limit)];
   if (categories.length > limit) {
-    displayedCategories.push({ name: 'other' } as ICategory);
+    displayedCategories.push({ id: 'other', name: 'other' });
   }
 
   const dropdownOptions =
     categories.length <= limit
       ? []
-      : categories.slice(limit).map((category) => ({
-          value: category.name,
+      : (categories.slice(limit).map((category) => ({
+          value: category.id,
           content: category.name
-        }));
+        })) as IOption[]);
 
   return { moveSegment, displayedCategories, dropdownOptions };
 };

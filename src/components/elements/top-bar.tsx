@@ -17,7 +17,7 @@ interface TopBarProps extends ClassProps {
 }
 
 const TopBar: React.FC<TopBarProps> = ({ className, categories, limit = 5 }) => {
-  const [activeCategory, setActiveCategory] = React.useState('all');
+  const [activeCategoryId, setActiveCategoryId] = React.useState('all');
   const [shouldMoveToSelect, setShouldMoveToSelect] = React.useState(false);
 
   const moveableElemRef = React.useRef<HTMLDivElement>(null);
@@ -32,13 +32,13 @@ const TopBar: React.FC<TopBarProps> = ({ className, categories, limit = 5 }) => 
     limit
   );
 
-  const onCategoryClick = (categoryName: string) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onCategoryClick = (categoryId: string) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     moveSegment(e.currentTarget);
-    setActiveCategory(categoryName);
+    setActiveCategoryId(categoryId);
   };
 
-  const onDropdownChange = (categoryName: string) => {
-    setActiveCategory(categoryName);
+  const onDropdownChange = (categoryId: string) => {
+    setActiveCategoryId(categoryId);
     setShouldMoveToSelect(true);
   };
 
@@ -60,17 +60,17 @@ const TopBar: React.FC<TopBarProps> = ({ className, categories, limit = 5 }) => 
     }
   }, []);
 
-  const isSelectActive = dropdownOptions.some((opt) => opt.value === activeCategory);
+  const isSelectActive = dropdownOptions.some((option) => option.value === activeCategoryId);
 
   return (
     <div className="bg-background sticky top-0 p-6 shadow-lg shadow-neutral-200">
       <div className={cn('flex-space-between container mx-auto max-h-14', className)}>
         <div ref={parentElemRef} className="flex-center relative gap-1 rounded-xl bg-neutral-100 p-1.5">
           {displayedCategories.map((category, idx) => {
-            if (category.name === 'other') {
+            if (category.id === 'other') {
               return (
                 <Select
-                  key={category.name}
+                  key={category.id}
                   ref={selectRef}
                   options={dropdownOptions}
                   onSelect={onDropdownChange}
@@ -82,11 +82,11 @@ const TopBar: React.FC<TopBarProps> = ({ className, categories, limit = 5 }) => 
             } else {
               return (
                 <TopBarCategory
-                  key={category.name}
+                  key={category.id}
                   category={category}
                   ref={idx === 0 ? firstElemRef : null}
-                  onClick={onCategoryClick(category.name)}
-                  isActive={category.name === activeCategory}
+                  onClick={onCategoryClick(category.id)}
+                  isActive={category.id === activeCategoryId}
                   className="z-10 rounded-xl px-4 py-2 capitalize"
                 />
               );

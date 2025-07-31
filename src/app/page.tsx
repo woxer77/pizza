@@ -2,16 +2,7 @@ import FilterAside from '@/elements/filter-aside';
 import Products from '@/elements/products';
 import TopBar from '@/elements/top-bar';
 
-const TEMP_CATEGORIES = [
-  { name: 'meat' },
-  { name: 'spicy' },
-  { name: 'sweet' },
-  { name: 'vegetarian' },
-  { name: 'chicken' },
-  { name: 'pineapple' },
-  { name: 'cheese' },
-  { name: 'tomato' }
-];
+import { TEMP_CATEGORIES } from '@/constants/common';
 
 export default function Home() {
   return (
