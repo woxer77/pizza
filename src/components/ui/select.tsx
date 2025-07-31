@@ -13,6 +13,7 @@ interface SelectProps extends ClassProps {
   postfixContent?: React.ReactNode;
   placeholder?: string;
   ref?: React.Ref<HTMLButtonElement>;
+  activeOptionValue?: string;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -23,7 +24,8 @@ const Select: React.FC<SelectProps> = ({
   prefixContent,
   postfixContent,
   placeholder,
-  ref
+  ref,
+  activeOptionValue
 }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = React.useState(false);
@@ -77,6 +79,7 @@ const Select: React.FC<SelectProps> = ({
   }, [isOpen]);
 
   return (
+    // TODO: reset selectedOption on activeCategoryId change
     <button
       ref={ref}
       onClick={toggleDropdown}
@@ -84,7 +87,7 @@ const Select: React.FC<SelectProps> = ({
       className={cn('flex-center relative cursor-pointer gap-1 font-semibold', className)}>
       <span className="flex-center flex gap-1">
         {prefixContent}
-        <span className={contentClassName}>{selectedOption?.content || placeholder}</span>
+        <span className={contentClassName}>{activeOptionValue || selectedOption?.content || placeholder}</span>
         {postfixContent}
       </span>
       <ul

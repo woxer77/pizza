@@ -27,7 +27,6 @@ const TopBar: React.FC<TopBarProps> = ({ className, categories, limit = 5 }) => 
   const parentElemRef = React.useRef<HTMLDivElement>(null);
   const firstElemRef = React.useRef<HTMLButtonElement>(null);
   const selectRef = React.useRef<HTMLButtonElement>(null);
-
   const { moveSegment, displayedCategories, dropdownOptions } = useCategory(
     parentElemRef,
     moveableElemRef,
@@ -91,6 +90,10 @@ const TopBar: React.FC<TopBarProps> = ({ className, categories, limit = 5 }) => 
                   onSelect={onDropdownChange}
                   postfixContent={<ChevronDown />}
                   placeholder="Other"
+                  activeOptionValue={
+                    // TODO: is there another way to do this?
+                    dropdownOptions.map((e) => e.value).includes(activeCategoryId) ? activeCategoryId : undefined
+                  }
                   className={cn('z-10 rounded-xl px-4 py-2 capitalize', isSelectActive && 'text-red-700')}
                 />
               );
