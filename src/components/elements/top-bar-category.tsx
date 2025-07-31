@@ -23,11 +23,7 @@ const TopBarCategory: React.FC<TopBarCategoryProps> = ({
 }) => {
   return (
     <button
-      className={cn(
-        'focus-ring flex cursor-pointer gap-2 font-semibold duration-300',
-        isActive && 'text-red-700',
-        className
-      )}
+      className={cn('flex cursor-pointer gap-2 font-semibold duration-300', isActive && 'text-red-700', className)}
       id={`top-bar-${category.id}`}
       ref={ref}
       onClick={onClick}>

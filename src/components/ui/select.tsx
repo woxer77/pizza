@@ -93,7 +93,7 @@ const Select: React.FC<SelectProps> = ({
             onKeyDown={(e) => onKeyDownDropdown(e, option)}
             tabIndex={isOpen ? 0 : -1}
             className={cn(
-              'focus-ring cursor-pointer rounded-sm px-3 py-1.5 text-left text-sm capitalize hover:bg-neutral-200',
+              'cursor-pointer rounded-sm px-3 py-1.5 text-left text-sm capitalize hover:bg-neutral-200',
               selectedOption?.value === option.value && 'bg-neutral-100'
             )}>
             {option.content}

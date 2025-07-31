@@ -120,14 +120,12 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    @apply focus-visible:border-ring focus-visible:ring-ring/50 !outline-none focus-visible:ring-[3px];
   }
   body {
     @apply bg-background text-foreground;
   }
-}
-
-@layer utilities {
-  .focus-ring {
-    @apply focus-visible:border-ring focus-visible:ring-ring/50 outline-none focus-visible:ring-[3px];
+  html {
+    scroll-behavior: smooth;
   }
 }
