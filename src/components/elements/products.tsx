@@ -26,9 +26,9 @@ const Products: React.FC<ClassProps> = ({ className }) => {
             />
           ))}
       </ProductGroup>
-      <ProductGroup title={TEMP_CATEGORIES[2].name} categoryId={TEMP_CATEGORIES[2].id}>
+      <ProductGroup title={TEMP_CATEGORIES[7].name} categoryId={TEMP_CATEGORIES[7].id}>
         {products
-          .filter((e) => e.categoryId === TEMP_CATEGORIES[2].id)
+          .filter((e) => e.categoryId === TEMP_CATEGORIES[7].id)
           .map(({ id, categoryId, name, description, startPrice, image }) => (
             <ProductCard
               key={id}

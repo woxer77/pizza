@@ -10,6 +10,7 @@ import Sort from '@/elements/sort';
 import type { ClassProps, ICategory } from '@/types/common';
 import { cn } from '@/lib/utils';
 import useCategory from '@/hooks/useCategory';
+import { useCategoryStore } from '@/store/category';
 
 interface TopBarProps extends ClassProps {
   categories: ICategory[];
@@ -17,7 +18,9 @@ interface TopBarProps extends ClassProps {
 }
 
 const TopBar: React.FC<TopBarProps> = ({ className, categories, limit = 5 }) => {
-  const [activeCategoryId, setActiveCategoryId] = React.useState('all');
+  const activeCategoryId = useCategoryStore((state) => state.activeId);
+  const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
+
   const [shouldMoveToSelect, setShouldMoveToSelect] = React.useState(false);
 
   const moveableElemRef = React.useRef<HTMLDivElement>(null);
@@ -59,6 +62,18 @@ const TopBar: React.FC<TopBarProps> = ({ className, categories, limit = 5 }) => 
       moveableElemRef.current.style.height = `${firstElemRect.height}px`;
     }
   }, []);
+
+  React.useEffect(() => {
+    const activeIsSelect = dropdownOptions.some((option) => option.value === activeCategoryId);
+    if (activeIsSelect && selectRef.current) {
+      moveSegment(selectRef.current);
+    } else {
+      const target = document.querySelector(`#top-bar-${activeCategoryId}`) as HTMLElement;
+      if (!target) return;
+
+      moveSegment(target);
+    }
+  }, [activeCategoryId, moveSegment, dropdownOptions]);
 
   const isSelectActive = dropdownOptions.some((option) => option.value === activeCategoryId);
 

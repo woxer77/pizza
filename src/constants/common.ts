@@ -135,7 +135,7 @@ export const products: IProduct[] = [
     description: 'Classic refreshing cola drink, 500ml',
     startPrice: 2,
     image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[5].id
+    categoryId: TEMP_CATEGORIES[7].id
   },
   {
     id: 14,
@@ -143,6 +143,6 @@ export const products: IProduct[] = [
     description: 'Fresh squeezed orange juice, 400ml',
     startPrice: 3,
     image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[5].id
+    categoryId: TEMP_CATEGORIES[7].id
   }
 ];

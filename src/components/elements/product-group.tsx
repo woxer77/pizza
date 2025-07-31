@@ -5,6 +5,7 @@ import React from 'react';
 import type { ClassProps } from '@/types/common';
 import { cn } from '@/lib/utils';
 import { useIntersection } from 'react-use';
+import { useCategoryStore } from '@/store/category';
 
 interface ProductGroupProps extends ClassProps {
   title: string;
@@ -13,6 +14,8 @@ interface ProductGroupProps extends ClassProps {
 }
 
 const ProductGroup: React.FC<ProductGroupProps> = ({ className, children, title, categoryId }) => {
+  const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
+
   const intersectionRef = React.useRef<HTMLDivElement>(null);
   const intersection = useIntersection(intersectionRef as React.RefObject<HTMLElement>, {
     threshold: 0.35
@@ -20,9 +23,9 @@ const ProductGroup: React.FC<ProductGroupProps> = ({ className, children, title,
 
   React.useEffect(() => {
     if (intersection?.isIntersecting) {
-      console.log(categoryId, title);
+      setActiveCategoryId(categoryId);
     }
-  }, [intersection?.isIntersecting, categoryId, title]);
+  }, [intersection?.isIntersecting, setActiveCategoryId, categoryId]);
 
   return (
     <div ref={intersectionRef} id={categoryId} className={cn('mb-10', className)}>

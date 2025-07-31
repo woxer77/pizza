@@ -5,6 +5,7 @@ export interface ClassProps {
 export interface IOption {
   value: string;
   content: string;
+  href?: string;
 }
 
 export interface ICategory {

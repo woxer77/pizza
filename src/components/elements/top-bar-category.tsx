@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { Button } from '@/ui/button';
+import Link from 'next/link';
+
 import type { ClassProps, ICategory } from '@/types/common';
 import { cn } from '@/lib/utils';
 
@@ -22,15 +25,19 @@ const TopBarCategory: React.FC<TopBarCategoryProps> = ({
   endAdornment
 }) => {
   return (
-    <button
+    <Button
+      noStyles
+      asChild
       className={cn('flex cursor-pointer gap-2 font-semibold duration-300', isActive && 'text-red-700', className)}
       id={`top-bar-${category.id}`}
       ref={ref}
       onClick={onClick}>
-      {startAdornment && <span>{startAdornment}</span>}
-      {category.name}
-      {endAdornment && <span>{endAdornment}</span>}
-    </button>
+      <Link href={`#${category.id}`}>
+        {startAdornment && <span>{startAdornment}</span>}
+        {category.name}
+        {endAdornment && <span>{endAdornment}</span>}
+      </Link>
+    </Button>
   );
 };
 

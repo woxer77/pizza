@@ -17,7 +17,7 @@ const useCategory = (
     }
   };
 
-  const displayedCategories = [{ id: 'all', name: 'all' }, ...categories.slice(0, limit)];
+  const displayedCategories = [...categories.slice(0, limit)];
   if (categories.length > limit) {
     displayedCategories.push({ id: 'other', name: 'other' });
   }
@@ -27,7 +27,8 @@ const useCategory = (
       ? []
       : (categories.slice(limit).map((category) => ({
           value: category.id,
-          content: category.name
+          content: category.name,
+          href: category.id
         })) as IOption[]);
 
   return { moveSegment, displayedCategories, dropdownOptions };

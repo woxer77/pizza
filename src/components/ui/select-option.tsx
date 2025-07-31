@@ -1,0 +1,28 @@
+import React from 'react';
+
+import type { ClassProps, IOption } from '@/types/common';
+import { cn } from '@/lib/utils';
+
+interface SelectOptionProps extends ClassProps {
+  option: IOption;
+  onClick?: () => void;
+  onKeyDown?: React.KeyboardEventHandler<HTMLLIElement>;
+  tabIndex?: number;
+}
+
+const SelectOption: React.FC<SelectOptionProps> = ({ className, option, onClick, onKeyDown, tabIndex }) => {
+  return (
+    <li
+      className={cn(
+        'cursor-pointer rounded-sm px-3 py-1.5 text-left text-sm capitalize hover:bg-neutral-200',
+        className
+      )}
+      onClick={onClick}
+      onKeyDown={onKeyDown}
+      tabIndex={tabIndex}>
+      {option.content}
+    </li>
+  );
+};
+
+export default SelectOption;

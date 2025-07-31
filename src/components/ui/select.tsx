@@ -2,6 +2,8 @@ import React from 'react';
 
 import type { ClassProps, IOption } from '@/shared/types/common';
 import { cn } from '@/lib/utils';
+import SelectOption from './select-option';
+import { useRouter } from 'next/navigation';
 
 interface SelectProps extends ClassProps {
   contentClassName?: string;
@@ -23,6 +25,7 @@ const Select: React.FC<SelectProps> = ({
   placeholder,
   ref
 }) => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = React.useState(false);
   const [selectedOption, setSelectedOption] = React.useState<IOption | null>(placeholder ? null : options[0]);
 
@@ -32,6 +35,10 @@ const Select: React.FC<SelectProps> = ({
     setSelectedOption(option);
     onSelect?.(option.value);
     setIsOpen(false);
+
+    if (option.href) {
+      router.push(`#${option.href}`);
+    }
   };
 
   const toggleDropdown = () => {
@@ -74,7 +81,7 @@ const Select: React.FC<SelectProps> = ({
       ref={ref}
       onClick={toggleDropdown}
       onKeyDown={onKeyDownSelect}
-      className={cn('flex-center focus-ring relative cursor-pointer gap-1 font-semibold', className)}>
+      className={cn('flex-center relative cursor-pointer gap-1 font-semibold', className)}>
       <span className="flex-center flex gap-1">
         {prefixContent}
         <span className={contentClassName}>{selectedOption?.content || placeholder}</span>
@@ -87,17 +94,13 @@ const Select: React.FC<SelectProps> = ({
           isOpen && 'visible z-10 translate-x-0 translate-y-1 opacity-100'
         )}>
         {options.map((option) => (
-          <li
+          <SelectOption
             key={option.value}
+            option={option}
             onClick={() => handleOptionClick(option)}
             onKeyDown={(e) => onKeyDownDropdown(e, option)}
             tabIndex={isOpen ? 0 : -1}
-            className={cn(
-              'cursor-pointer rounded-sm px-3 py-1.5 text-left text-sm capitalize hover:bg-neutral-200',
-              selectedOption?.value === option.value && 'bg-neutral-100'
-            )}>
-            {option.content}
-          </li>
+          />
         ))}
       </ul>
     </button>
