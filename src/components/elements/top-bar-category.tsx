@@ -16,6 +16,8 @@ interface TopBarCategoryProps extends ClassProps {
   endAdornment?: React.ReactNode;
 }
 
+type ButtonIdType = `top-bar-${string}`;
+
 const TopBarCategory: React.FC<TopBarCategoryProps> = ({
   className,
   category,
@@ -25,12 +27,14 @@ const TopBarCategory: React.FC<TopBarCategoryProps> = ({
   startAdornment,
   endAdornment
 }) => {
+  const buttonId: ButtonIdType = `top-bar-${category.id}`;
+
   return (
     <Button
       noStyles
       asChild
       className={cn('flex cursor-pointer gap-2 font-semibold duration-300', isActive && 'text-red-700', className)}
-      id={`top-bar-${category.id}`}
+      id={buttonId}
       ref={ref}
       onClick={onClick}>
       <Link href={`#${category.id}`}>
