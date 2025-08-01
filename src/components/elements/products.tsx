@@ -4,7 +4,8 @@ import ProductCard from '@/elements/product-card';
 import ProductGroup from '@/elements/product-group';
 
 import { groupProductsByCategory } from '@/lib/utils';
-import type { ClassProps, IProduct } from '@/types/common';
+import type { ClassProps } from '@/types/common';
+import type { IProduct } from '@/shared/types/product.interface';
 import { cn } from '@/lib/utils';
 
 interface ProductsProps extends ClassProps {

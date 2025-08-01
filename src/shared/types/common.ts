@@ -8,11 +8,6 @@ export interface IOption {
   href?: string;
 }
 
-export interface ICategory {
-  id: string;
-  name: string;
-}
-
 export interface ChoiceItemProps extends ClassProps {
   value: string;
   text: string;
@@ -23,13 +18,4 @@ export interface ChoiceItemProps extends ClassProps {
 export interface FilterItem {
   value: string;
   text: string;
-}
-
-export interface IProduct {
-  id: number;
-  category: ICategory;
-  name: string;
-  description: string;
-  startPrice: number;
-  image: string;
 }

@@ -7,7 +7,8 @@ import TopBarCategory from '@/elements/top-bar-category';
 import Select from '@/ui/select';
 import Sort from '@/elements/sort';
 
-import type { ClassProps, ICategory } from '@/types/common';
+import type { ClassProps } from '@/types/common';
+import type { ICategory } from '@/shared/types/category.interface';
 import { cn } from '@/lib/utils';
 import useCategory from '@/hooks/useCategory';
 import { useCategoryStore } from '@/store/category';

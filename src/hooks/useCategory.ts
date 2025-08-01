@@ -1,4 +1,5 @@
-import type { ICategory, IOption } from '@/shared/types/common';
+import type { IOption } from '@/shared/types/common';
+import type { ICategory } from '@/shared/types/category.interface';
 
 const useCategory = (
   parentElemRef: React.RefObject<HTMLDivElement | null>,

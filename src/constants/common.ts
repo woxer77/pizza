@@ -1,4 +1,6 @@
-import type { ICategory, IOption, IProduct } from '@/shared/types/common';
+import type { IOption } from '@/shared/types/common';
+import type { IProduct } from '@/shared/types/product.interface';
+import type { ICategory } from '@/shared/types/category.interface';
 
 enum ProductSortOptions {
   POPULAR = 'popular',

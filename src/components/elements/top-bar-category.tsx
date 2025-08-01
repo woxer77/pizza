@@ -3,7 +3,8 @@ import React from 'react';
 import { Button } from '@/ui/button';
 import Link from 'next/link';
 
-import type { ClassProps, ICategory } from '@/types/common';
+import type { ClassProps } from '@/types/common';
+import type { ICategory } from '@/shared/types/category.interface';
 import { cn } from '@/lib/utils';
 
 interface TopBarCategoryProps extends ClassProps {

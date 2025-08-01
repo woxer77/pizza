@@ -1,5 +1,10 @@
+import type { ICategory } from './category.interface';
+
 export interface IProduct {
-  title: string;
+  id: number;
+  category: ICategory;
+  name: string;
   description: string;
-  price: number;
+  startPrice: number;
+  image: string;
 }

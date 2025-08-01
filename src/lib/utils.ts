@@ -1,4 +1,4 @@
-import type { IProduct } from '@/shared/types/common';
+import type { IProduct } from '@/shared/types/product.interface';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 

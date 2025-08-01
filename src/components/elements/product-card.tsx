@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { Button } from '@/ui/button';
 import { Plus } from 'lucide-react';
 
-import type { ClassProps, IProduct } from '@/types/common';
+import type { ClassProps } from '@/types/common';
+import type { IProduct } from '@/shared/types/product.interface';
 import { cn } from '@/lib/utils';
 
 interface ProductCardProps extends ClassProps, IProduct {}
