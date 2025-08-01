@@ -27,7 +27,7 @@ export interface FilterItem {
 
 export interface IProduct {
   id: number;
-  categoryId: string;
+  category: ICategory;
   name: string;
   description: string;
   startPrice: number;

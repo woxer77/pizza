@@ -24,6 +24,7 @@ export const TEMP_CATEGORIES: ICategory[] = [
 ];
 
 export const products: IProduct[] = [
+  // Pizzas (4 items)
   {
     id: 0,
     name: 'Diablo',
@@ -31,7 +32,7 @@ export const products: IProduct[] = [
       'Spicy chorizo, spicy jalapeño peppers, barbecue sauce, meatballs, tomatoes, sweet peppers, red onions, mozzarella',
     startPrice: 10,
     image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[0].id
+    category: TEMP_CATEGORIES[0]
   },
   {
     id: 1,
@@ -39,7 +40,7 @@ export const products: IProduct[] = [
     description: 'Classic tomato sauce, fresh mozzarella, basil leaves, olive oil',
     startPrice: 8,
     image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[0].id
+    category: TEMP_CATEGORIES[0]
   },
   {
     id: 2,
@@ -47,7 +48,7 @@ export const products: IProduct[] = [
     description: 'Tomato sauce, mozzarella cheese, pepperoni slices, oregano',
     startPrice: 9,
     image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[0].id
+    category: TEMP_CATEGORIES[0]
   },
   {
     id: 3,
@@ -55,94 +56,180 @@ export const products: IProduct[] = [
     description: 'Tomato sauce, mozzarella cheese, ham, pineapple chunks',
     startPrice: 11,
     image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[0].id
+    category: TEMP_CATEGORIES[0]
   },
+
+  // Combos (3 items)
   {
     id: 4,
-    name: 'Quattro Stagioni',
-    description: 'Tomato sauce, mozzarella, ham, mushrooms, artichokes, olives',
-    startPrice: 13,
+    name: 'Family Combo',
+    description: 'Large pizza, 6 wings, 2 drinks, and garlic bread',
+    startPrice: 25,
     image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[0].id
+    category: TEMP_CATEGORIES[1]
   },
   {
     id: 5,
-    name: 'Meat Lovers',
-    description: 'Tomato sauce, mozzarella, pepperoni, sausage, bacon, ham',
-    startPrice: 15,
+    name: 'Date Night Combo',
+    description: 'Medium pizza, 2 drinks, and dessert for two',
+    startPrice: 18,
     image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[0].id
+    category: TEMP_CATEGORIES[1]
   },
   {
     id: 6,
-    name: 'Vegetarian',
-    description: 'Tomato sauce, mozzarella, bell peppers, mushrooms, onions, olives',
-    startPrice: 10,
-    image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[0].id
-  },
-  {
-    id: 7,
-    name: 'BBQ Chicken',
-    description: 'BBQ sauce, mozzarella, grilled chicken, red onions, cilantro',
+    name: 'Student Combo',
+    description: 'Small pizza, drink, and side snack',
     startPrice: 12,
     image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[0].id
+    category: TEMP_CATEGORIES[1]
   },
+
+  // Snacks (3 items)
   {
-    id: 8,
-    name: 'Mediterranean',
-    description: 'Olive oil, mozzarella, sun-dried tomatoes, feta cheese, spinach, olives',
-    startPrice: 11,
-    image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[0].id
-  },
-  {
-    id: 9,
-    name: 'Buffalo Chicken',
-    description: 'Buffalo sauce, mozzarella, chicken, red onions, celery, blue cheese',
-    startPrice: 13,
-    image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[0].id
-  },
-  {
-    id: 10,
-    name: 'Supreme',
-    description: 'Tomato sauce, mozzarella, pepperoni, sausage, bell peppers, mushrooms, onions',
-    startPrice: 14,
-    image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[0].id
-  },
-  {
-    id: 11,
+    id: 7,
     name: 'Chicken Wings',
     description: 'Crispy chicken wings with choice of buffalo, BBQ, or honey mustard sauce',
     startPrice: 7,
     image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[2].id
+    category: TEMP_CATEGORIES[2]
   },
   {
-    id: 12,
+    id: 8,
     name: 'Mozzarella Sticks',
     description: 'Golden fried mozzarella sticks served with marinara sauce',
     startPrice: 6,
     image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[2].id
+    category: TEMP_CATEGORIES[2]
   },
   {
-    id: 13,
+    id: 9,
+    name: 'Garlic Bread',
+    description: 'Crispy bread with garlic butter and herbs',
+    startPrice: 4,
+    image: '/pizza.png',
+    category: TEMP_CATEGORIES[2]
+  },
+
+  // Cocktails (2 items)
+  {
+    id: 10,
+    name: 'Mojito',
+    description: 'Classic mojito with mint, lime, and rum',
+    startPrice: 8,
+    image: '/pizza.png',
+    category: TEMP_CATEGORIES[3]
+  },
+  {
+    id: 11,
+    name: 'Piña Colada',
+    description: 'Tropical cocktail with pineapple and coconut',
+    startPrice: 9,
+    image: '/pizza.png',
+    category: TEMP_CATEGORIES[3]
+  },
+
+  // Drinks (3 items)
+  {
+    id: 12,
     name: 'Coca-Cola',
     description: 'Classic refreshing cola drink, 500ml',
     startPrice: 2,
     image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[7].id
+    category: TEMP_CATEGORIES[4]
   },
   {
-    id: 14,
+    id: 13,
     name: 'Orange Juice',
     description: 'Fresh squeezed orange juice, 400ml',
     startPrice: 3,
     image: '/pizza.png',
-    categoryId: TEMP_CATEGORIES[7].id
+    category: TEMP_CATEGORIES[4]
+  },
+  {
+    id: 14,
+    name: 'Sparkling Water',
+    description: 'Refreshing sparkling mineral water, 500ml',
+    startPrice: 2,
+    image: '/pizza.png',
+    category: TEMP_CATEGORIES[4]
+  },
+
+  // Desserts (2 items)
+  {
+    id: 15,
+    name: 'Tiramisu',
+    description: 'Classic Italian dessert with coffee and mascarpone',
+    startPrice: 6,
+    image: '/pizza.png',
+    category: TEMP_CATEGORIES[5]
+  },
+  {
+    id: 16,
+    name: 'Chocolate Cake',
+    description: 'Rich chocolate cake with chocolate frosting',
+    startPrice: 5,
+    image: '/pizza.png',
+    category: TEMP_CATEGORIES[5]
+  },
+
+  // Salads (3 items)
+  {
+    id: 17,
+    name: 'Caesar Salad',
+    description: 'Fresh romaine lettuce, croutons, parmesan, caesar dressing',
+    startPrice: 7,
+    image: '/pizza.png',
+    category: TEMP_CATEGORIES[6]
+  },
+  {
+    id: 18,
+    name: 'Greek Salad',
+    description: 'Tomatoes, cucumbers, olives, feta cheese, olive oil',
+    startPrice: 8,
+    image: '/pizza.png',
+    category: TEMP_CATEGORIES[6]
+  },
+  {
+    id: 19,
+    name: 'Caprese Salad',
+    description: 'Fresh mozzarella, tomatoes, basil, balsamic glaze',
+    startPrice: 9,
+    image: '/pizza.png',
+    category: TEMP_CATEGORIES[6]
+  },
+
+  // Pasta (4 items)
+  {
+    id: 20,
+    name: 'Spaghetti Carbonara',
+    description: 'Classic pasta with eggs, cheese, pancetta, and black pepper',
+    startPrice: 12,
+    image: '/pizza.png',
+    category: TEMP_CATEGORIES[7]
+  },
+  {
+    id: 21,
+    name: 'Penne Arrabbiata',
+    description: 'Spicy tomato sauce with garlic, chili, and herbs',
+    startPrice: 10,
+    image: '/pizza.png',
+    category: TEMP_CATEGORIES[7]
+  },
+  {
+    id: 22,
+    name: 'Fettuccine Alfredo',
+    description: 'Creamy parmesan sauce with butter and garlic',
+    startPrice: 11,
+    image: '/pizza.png',
+    category: TEMP_CATEGORIES[7]
+  },
+  {
+    id: 23,
+    name: 'Lasagna',
+    description: 'Layered pasta with meat sauce, cheese, and herbs',
+    startPrice: 14,
+    image: '/pizza.png',
+    category: TEMP_CATEGORIES[7]
   }
 ];
