@@ -33,17 +33,17 @@ const topFilters = [
 const FilterAside: React.FC<ClassProps> = ({ className }) => {
   return (
     <aside
-      className={cn('sticky top-[132px] h-[calc(90vh-132px)] max-w-[244px] overflow-y-auto px-2 pb-2', className)}
+      className={cn('sticky top-[132px] h-[calc(90vh-132px)] max-w-[244px] overflow-y-auto pr-2 pb-2', className)}
       tabIndex={-1}>
-      <h3 className="mb-6 text-2xl font-bold">Filtration</h3>
-      <CheckboxGroup items={topFilters} className="mb-6" />
+      <h3 className="mb-6 pl-1 text-2xl font-bold">Filtration</h3>
+      <CheckboxGroup items={topFilters} className="mb-6 pl-1" />
       <hr className="my-6" />
-      <h4 className="mb-2 font-bold">Price</h4>
-      <PriceFilter max={100} step={1} />
+      <h4 className="mb-2 pl-1 font-bold">Price</h4>
+      <PriceFilter max={100} step={1} className="pl-1" />
       <hr className="my-6" />
-      <CheckboxGroup items={ingredients} title="Ingredients" className="mb-6" />
+      <CheckboxGroup items={ingredients} title="Ingredients" className="mb-6 pb-1 pl-1" />
       <hr className="my-6" />
-      <RadioGroup defaultValue="traditional" title="Dough type" className="mb-6">
+      <RadioGroup defaultValue="traditional" title="Dough type" className="mb-6 pl-1" titleClassName="pl-1">
         <RadioItem value="traditional" text={upFirstLetter('traditional')} />
         <RadioItem value="slim" text={upFirstLetter('slim')} />
       </RadioGroup>

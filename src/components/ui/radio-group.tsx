@@ -8,12 +8,13 @@ import { cn } from '@/lib/utils';
 
 interface RadioGroupProps extends React.ComponentProps<typeof RadioGroupPrimitive.Root> {
   title?: string;
+  titleClassName?: string;
 }
 
-function RadioGroup({ className, title, ...props }: RadioGroupProps) {
+function RadioGroup({ className, title, titleClassName, ...props }: RadioGroupProps) {
   return (
     <>
-      {title && <h4 className="mb-2 font-bold">{title}</h4>}
+      {title && <h4 className={cn('mb-2 font-bold', titleClassName)}>{title}</h4>}
       <RadioGroupPrimitive.Root data-slot="radio-group" className={cn('grid gap-2', className)} {...props} />
     </>
   );
