@@ -120,6 +120,12 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  button,
+  a,
+  input,
+  textarea,
+  select {
     @apply focus-visible:border-ring focus-visible:ring-ring/50 !outline-none focus-visible:ring-[3px];
   }
   body {

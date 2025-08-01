@@ -33,7 +33,8 @@ const topFilters = [
 const FilterAside: React.FC<ClassProps> = ({ className }) => {
   return (
     <aside
-      className={cn('sticky top-[132px] h-[calc(90vh-132px)] max-w-[244px] overflow-y-auto px-2 pb-2', className)}>
+      className={cn('sticky top-[132px] h-[calc(90vh-132px)] max-w-[244px] overflow-y-auto px-2 pb-2', className)}
+      tabIndex={-1}>
       <h3 className="mb-6 text-2xl font-bold">Filtration</h3>
       <CheckboxGroup items={topFilters} className="mb-6" />
       <hr className="my-6" />
