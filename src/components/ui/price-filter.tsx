@@ -75,6 +75,9 @@ const PriceFilter: React.FC<PriceFilterProps> = ({ className, step, min = 0, max
         setPriceRange([priceRange[0], number]);
         setInputValues([inputValues[0], number.toString()]);
         break;
+      default:
+        const exhaustiveCheck: never = type;
+        return exhaustiveCheck;
     }
   };
 
