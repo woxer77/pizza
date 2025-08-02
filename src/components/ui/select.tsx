@@ -1,14 +1,17 @@
+'use client';
+
 import React from 'react';
+
+import SelectOption from '@/ui/select-option';
 
 import type { ClassProps, IOption } from '@/shared/types/common';
 import { cn } from '@/lib/utils';
-import SelectOption from './select-option';
 import { useRouter } from 'next/navigation';
 
-interface SelectProps extends ClassProps {
+interface SelectProps<T extends string> extends ClassProps {
   contentClassName?: string;
-  options: IOption[];
-  onSelect?: (value: string) => void;
+  options: IOption<T>[];
+  onSelect?: (value: T) => void;
   prefixContent?: React.ReactNode;
   postfixContent?: React.ReactNode;
   placeholder?: string;
@@ -16,7 +19,7 @@ interface SelectProps extends ClassProps {
   activeOptionValue?: string;
 }
 
-const Select: React.FC<SelectProps> = ({
+const Select = <T extends string>({
   className,
   contentClassName,
   options,
@@ -26,14 +29,14 @@ const Select: React.FC<SelectProps> = ({
   placeholder,
   ref,
   activeOptionValue
-}) => {
+}: SelectProps<T>) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = React.useState(false);
-  const [selectedOption, setSelectedOption] = React.useState<IOption | null>(placeholder ? null : options[0]);
+  const [selectedOption, setSelectedOption] = React.useState<IOption<T> | null>(placeholder ? null : options[0]);
 
   const dropdownRef = React.useRef<HTMLUListElement>(null);
 
-  const handleOptionClick = (option: IOption) => {
+  const handleOptionClick = (option: IOption<T>) => {
     setSelectedOption(option);
     onSelect?.(option.value);
     setIsOpen(false);
@@ -56,7 +59,7 @@ const Select: React.FC<SelectProps> = ({
     }
   };
 
-  const onKeyDownDropdown = (e: React.KeyboardEvent, option: IOption) => {
+  const onKeyDownDropdown = (e: React.KeyboardEvent, option: IOption<T>) => {
     if (e.key === 'Escape') {
       setIsOpen(false);
     } else if (e.key === 'Enter') {

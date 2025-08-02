@@ -8,3 +8,10 @@ export interface IProduct {
   startPrice: number;
   image: string;
 }
+
+export enum ProductSortBy {
+  POPULAR = 'popular',
+  NEW = 'new',
+  ASCENDING = 'ascending',
+  DESCENDING = 'descending'
+}

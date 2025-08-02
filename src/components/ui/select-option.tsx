@@ -3,14 +3,20 @@ import React from 'react';
 import type { ClassProps, IOption } from '@/types/common';
 import { cn } from '@/lib/utils';
 
-interface SelectOptionProps extends ClassProps {
-  option: IOption;
+interface SelectOptionProps<T> extends ClassProps {
+  option: IOption<T>;
   onClick?: () => void;
   onKeyDown?: React.KeyboardEventHandler<HTMLLIElement>;
   tabIndex?: number;
 }
 
-const SelectOption: React.FC<SelectOptionProps> = ({ className, option, onClick, onKeyDown, tabIndex }) => {
+const SelectOption = <T extends string>({
+  className,
+  option,
+  onClick,
+  onKeyDown,
+  tabIndex
+}: SelectOptionProps<T>) => {
   return (
     <li
       className={cn(
