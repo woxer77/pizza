@@ -15,6 +15,8 @@ model User {
 
   firstName  String
   secondName String
+  phone      String
+  address    String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -26,8 +28,73 @@ model Product {
   name        String
   description String
   image       String
+  basePrice   Int
 
-  startPrice Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+
+  ingredients Ingredient[]
+  variations  ProductVariation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductVariation {
+  id Int @id @default(autoincrement())
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+
+  size   Size? @relation(fields: [sizeId], references: [id])
+  sizeId Int?
+
+  doughtType   DoughType? @relation(fields: [doughtTypeId], references: [id])
+  doughtTypeId Int?
+}
+
+model Size {
+  id Int @id @default(autoincrement())
+
+  name  String
+  size  Int
+  price Int
+
+  productVariations ProductVariation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DoughType {
+  id Int @id @default(autoincrement())
+
+  name  String
+  price Int
+
+  productVariations ProductVariation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id       String    @id
+  name     String
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Ingredient {
+  id Int @id @default(autoincrement())
+
+  name  String
+  price Int
+  image String
+
+  products Product[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
