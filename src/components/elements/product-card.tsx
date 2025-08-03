@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 
 interface ProductCardProps extends ClassProps, IProduct {}
 
-const ProductCard: React.FC<ProductCardProps> = ({ className, name, description, image, startPrice }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ className, name, description, image, basePrice }) => {
   return (
     <div className={cn('', className)}>
       <div className="flex-center mb-4 h-[260px] w-full rounded-2xl bg-[#FFF7EE]">
@@ -22,7 +22,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ className, name, description,
       </div>
       <div className="flex-space-between">
         <span className="text-lg">
-          from <strong className="text-xl font-extrabold">${startPrice}</strong>
+          from <strong className="text-xl font-extrabold">${basePrice}</strong>
         </span>
         <Button variant="secondary" className="flex gap-2 px-6 py-5 text-lg font-bold">
           <Plus size={20} /> Build

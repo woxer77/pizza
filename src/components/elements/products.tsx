@@ -30,7 +30,7 @@ const Products: React.FC<ProductsProps> = ({ className, products }) => {
                 category={product.category}
                 name={product.name}
                 description={product.description}
-                startPrice={product.startPrice}
+                basePrice={product.basePrice}
                 image={product.image}
               />
             ))}

@@ -5,7 +5,7 @@ export interface IProduct {
   category: ICategory;
   name: string;
   description: string;
-  startPrice: number;
+  basePrice: number;
   image: string;
 }
 
