@@ -7,14 +7,14 @@ const useCategory = (categories: ICategory[], limit: number) => {
     displayedCategories.push({ id: 'other', name: 'other' });
   }
 
-  const dropdownOptions =
+  const dropdownOptions: IOption<string>[] =
     categories.length <= limit
       ? []
-      : (categories.slice(limit).map((category) => ({
+      : categories.slice(limit).map((category) => ({
           value: category.id,
           content: category.name,
           href: category.id
-        })) as IOption<string>[]);
+        }));
 
   return { displayedCategories, dropdownOptions };
 };
