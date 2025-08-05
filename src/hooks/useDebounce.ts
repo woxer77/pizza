@@ -2,7 +2,7 @@ import React from 'react';
 
 const useDebounce = <T>(value: T, delay: number): T => {
   const [debouncedValue, setDebouncedValue] = React.useState<T>(value);
-  const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const timerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
 
   React.useEffect(() => {
     if (timerRef.current) clearTimeout(timerRef.current);

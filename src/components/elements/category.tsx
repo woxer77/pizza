@@ -28,8 +28,9 @@ const Category: React.FC<CategoryProps> = ({ className, categories, limit = 5 })
   const parentElemRef = React.useRef<HTMLDivElement>(null);
   const firstElemRef = React.useRef<HTMLButtonElement>(null);
   const selectRef = React.useRef<HTMLButtonElement>(null);
+
   const { displayedCategories, dropdownOptions } = useCategory(categories, limit);
-  const { moveSegment } = useSegmentControl(parentElemRef, moveableElemRef);
+  const moveSegment = useSegmentControl(parentElemRef, moveableElemRef);
 
   const onCategoryClick = (categoryId: string) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     moveSegment(e.currentTarget);
@@ -61,6 +62,7 @@ const Category: React.FC<CategoryProps> = ({ className, categories, limit = 5 })
 
   React.useEffect(() => {
     const activeIsSelect = dropdownOptions.some((option) => option.value === activeCategoryId);
+
     if (activeIsSelect && selectRef.current) {
       moveSegment(selectRef.current);
     } else {

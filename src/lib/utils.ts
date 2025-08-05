@@ -11,7 +11,7 @@ export function upFirstLetter(str: string) {
 }
 
 export const groupProductsByCategory = (products: IProduct[]): IProduct[][] => {
-  const productsMap = new Map<string | number, IProduct[]>();
+  const productsMap = new Map<string, IProduct[]>();
 
   products.forEach((product) => {
     const categoryId = product.category.id;

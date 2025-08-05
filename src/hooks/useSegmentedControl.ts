@@ -3,7 +3,7 @@ const useSegmentedControl = (
   moveableElemRef: React.RefObject<HTMLDivElement | null>
 ) => {
   const moveSegment = (target: HTMLElement) => {
-    if (parentElemRef.current && moveableElemRef.current) {
+    if (parentElemRef.current && moveableElemRef.current && target) {
       const targetRect = target.getBoundingClientRect();
       const parentRect = parentElemRef.current.getBoundingClientRect();
 
@@ -12,7 +12,7 @@ const useSegmentedControl = (
     }
   };
 
-  return { moveSegment };
+  return moveSegment;
 };
 
 export default useSegmentedControl;
