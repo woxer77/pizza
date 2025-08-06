@@ -8,7 +8,7 @@ import type { ClassProps } from '@/types/common';
 import { cn } from '@/lib/utils';
 import { TEMP_CATEGORIES } from '@/constants/category.constants';
 import { productSortOptions } from '@/constants/product.constants';
-import type { ProductSortBy } from '@/shared/types/product.interface';
+import type { ProductSortByValue } from '@/shared/types/product.interface';
 
 const prefixSortNode = (
   <div className="flex-center flex shrink-0 gap-1">
@@ -22,7 +22,7 @@ const TopBar: React.FC<ClassProps> = ({ className }) => {
     <div className={cn('bg-background sticky top-0 p-6 shadow-lg shadow-neutral-200', className)}>
       <div className="flex-space-between container mx-auto max-h-14">
         <Category categories={TEMP_CATEGORIES} />
-        <Sort<ProductSortBy>
+        <Sort<ProductSortByValue>
           options={productSortOptions}
           prefixContent={prefixSortNode}
           className="rounded-xl bg-neutral-100 p-1.5"

@@ -9,9 +9,11 @@ export interface IProduct {
   image: string;
 }
 
-export enum ProductSortBy {
-  POPULAR = 'popular',
-  NEW = 'new',
-  ASCENDING = 'ascending',
-  DESCENDING = 'descending'
-}
+export const ProductSortBy = {
+  POPULAR: 'popular',
+  NEW: 'new',
+  ASCENDING: 'ascending',
+  DESCENDING: 'descending'
+} as const;
+
+export type ProductSortByValue = (typeof ProductSortBy)[keyof typeof ProductSortBy];

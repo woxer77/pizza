@@ -8,10 +8,12 @@ import { Input } from '@/ui/input';
 import type { ClassProps } from '@/types/common';
 import { cn } from '@/lib/utils';
 
-enum InputType {
-  MIN = 'min',
-  MAX = 'max'
-}
+const InputType = {
+  MIN: 'min',
+  MAX: 'max'
+} as const;
+
+type InputTypeValue = (typeof InputType)[keyof typeof InputType];
 
 interface PriceFilterProps extends ClassProps {
   min?: number;
@@ -28,7 +30,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({ className, step, min = 0, max
     setInputValues([range[0].toString(), range[1].toString()]);
   };
 
-  const onInputChange = (value: string, type: InputType) => {
+  const onInputChange = (value: string, type: InputTypeValue) => {
     if (type === InputType.MIN) {
       setInputValues([value, inputValues[1]]);
     } else {
@@ -36,7 +38,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({ className, step, min = 0, max
     }
   };
 
-  const onInputBlur = (value: string, type: InputType) => {
+  const onInputBlur = (value: string, type: InputTypeValue) => {
     const number = parseInt(value, 10);
 
     if (!isFinite(number)) {
