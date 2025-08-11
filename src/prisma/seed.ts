@@ -1,5 +1,8 @@
+import { categories } from '@/constants/category.constants';
 import prisma from './prisma-client';
 import { hashSync } from 'bcrypt';
+import { ingredients } from '@/constants/common';
+import { products } from '@/constants/product.constants';
 
 async function generate() {
   await prisma.user.createMany({
@@ -25,10 +28,25 @@ async function generate() {
       }
     ]
   });
+
+  await prisma.category.createMany({
+    data: categories
+  });
+
+  await prisma.ingredient.createMany({
+    data: ingredients
+  });
+
+  await prisma.product.createMany({
+    data: products
+  });
 }
 
 async function clear() {
   await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Category" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Ingredient" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Product" RESTART IDENTITY CASCADE`;
 }
 
 async function main() {

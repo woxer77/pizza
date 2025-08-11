@@ -14,6 +14,10 @@ import { cn, upFirstLetter } from '@/lib/utils';
 import { ingredients, topFilters } from '@/constants/common';
 
 const FilterAside: React.FC<ClassProps> = ({ className }) => {
+  const TEMP_INGREDIENTS = ingredients.map((item) => {
+    return { value: item.name.toLowerCase(), text: item.name };
+  });
+
   return (
     <aside
       className={cn(
@@ -30,7 +34,7 @@ const FilterAside: React.FC<ClassProps> = ({ className }) => {
       </FilterSection>
       <hr className="my-6" />
       <FilterSection title="Ingredients">
-        <CheckboxGroup items={ingredients} className="pb-1" />
+        <CheckboxGroup items={TEMP_INGREDIENTS} className="pb-1" />
       </FilterSection>
       <hr className="my-6" />
       <FilterSection title="Dough type">
