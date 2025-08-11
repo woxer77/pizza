@@ -58,8 +58,8 @@ model ProductVariation {
   size   Size? @relation(fields: [sizeId], references: [id])
   sizeId Int?
 
-  doughtType   DoughType? @relation(fields: [doughtTypeId], references: [id])
-  doughtTypeId Int?
+  doughType   DoughType? @relation(fields: [doughTypeId], references: [id])
+  doughTypeId Int?
 
   cartItems CartItem[]
 }
