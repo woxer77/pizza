@@ -8,7 +8,7 @@ export const productSortOptions: IOption<ProductSortByValue>[] = Object.values(P
 
 export const products = [
   // Pizzas
-  {
+  /* {
     name: 'Cheese',
     description: 'Classic cheese pizza with stretchy mozzarella and house tomato sauce.',
     image: '/pizza/cheese.png',
@@ -56,7 +56,7 @@ export const products = [
     image: '/pizza/pepperoni.png',
     basePrice: 9.8,
     categoryId: 'pizza'
-  },
+  }, */
 
   // Combos
   {

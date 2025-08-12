@@ -3,6 +3,21 @@ import prisma from './prisma-client';
 import { hashSync } from 'bcrypt';
 import { ingredients } from '@/constants/common';
 import { products } from '@/constants/product.constants';
+import type { Prisma } from '@prisma/client';
+
+type GenerateVariationType = (
+  productId: number,
+  sizeId?: 1 | 2 | 3 | 4,
+  doughTypeId?: 1 | 2
+) => Prisma.ProductVariationUncheckedCreateInput;
+
+const generateVariation: GenerateVariationType = (productId, sizeId, doughTypeId) => {
+  return {
+    productId,
+    sizeId,
+    doughTypeId
+  };
+};
 
 async function generate() {
   await prisma.user.createMany({
@@ -37,16 +52,183 @@ async function generate() {
     data: ingredients
   });
 
+  const createdIngredients = await prisma.ingredient.findMany({
+    where: {
+      name: {
+        in: ingredients.map((elem) => elem.name)
+      }
+    },
+    select: { id: true }
+  });
+
   await prisma.product.createMany({
     data: products
+  });
+
+  await prisma.size.createMany({
+    data: [
+      {
+        name: '20 cm',
+        size: 20,
+        price: 3
+      },
+      {
+        name: '25 cm',
+        size: 25,
+        price: 5
+      },
+      {
+        name: '30 cm',
+        size: 30,
+        price: 8
+      },
+      {
+        name: '35 cm',
+        size: 35,
+        price: 12
+      }
+    ]
+  });
+
+  await prisma.doughType.createMany({
+    data: [
+      {
+        name: 'traditional',
+        price: 5
+      },
+      {
+        name: 'thin',
+        price: 6
+      }
+    ]
+  });
+
+  const pizza1 = await prisma.product.create({
+    data: {
+      name: 'Cheese',
+      description: 'Classic cheese pizza with stretchy mozzarella and house tomato sauce.',
+      image: '/pizza/cheese.png',
+      basePrice: 8.5,
+      categoryId: 'pizza',
+      ingredients: {
+        connect: createdIngredients.slice(0, 5)
+      }
+    }
+  });
+  const pizza2 = await prisma.product.create({
+    data: {
+      name: 'Chorizo',
+      description: 'Spicy chorizo slices, tomato sauce and mozzarella.',
+      image: '/pizza/chorizo.png',
+      basePrice: 9.5,
+      categoryId: 'pizza',
+      ingredients: {
+        connect: createdIngredients.slice(5, 10)
+      }
+    }
+  });
+  const pizza3 = await prisma.product.create({
+    data: {
+      name: 'Double Chicken',
+      description: 'Double portion of tender chicken, mozzarella and creamy sauce.',
+      image: '/pizza/double-chicken.png',
+      basePrice: 10.5,
+      categoryId: 'pizza',
+      ingredients: {
+        connect: createdIngredients.slice(10)
+      }
+    }
+  });
+
+  await prisma.productVariation.createMany({
+    data: [
+      generateVariation(pizza1.id, 1, 1),
+      generateVariation(pizza1.id, 2, 1),
+      generateVariation(pizza1.id, 3, 1),
+      generateVariation(pizza1.id, 3, 2),
+      generateVariation(pizza1.id, 4, 1),
+      generateVariation(pizza1.id, 4, 2),
+
+      generateVariation(pizza2.id, 1, 1),
+      generateVariation(pizza2.id, 2, 1),
+      generateVariation(pizza2.id, 3, 1),
+      generateVariation(pizza2.id, 3, 2),
+
+      generateVariation(pizza3.id, 2, 1),
+      generateVariation(pizza3.id, 3, 1),
+      generateVariation(pizza3.id, 3, 2),
+      generateVariation(pizza3.id, 4, 1),
+      generateVariation(pizza3.id, 4, 2),
+
+      generateVariation(1),
+      generateVariation(2),
+      generateVariation(3),
+      generateVariation(4),
+      generateVariation(5),
+      generateVariation(6),
+      generateVariation(7),
+      generateVariation(8),
+      generateVariation(9),
+      generateVariation(10),
+      generateVariation(11),
+      generateVariation(12),
+      generateVariation(13),
+      generateVariation(14),
+      generateVariation(15),
+      generateVariation(16),
+      generateVariation(17),
+      generateVariation(18),
+      generateVariation(19),
+      generateVariation(20),
+      generateVariation(21),
+      generateVariation(22)
+    ]
+  });
+
+  await prisma.cart.createMany({
+    data: [
+      {
+        userId: 1,
+        token: 123,
+        totalPrice: 0
+      },
+      {
+        userId: 2,
+        token: 444,
+        totalPrice: 0
+      }
+    ]
+  });
+
+  await prisma.cartItem.create({
+    data: {
+      cartId: 1,
+      productVariationId: 1,
+      quantity: 3,
+      totalPrice: 33.3,
+      ingredients: {
+        connect: [{ id: 1 }, { id: 2 }, { id: 3 }]
+      }
+    }
   });
 }
 
 async function clear() {
-  await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE`;
-  await prisma.$executeRaw`TRUNCATE TABLE "Category" RESTART IDENTITY CASCADE`;
-  await prisma.$executeRaw`TRUNCATE TABLE "Ingredient" RESTART IDENTITY CASCADE`;
-  await prisma.$executeRaw`TRUNCATE TABLE "Product" RESTART IDENTITY CASCADE`;
+  const tables = [
+    'User',
+    'Category',
+    'Ingredient',
+    'Product',
+    'ProductVariation',
+    'Size',
+    'DoughType',
+    'Cart',
+    'CartItem'
+  ] as const;
+
+  for (const table of tables) {
+    await prisma.$executeRawUnsafe(`TRUNCATE TABLE "${table}" RESTART IDENTITY CASCADE`);
+  }
 }
 
 async function main() {
