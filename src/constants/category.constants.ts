@@ -4,5 +4,6 @@ export const categories = [
   { id: 'snack', name: 'snacks' },
   { id: 'drink', name: 'drink' },
   { id: 'dessert', name: 'desserts' },
-  { id: 'sauce', name: 'sauces' }
+  { id: 'sauce', name: 'sauces' },
+  { id: 'breakfast', name: 'breakfast' }
 ];

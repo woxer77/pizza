@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Sort from '@/elements/sort';
-import CategoryContainer from '@/containers/category-container';
+import CategoriesContainer from '@/containers/categories-container';
 import { ArrowDownUp } from 'lucide-react';
 
 import type { ClassProps } from '@/types/common';
@@ -20,7 +20,7 @@ const TopBar: React.FC<ClassProps> = ({ className }) => {
   return (
     <div className={cn('bg-background sticky top-0 p-6 shadow-lg shadow-neutral-200', className)}>
       <div className="flex-space-between container mx-auto max-h-14">
-        <CategoryContainer />
+        <CategoriesContainer />
         <Sort<ProductSortByValue>
           options={productSortOptions}
           prefixContent={prefixSortNode}

@@ -1,22 +1,18 @@
+'use client';
+
 import React from 'react';
 
 import Products from '@/components/elements/products';
 
-import prisma from '@/prisma/prisma-client';
+import useFetch from '@/hooks/useFetch';
+import Api from '@/services/api-client';
 
-const ProductsContainer: React.FC = async () => {
-  const categories = await prisma.category.findMany({
-    include: {
-      products: {
-        include: {
-          ingredients: true,
-          variations: true
-        }
-      }
-    }
-  });
+const ProductsContainer: React.FC = () => {
+  const { data, loading, error } = useFetch(Api.category.getAllWithProducts);
 
-  return <Products categories={categories} />;
+  if (error) return <div>Error! {error.message}</div>;
+  if (loading || data === null) return <div>Loading...</div>; // TODO: skeleton
+  return <Products categories={data} />;
 };
 
 export default ProductsContainer;

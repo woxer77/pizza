@@ -11,10 +11,10 @@ import { cn } from '@/lib/utils';
 import { useCategoryStore } from '@/store/category';
 import useCategory from '@/hooks/useCategory';
 import useSegmentControl from '@/hooks/useSegmentedControl';
-import type { Category } from '@prisma/client';
+import type { CategoryWithProducts } from '@/shared/types/category.interface';
 
 interface CategoryProps extends ClassProps {
-  categories: Category[];
+  categories: CategoryWithProducts[];
   limit?: number;
 }
 
@@ -29,7 +29,7 @@ const Categories: React.FC<CategoryProps> = ({ className, categories, limit = 5 
   const firstElemRef = React.useRef<HTMLButtonElement>(null);
   const selectRef = React.useRef<HTMLButtonElement>(null);
 
-  const { displayedCategories, dropdownOptions } = useCategory(categories, limit);
+  const { displayedCategories, dropdownOptions, hasOtherBtn } = useCategory(categories, limit);
   const moveSegment = useSegmentControl(parentElemRef, moveableElemRef);
 
   const onCategoryClick = (categoryId: string) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -79,36 +79,30 @@ const Categories: React.FC<CategoryProps> = ({ className, categories, limit = 5 
     <div
       className={cn('flex-center relative gap-1 rounded-xl bg-neutral-100 p-1.5', className)}
       ref={parentElemRef}>
-      {displayedCategories.map((category, idx) => {
-        if (category.id === 'other') {
-          return (
-            <Select
-              key={category.id}
-              ref={selectRef}
-              options={dropdownOptions}
-              onSelect={onDropdownChange}
-              postfixContent={<ChevronDown />}
-              placeholder="Other"
-              activeOptionValue={
-                // TODO: is there another way to do this?
-                dropdownOptions.map((e) => e.value).includes(activeCategoryId) ? activeCategoryId : undefined
-              }
-              className={cn('z-10 rounded-xl px-4 py-2 capitalize', isSelectActive && 'text-red-700')}
-            />
-          );
-        } else {
-          return (
-            <TopBarCategory
-              key={category.id}
-              category={category}
-              ref={idx === 0 ? firstElemRef : null}
-              onClick={onCategoryClick(category.id)}
-              isActive={category.id === activeCategoryId}
-              className="z-10 rounded-xl px-4 py-2 capitalize"
-            />
-          );
-        }
-      })}
+      {displayedCategories.map((category, idx) => (
+        <TopBarCategory
+          key={category.id}
+          category={category}
+          ref={idx === 0 ? firstElemRef : null}
+          onClick={onCategoryClick(category.id)}
+          isActive={category.id === activeCategoryId}
+          className="z-10 rounded-xl px-4 py-2 capitalize"
+        />
+      ))}
+      {hasOtherBtn && (
+        <Select
+          ref={selectRef}
+          options={dropdownOptions}
+          onSelect={onDropdownChange}
+          postfixContent={<ChevronDown />}
+          placeholder="Other"
+          activeOptionValue={
+            // TODO: is there another way to do this?
+            dropdownOptions.map((e) => e.value).includes(activeCategoryId) ? activeCategoryId : undefined
+          }
+          className={cn('z-10 rounded-xl px-4 py-2 capitalize', isSelectActive && 'text-red-700')}
+        />
+      )}
       <div
         ref={moveableElemRef}
         className="bg-background absolute top-1/2 left-0 -translate-y-1/2 rounded-xl transition-all"
