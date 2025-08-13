@@ -1,13 +1,5 @@
-import type { ICategory } from './category.interface';
-
-export interface IProduct {
-  id: number;
-  category: ICategory;
-  name: string;
-  description: string;
-  basePrice: number;
-  image: string;
-}
+// eslint-disable-next-line
+import type { Product as PrismaProduct } from '@prisma/client';
 
 export const ProductSortBy = {
   POPULAR: 'popular',
@@ -17,3 +9,7 @@ export const ProductSortBy = {
 } as const;
 
 export type ProductSortByValue = (typeof ProductSortBy)[keyof typeof ProductSortBy];
+
+export interface Product extends Omit<PrismaProduct, 'basePrice'> {
+  basePrice: number;
+}
