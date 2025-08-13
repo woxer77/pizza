@@ -54,7 +54,19 @@ const eslintConfig = [
       'no-param-reassign': 'warn',
       '@typescript-eslint/no-unused-vars': 'error',
       'react/jsx-uses-react': 'error',
-      'react/jsx-uses-vars': 'error'
+      'react/jsx-uses-vars': 'error',
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: '@prisma/client',
+              importNames: ['Product'],
+              message: 'Use Product type from @/types'
+            }
+          ]
+        }
+      ]
     }
   },
   eslintConfigPrettier
