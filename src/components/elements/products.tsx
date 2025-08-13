@@ -3,31 +3,32 @@ import React from 'react';
 import ProductCard from '@/elements/product-card';
 import ProductGroup from '@/elements/product-group';
 
-import { groupProductsByCategory } from '@/lib/utils';
 import type { ClassProps } from '@/types/common';
-import type { IProduct } from '@/shared/types/product.interface';
 import { cn } from '@/lib/utils';
+import type { Category, Ingredient, ProductVariation } from '@prisma/client';
+import type { Product } from '@/types/product.interface';
+
+type CategoryWithProducts = Category & {
+  products: (Product & {
+    ingredients: Ingredient[];
+    variations: ProductVariation[];
+  })[];
+};
 
 interface ProductsProps extends ClassProps {
-  products: IProduct[];
+  categories: CategoryWithProducts[];
 }
 
-const Products: React.FC<ProductsProps> = ({ className, products }) => {
-  const groupedProducts = React.useMemo(() => groupProductsByCategory(products), [products]);
-
+const Products: React.FC<ProductsProps> = ({ className, categories }) => {
   return (
     <main className={cn('', className)}>
-      {groupedProducts.map((productsArr) => {
+      {categories.map((category) => {
         return (
-          <ProductGroup
-            key={productsArr[0].category.id}
-            title={productsArr[0].category.name}
-            categoryId={productsArr[0].category.id}>
-            {productsArr.map((product) => (
+          <ProductGroup key={category.id} title={category.name} categoryId={category.id}>
+            {category.products.map((product) => (
               <ProductCard
                 key={product.id}
                 id={product.id}
-                category={product.category}
                 name={product.name}
                 description={product.description}
                 basePrice={product.basePrice}
