@@ -10,15 +10,15 @@ import type { ClassProps } from '@/types/common';
 import { cn } from '@/lib/utils';
 import { useCategoryStore } from '@/store/category';
 import useCategory from '@/hooks/useCategory';
-import type { ICategory } from '@/shared/types/category.interface';
 import useSegmentControl from '@/hooks/useSegmentedControl';
+import type { Category } from '@prisma/client';
 
 interface CategoryProps extends ClassProps {
-  categories: ICategory[];
+  categories: Category[];
   limit?: number;
 }
 
-const Category: React.FC<CategoryProps> = ({ className, categories, limit = 5 }) => {
+const Categories: React.FC<CategoryProps> = ({ className, categories, limit = 5 }) => {
   const activeCategoryId = useCategoryStore((state) => state.activeId);
   const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
 
@@ -117,4 +117,4 @@ const Category: React.FC<CategoryProps> = ({ className, categories, limit = 5 })
   );
 };
 
-export default Category;
+export default Categories;
