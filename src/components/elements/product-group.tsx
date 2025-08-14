@@ -15,6 +15,7 @@ interface ProductGroupProps extends ClassProps {
 
 const ProductGroup: React.FC<ProductGroupProps> = ({ className, children, title, categoryId }) => {
   const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
+  const ignoreIntersection = useCategoryStore((state) => state.ignoreIntersection);
 
   const intersectionRef = React.useRef<HTMLDivElement>(null);
   const intersection = useIntersection(intersectionRef as React.RefObject<HTMLElement>, {
@@ -22,10 +23,10 @@ const ProductGroup: React.FC<ProductGroupProps> = ({ className, children, title,
   });
 
   React.useEffect(() => {
-    if (intersection?.isIntersecting) {
+    if (intersection?.isIntersecting && !ignoreIntersection) {
       setActiveCategoryId(categoryId);
     }
-  }, [intersection?.isIntersecting, setActiveCategoryId, categoryId]);
+  }, [intersection?.isIntersecting, setActiveCategoryId, categoryId, ignoreIntersection]);
 
   return (
     <div ref={intersectionRef} id={categoryId} className={cn('mb-10', className)}>

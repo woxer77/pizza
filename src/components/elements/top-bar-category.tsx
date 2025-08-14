@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { Button } from '@/ui/button';
-import Link from 'next/link';
 
 import type { ClassProps } from '@/types/common';
-import type { ICategory } from '@/shared/types/category.interface';
 import { cn } from '@/lib/utils';
+import type { CategoryWithProducts } from '@/shared/types/category.interface';
+import { PRODUCTS_SCROLL_Y_OFFSET } from '@/constants/common';
 
 interface TopBarCategoryProps extends ClassProps {
-  category: ICategory;
+  category: CategoryWithProducts;
   isActive?: boolean;
   ref?: React.Ref<HTMLButtonElement>;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -29,19 +29,26 @@ const TopBarCategory: React.FC<TopBarCategoryProps> = ({
 }) => {
   const buttonId: ButtonIdType = `top-bar-${category.id}`;
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const targetElem = document.getElementById(category.id);
+    if (targetElem) {
+      const y = targetElem.getBoundingClientRect().top + window.scrollY - PRODUCTS_SCROLL_Y_OFFSET;
+
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+    onClick?.(e);
+  };
+
   return (
     <Button
       noStyles
-      asChild
       className={cn('flex cursor-pointer gap-2 font-semibold duration-300', isActive && 'text-red-700', className)}
       id={buttonId}
       ref={ref}
-      onClick={onClick}>
-      <Link href={`#${category.id}`}>
-        {startAdornment && <span>{startAdornment}</span>}
-        {category.name}
-        {endAdornment && <span>{endAdornment}</span>}
-      </Link>
+      onClick={handleClick}>
+      {startAdornment && <span>{startAdornment}</span>}
+      {category.name}
+      {endAdornment && <span>{endAdornment}</span>}
     </Button>
   );
 };

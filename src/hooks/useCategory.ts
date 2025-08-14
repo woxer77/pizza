@@ -3,7 +3,6 @@ import type { IOption } from '@/shared/types/common';
 
 const useCategory = (categories: CategoryWithProducts[], limit: number) => {
   const displayedCategories = categories.slice(0, limit).filter((category) => category.products.length > 0);
-  const hasOtherBtn = categories.length > limit;
 
   const dropdownOptions: IOption<string>[] =
     categories.length <= limit
@@ -17,7 +16,7 @@ const useCategory = (categories: CategoryWithProducts[], limit: number) => {
             href: category.id
           }));
 
-  return { displayedCategories, dropdownOptions, hasOtherBtn };
+  return { displayedCategories, dropdownOptions };
 };
 
 export default useCategory;

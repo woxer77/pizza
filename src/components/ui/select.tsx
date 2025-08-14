@@ -16,7 +16,7 @@ interface SelectProps<T extends string> extends ClassProps {
   postfixContent?: React.ReactNode;
   placeholder?: string;
   ref?: React.Ref<HTMLButtonElement>;
-  activeOptionValue?: string;
+  activeOptionValue?: T;
 }
 
 const Select = <T extends string>({
@@ -30,11 +30,12 @@ const Select = <T extends string>({
   ref,
   activeOptionValue
 }: SelectProps<T>) => {
-  const router = useRouter();
   const [isOpen, setIsOpen] = React.useState(false);
   const [selectedOption, setSelectedOption] = React.useState<IOption<T> | null>(placeholder ? null : options[0]);
 
   const dropdownRef = React.useRef<HTMLUListElement>(null);
+
+  const router = useRouter();
 
   const handleOptionClick = (option: IOption<T>) => {
     setSelectedOption(option);

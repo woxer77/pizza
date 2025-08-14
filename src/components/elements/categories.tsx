@@ -12,6 +12,7 @@ import { useCategoryStore } from '@/store/category';
 import useCategory from '@/hooks/useCategory';
 import useSegmentControl from '@/hooks/useSegmentedControl';
 import type { CategoryWithProducts } from '@/shared/types/category.interface';
+import { IGNORE_INTERSECTION_DELAY } from '@/constants/common';
 
 interface CategoryProps extends ClassProps {
   categories: CategoryWithProducts[];
@@ -21,6 +22,7 @@ interface CategoryProps extends ClassProps {
 const Categories: React.FC<CategoryProps> = ({ className, categories, limit = 5 }) => {
   const activeCategoryId = useCategoryStore((state) => state.activeId);
   const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
+  const setIgnoreIntersection = useCategoryStore((state) => state.setIgnoreIntersection);
 
   const [shouldMoveToSelect, setShouldMoveToSelect] = React.useState(false);
 
@@ -29,12 +31,24 @@ const Categories: React.FC<CategoryProps> = ({ className, categories, limit = 5 
   const firstElemRef = React.useRef<HTMLButtonElement>(null);
   const selectRef = React.useRef<HTMLButtonElement>(null);
 
-  const { displayedCategories, dropdownOptions, hasOtherBtn } = useCategory(categories, limit);
+  const ignoreIntersectionTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  const { displayedCategories, dropdownOptions } = useCategory(categories, limit);
   const moveSegment = useSegmentControl(parentElemRef, moveableElemRef);
 
   const onCategoryClick = (categoryId: string) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     moveSegment(e.currentTarget);
     setActiveCategoryId(categoryId);
+
+    setIgnoreIntersection(true);
+
+    if (ignoreIntersectionTimeoutRef.current) {
+      clearTimeout(ignoreIntersectionTimeoutRef.current);
+    }
+
+    ignoreIntersectionTimeoutRef.current = setTimeout(() => {
+      setIgnoreIntersection(false);
+    }, IGNORE_INTERSECTION_DELAY);
   };
 
   const onDropdownChange = (categoryId: string) => {
@@ -89,7 +103,7 @@ const Categories: React.FC<CategoryProps> = ({ className, categories, limit = 5 
           className="z-10 rounded-xl px-4 py-2 capitalize"
         />
       ))}
-      {hasOtherBtn && (
+      {categories.length > limit && (
         <Select
           ref={selectRef}
           options={dropdownOptions}

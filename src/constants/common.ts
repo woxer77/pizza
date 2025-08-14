@@ -100,3 +100,6 @@ export const ingredients = [
     image: '/ingredients/sweet-pepper.png'
   }
 ];
+
+export const IGNORE_INTERSECTION_DELAY = 500;
+export const PRODUCTS_SCROLL_Y_OFFSET = 130;
