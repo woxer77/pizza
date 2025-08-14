@@ -154,6 +154,27 @@ export const products = [
     basePrice: 4.5,
     categoryId: 'drink'
   },
+  {
+    name: 'Oreo Milkshake',
+    description: 'Rich and creamy milkshake with Oreo cookies.',
+    image: '/drink/oreo-milkshake.png',
+    basePrice: 4.8,
+    categoryId: 'drink'
+  },
+  {
+    name: 'Peach Milkshake',
+    description: 'Refreshing peach flavored milkshake.',
+    image: '/drink/peach-milkshake.png',
+    basePrice: 4.6,
+    categoryId: 'drink'
+  },
+  {
+    name: 'Pistachio Milkshake',
+    description: 'Smooth milkshake with pistachio flavor.',
+    image: '/drink/pistachio-milkshake.png',
+    basePrice: 5.0,
+    categoryId: 'drink'
+  },
 
   // Sauces
   {

@@ -138,6 +138,18 @@ async function generate() {
       basePrice: 10.5,
       categoryId: 'pizza',
       ingredients: {
+        connect: createdIngredients.slice(10, 13)
+      }
+    }
+  });
+  const pizza4 = await prisma.product.create({
+    data: {
+      name: 'Four Cheese',
+      description: 'Blend of mozzarella, blue cheese, parmesan and cheddar.',
+      image: '/pizza/four-cheese.png',
+      basePrice: 10.0,
+      categoryId: 'pizza',
+      ingredients: {
         connect: createdIngredients.slice(10)
       }
     }
@@ -162,6 +174,12 @@ async function generate() {
       generateVariation(pizza3.id, 3, 2),
       generateVariation(pizza3.id, 4, 1),
       generateVariation(pizza3.id, 4, 2),
+
+      generateVariation(pizza4.id, 1, 1),
+      generateVariation(pizza4.id, 2, 1),
+      generateVariation(pizza4.id, 3, 1),
+      generateVariation(pizza4.id, 3, 2),
+      generateVariation(pizza4.id, 4, 1),
 
       generateVariation(1),
       generateVariation(2),
