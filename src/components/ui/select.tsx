@@ -5,8 +5,9 @@ import React from 'react';
 import SelectOption from '@/ui/select-option';
 
 import type { ClassProps, IOption } from '@/shared/types/common';
-import { cn } from '@/lib/utils';
-import { useRouter } from 'next/navigation';
+import { cn, scrollWithOffset } from '@/lib/utils';
+import { PRODUCTS_SCROLL_Y_OFFSET } from '@/constants/common';
+import { useCategoryStore } from '@/store/category';
 
 interface SelectProps<T extends string> extends ClassProps {
   contentClassName?: string;
@@ -30,12 +31,12 @@ const Select = <T extends string>({
   ref,
   activeOptionValue
 }: SelectProps<T>) => {
+  const activeCategoryId = useCategoryStore((state) => state.activeId);
+
   const [isOpen, setIsOpen] = React.useState(false);
-  const [selectedOption, setSelectedOption] = React.useState<IOption<T> | null>(placeholder ? null : options[0]);
+  const [selectedOption, setSelectedOption] = React.useState<IOption<T> | null>(null);
 
   const dropdownRef = React.useRef<HTMLUListElement>(null);
-
-  const router = useRouter();
 
   const handleOptionClick = (option: IOption<T>) => {
     setSelectedOption(option);
@@ -43,7 +44,7 @@ const Select = <T extends string>({
     setIsOpen(false);
 
     if (option.href) {
-      router.push(`#${option.href}`);
+      scrollWithOffset(option.href, PRODUCTS_SCROLL_Y_OFFSET);
     }
   };
 
@@ -82,8 +83,13 @@ const Select = <T extends string>({
     }
   }, [isOpen]);
 
+  React.useEffect(() => {
+    if (activeCategoryId !== selectedOption?.value) {
+      setSelectedOption(null);
+    }
+  }, [activeCategoryId, selectedOption]);
+
   return (
-    // TODO: reset selectedOption on activeCategoryId change
     <button
       ref={ref}
       onClick={toggleDropdown}

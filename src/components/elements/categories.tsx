@@ -110,10 +110,7 @@ const Categories: React.FC<CategoryProps> = ({ className, categories, limit = 5 
           onSelect={onDropdownChange}
           postfixContent={<ChevronDown />}
           placeholder="Other"
-          activeOptionValue={
-            // TODO: is there another way to do this?
-            dropdownOptions.map((e) => e.value).includes(activeCategoryId) ? activeCategoryId : undefined
-          }
+          activeOptionValue={dropdownOptions.find((e) => e.value === activeCategoryId)?.content}
           className={cn('z-10 rounded-xl px-4 py-2 capitalize', isSelectActive && 'text-red-700')}
         />
       )}

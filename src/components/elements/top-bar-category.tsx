@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@/ui/button';
 
 import type { ClassProps } from '@/types/common';
-import { cn } from '@/lib/utils';
+import { cn, scrollWithOffset } from '@/lib/utils';
 import type { CategoryWithProducts } from '@/shared/types/category.interface';
 import { PRODUCTS_SCROLL_Y_OFFSET } from '@/constants/common';
 
@@ -30,12 +30,8 @@ const TopBarCategory: React.FC<TopBarCategoryProps> = ({
   const buttonId: ButtonIdType = `top-bar-${category.id}`;
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const targetElem = document.getElementById(category.id);
-    if (targetElem) {
-      const y = targetElem.getBoundingClientRect().top + window.scrollY - PRODUCTS_SCROLL_Y_OFFSET;
+    scrollWithOffset(category.id, PRODUCTS_SCROLL_Y_OFFSET);
 
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
     onClick?.(e);
   };
 
