@@ -61,8 +61,8 @@ const eslintConfig = [
           paths: [
             {
               name: '@prisma/client',
-              importNames: ['Product'],
-              message: 'Use Product type from @/types'
+              importNames: ['Product', 'Ingredient', 'Size', 'DoughType', 'Cart', 'CartItem', 'Order'],
+              message: 'Use type from @/types (not Prisma type bc of Decimal)'
             }
           ]
         }
