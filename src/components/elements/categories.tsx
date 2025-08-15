@@ -36,24 +36,26 @@ const Categories: React.FC<CategoryProps> = ({ className, categories, limit = 5 
   const { displayedCategories, dropdownOptions } = useCategory(categories, limit);
   const moveSegment = useSegmentControl(parentElemRef, moveableElemRef);
 
-  const onCategoryClick = (categoryId: string) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    moveSegment(e.currentTarget);
+  const handleCategoryChange = (categoryId: string) => {
     setActiveCategoryId(categoryId);
 
     setIgnoreIntersection(true);
-
     if (ignoreIntersectionTimeoutRef.current) {
       clearTimeout(ignoreIntersectionTimeoutRef.current);
     }
-
     ignoreIntersectionTimeoutRef.current = setTimeout(() => {
       setIgnoreIntersection(false);
     }, IGNORE_INTERSECTION_DELAY);
   };
 
+  const onCategoryClick = (categoryId: string) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    moveSegment(e.currentTarget);
+    handleCategoryChange(categoryId);
+  };
+
   const onDropdownChange = (categoryId: string) => {
-    setActiveCategoryId(categoryId);
     setShouldMoveToSelect(true);
+    handleCategoryChange(categoryId);
   };
 
   React.useLayoutEffect(() => {
@@ -72,6 +74,12 @@ const Categories: React.FC<CategoryProps> = ({ className, categories, limit = 5 
       moveableElemRef.current.style.width = `${firstElemRect.width}px`;
       moveableElemRef.current.style.height = `${firstElemRect.height}px`;
     }
+
+    return () => {
+      if (ignoreIntersectionTimeoutRef.current) {
+        clearTimeout(ignoreIntersectionTimeoutRef.current);
+      }
+    };
   }, []);
 
   React.useEffect(() => {
@@ -80,7 +88,7 @@ const Categories: React.FC<CategoryProps> = ({ className, categories, limit = 5 
     if (activeIsSelect && selectRef.current) {
       moveSegment(selectRef.current);
     } else {
-      const target = document.querySelector(`#top-bar-${activeCategoryId}`) as HTMLElement;
+      const target = document.querySelector(`#top-bar-${activeCategoryId}`) as HTMLElement | null;
       if (!target) return;
 
       moveSegment(target);

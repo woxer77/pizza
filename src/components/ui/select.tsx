@@ -18,6 +18,7 @@ interface SelectProps<T extends string> extends ClassProps {
   placeholder?: string;
   ref?: React.Ref<HTMLButtonElement>;
   activeOptionValue?: T;
+  defaultOption?: IOption<T>;
 }
 
 const Select = <T extends string>({
@@ -29,12 +30,13 @@ const Select = <T extends string>({
   postfixContent,
   placeholder,
   ref,
-  activeOptionValue
+  activeOptionValue,
+  defaultOption
 }: SelectProps<T>) => {
   const activeCategoryId = useCategoryStore((state) => state.activeId);
 
   const [isOpen, setIsOpen] = React.useState(false);
-  const [selectedOption, setSelectedOption] = React.useState<IOption<T> | null>(null);
+  const [selectedOption, setSelectedOption] = React.useState<IOption<T> | null>(defaultOption || null);
 
   const dropdownRef = React.useRef<HTMLUListElement>(null);
 
@@ -87,7 +89,7 @@ const Select = <T extends string>({
     if (activeCategoryId !== selectedOption?.value) {
       setSelectedOption(null);
     }
-  }, [activeCategoryId, selectedOption]);
+  }, [activeCategoryId]);
 
   return (
     <button
@@ -97,7 +99,9 @@ const Select = <T extends string>({
       className={cn('flex-center relative cursor-pointer gap-1 font-semibold', className)}>
       <span className="flex-center flex gap-1">
         {prefixContent}
-        <span className={contentClassName}>{activeOptionValue || selectedOption?.content || placeholder}</span>
+        <span className={contentClassName}>
+          {activeOptionValue || selectedOption?.content || defaultOption?.content || placeholder}
+        </span>
         {postfixContent}
       </span>
       <ul
