@@ -3,23 +3,23 @@ import React from 'react';
 import CheckboxItem from '@/ui/checkbox-item';
 import { Button } from '@/ui/button';
 import { Input } from '@/ui/input';
+import { Skeleton } from '@/ui/skeleton';
 
 import type { ClassProps, FilterItem } from '@/types/common';
 import { cn } from '@/lib/utils';
-import useDebounce from '@/hooks/useDebounce';
 
 interface CheckboxGroupProps extends ClassProps {
   title?: string;
   items: FilterItem[];
   limit?: number;
+  loading?: boolean;
 }
 
-const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ className, title, items, limit = 5 }) => {
+const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ className, title, items, limit = 5, loading }) => {
   const defaultItems = items.length > limit ? items.slice(0, limit) : items;
   const [displayedItems, setDisplayedItems] = React.useState(defaultItems);
   const [inputVisibility, setInputVisibility] = React.useState(false);
   const [inputText, setInputText] = React.useState('');
-  const debouncedValue = useDebounce(inputText, 300);
 
   const showItemsHandler = () => {
     if (items.length === displayedItems.length) {
@@ -37,16 +37,18 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ className, title, items, 
   };
 
   React.useEffect(() => {
-    if (!inputVisibility) return;
-    if (!debouncedValue.trim()) {
-      setDisplayedItems(items);
+    if (inputText.trim()) {
+      const clearInputText = inputText.trim().toLowerCase();
+      const filteredItems = items.filter((item) => item.text.toLowerCase().includes(clearInputText));
+      setDisplayedItems(filteredItems);
       return;
     }
+    setDisplayedItems(items.slice(0, limit));
+  }, [inputText, items, limit]);
 
-    const debounceLowerCase = debouncedValue.trim().toLowerCase();
-    const filteredItems = items.filter((item) => item.value.toLowerCase().includes(debounceLowerCase));
-    setDisplayedItems(filteredItems);
-  }, [debouncedValue, inputVisibility, items]);
+  if (loading) {
+    return Array.from({ length: limit }).map((_, idx) => <Skeleton key={idx} className="mb-2 h-6" />);
+  }
 
   return (
     <section className={cn('flex max-h-96 flex-col gap-2 overflow-y-auto pl-1', className)} tabIndex={-1}>
@@ -61,7 +63,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ className, title, items, 
           <CheckboxItem key={item.value} value={item.value} text={item.text} />
         ))}
       </div>
-      {items.length > limit && !debouncedValue.trim() && (
+      {items.length > limit && !inputText.trim() && (
         <Button
           variant="link"
           onClick={showItemsHandler}

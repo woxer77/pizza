@@ -1,8 +1,3 @@
-export const topFilters = [
-  { value: 'ready to go', text: 'Ready to go' },
-  { value: 'new', text: 'New' }
-];
-
 export const ingredients = [
   {
     name: 'Bacon',
