@@ -5,10 +5,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function upFirstLetter(str: string) {
-  return str[0].toUpperCase() + str.slice(1);
-}
-
 export const scrollWithOffset = (id: string, offset: number) => {
   const targetElem = document.getElementById(id);
   if (targetElem) {

@@ -9,13 +9,12 @@ import type { ClassProps, FilterItem } from '@/types/common';
 import { cn } from '@/lib/utils';
 
 interface CheckboxGroupProps extends ClassProps {
-  title?: string;
   items: FilterItem[];
   limit?: number;
   loading?: boolean;
 }
 
-const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ className, title, items, limit = 5, loading }) => {
+const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ className, items, limit = 5, loading }) => {
   const defaultItems = items.length > limit ? items.slice(0, limit) : items;
   const [displayedItems, setDisplayedItems] = React.useState(defaultItems);
   const [inputVisibility, setInputVisibility] = React.useState(false);
@@ -52,7 +51,6 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ className, title, items, 
 
   return (
     <section className={cn('flex max-h-96 flex-col gap-2 overflow-y-auto pl-1', className)} tabIndex={-1}>
-      {title && <h4 className="font-bold">{title}</h4>}
       {inputVisibility && (
         <div className="pt-1 pr-2">
           <Input value={inputText} onChange={(e) => filterItems(e.target.value)} />
@@ -60,7 +58,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ className, title, items, 
       )}
       <div className="flex flex-col gap-1.5">
         {displayedItems.map((item) => (
-          <CheckboxItem key={item.value} value={item.value} text={item.text} />
+          <CheckboxItem key={item.value} value={item.value} text={item.text} className="capitalize" />
         ))}
       </div>
       {items.length > limit && !inputText.trim() && (
