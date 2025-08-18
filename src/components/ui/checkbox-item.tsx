@@ -1,13 +1,21 @@
 import React from 'react';
 
-import type { ChoiceItemProps } from '@/types/common';
 import { cn } from '@/lib/utils';
 import { Checkbox } from '@/ui/checkbox';
+import type { ClassProps } from '@/shared/types/common';
 
-type CheckboxIdType = `checkbox-${string}`;
+type CheckboxIdType = `checkbox-${string}-${string}`;
 
-const CheckboxItem: React.FC<ChoiceItemProps> = ({ className, value, text, checked, onCheckedChange }) => {
-  const checkboxId: CheckboxIdType = `checkbox-${value}`;
+interface CheckboxItemProps extends ClassProps {
+  value: string;
+  text: string;
+  checked?: boolean;
+  onCheckedChange?: (checked: boolean) => void;
+  name: string;
+}
+
+const CheckboxItem: React.FC<CheckboxItemProps> = ({ className, value, text, checked, onCheckedChange, name }) => {
+  const checkboxId: CheckboxIdType = `checkbox-${name}-${value}`;
 
   return (
     <div className={cn('flex w-fit cursor-pointer items-center gap-2', className)}>
@@ -19,7 +27,7 @@ const CheckboxItem: React.FC<ChoiceItemProps> = ({ className, value, text, check
         className="cursor-pointer"
       />
       {text && (
-        <label htmlFor={`checkbox-${value}`} className="cursor-pointer select-none">
+        <label htmlFor={checkboxId} className="cursor-pointer select-none">
           {text}
         </label>
       )}

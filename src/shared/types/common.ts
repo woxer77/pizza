@@ -8,13 +8,6 @@ export interface IOption<T> {
   href?: string;
 }
 
-export interface ChoiceItemProps extends ClassProps {
-  value: string;
-  text: string;
-  checked?: boolean;
-  onCheckedChange?: (checked: boolean) => void;
-}
-
 export interface FilterItem {
   value: string;
   text: string;
