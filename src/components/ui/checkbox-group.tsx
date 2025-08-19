@@ -59,7 +59,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
     }
     setDisplayedItems(items.slice(0, limit));
   }, [inputText, items, limit]);
-  console.log('rerender', name);
+
   if (loading) {
     return Array.from({ length: predictedLength ? predictedLength : limit }).map((_, idx) => (
       <Skeleton key={idx} className="mb-2 h-6" />

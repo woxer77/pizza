@@ -35,7 +35,7 @@ const buttonVariants = cva(
   }
 );
 
-function Button({
+const memoizedButton = React.memo(function Button({
   className,
   variant,
   size,
@@ -56,6 +56,6 @@ function Button({
       {...props}
     />
   );
-}
+});
 
-export { Button, buttonVariants };
+export { memoizedButton as Button, buttonVariants };

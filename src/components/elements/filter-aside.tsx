@@ -12,12 +12,16 @@ import { cn } from '@/lib/utils';
 import useFilterAside from '@/hooks/useFilterAside';
 import useSet from '@/hooks/useSet';
 
+const MAX_PRICE = 100;
+
 const FilterAside: React.FC<ClassProps> = ({ className }) => {
   const { ingredients, doughTypes, sizes, isBtnDisabled } = useFilterAside();
 
   const ingredientSet = useSet<string>();
   const doughTypeSet = useSet<string>();
   const sizeSet = useSet<string>();
+
+  const [priceRange, setPriceRange] = React.useState<[number, number]>([0, MAX_PRICE]);
 
   return (
     <aside
@@ -36,8 +40,9 @@ const FilterAside: React.FC<ClassProps> = ({ className }) => {
           name="doughTypes"
         />
       </FilterSection>
+      <hr className="my-6" />
       <FilterSection title="Price">
-        <PriceFilter max={100} step={1} className="pl-1" />
+        <PriceFilter max={MAX_PRICE} step={1} onChange={setPriceRange} className="pl-1" />
       </FilterSection>
       <hr className="my-6" />
       <FilterSection title="Ingredients">

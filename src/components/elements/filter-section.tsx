@@ -18,4 +18,4 @@ const FilterSection: React.FC<FilterSectionProps> = ({ className, title, titleCl
   );
 };
 
-export default FilterSection;
+export default React.memo(FilterSection);

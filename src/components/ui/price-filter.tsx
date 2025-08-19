@@ -19,9 +19,10 @@ interface PriceFilterProps extends ClassProps {
   min?: number;
   max: number;
   step: number;
+  onChange?: (range: [number, number]) => void;
 }
 
-const PriceFilter: React.FC<PriceFilterProps> = ({ className, step, min = 0, max }) => {
+const PriceFilter: React.FC<PriceFilterProps> = ({ className, step, min = 0, max, onChange }) => {
   const [priceRange, setPriceRange] = React.useState<[number, number]>([min, max]);
   const [inputValues, setInputValues] = React.useState<[string, string]>([min.toString(), max.toString()]);
 
@@ -84,6 +85,12 @@ const PriceFilter: React.FC<PriceFilterProps> = ({ className, step, min = 0, max
   };
 
   const minStepsBetweenThumbs = max / 10;
+
+  React.useEffect(() => {
+    if (priceRange.length > 0) {
+      onChange?.(priceRange);
+    }
+  }, [priceRange, onChange]);
 
   return (
     <div className={cn('', className)}>
