@@ -10,47 +10,14 @@ import FilterSection from '@/elements/filter-section';
 import type { ClassProps } from '@/types/common';
 import { cn } from '@/lib/utils';
 import useFilterAside from '@/hooks/useFilterAside';
+import useSet from '@/hooks/useSet';
 
 const FilterAside: React.FC<ClassProps> = ({ className }) => {
   const { ingredients, doughTypes, sizes, isBtnDisabled } = useFilterAside();
-  const [ingredientValues, setIngredientValues] = React.useState(new Set<string>([]));
-  const [doughTypeValues, setDoughTypeValues] = React.useState(new Set<string>([]));
-  const [sizeValues, setSizeValues] = React.useState(new Set<string>([]));
 
-  console.log(ingredientValues, doughTypeValues, sizeValues);
-
-  const toggleSet = React.useCallback(<T,>(setValue: React.Dispatch<React.SetStateAction<Set<T>>>, id: T) => {
-    setValue((prev) => {
-      const newValue = new Set(prev);
-
-      if (prev.has(id)) {
-        newValue.delete(id);
-      } else {
-        newValue.add(id);
-      }
-
-      return newValue;
-    });
-  }, []);
-
-  const handleIngredientsClick = React.useCallback(
-    (id: string) => {
-      toggleSet(setIngredientValues, id);
-    },
-    [toggleSet]
-  );
-  const handleDoughTypesClick = React.useCallback(
-    (id: string) => {
-      toggleSet(setDoughTypeValues, id);
-    },
-    [toggleSet]
-  );
-  const handleSizesClick = React.useCallback(
-    (id: string) => {
-      toggleSet(setSizeValues, id);
-    },
-    [toggleSet]
-  );
+  const ingredientSet = useSet<string>();
+  const doughTypeSet = useSet<string>();
+  const sizeSet = useSet<string>();
 
   return (
     <aside
@@ -64,7 +31,8 @@ const FilterAside: React.FC<ClassProps> = ({ className }) => {
           items={doughTypes.data}
           loading={doughTypes.loading}
           predictedLength={2}
-          onCheckboxClick={handleDoughTypesClick}
+          checkedValues={doughTypeSet.values}
+          onCheckboxClick={doughTypeSet.toggle}
           name="doughTypes"
         />
       </FilterSection>
@@ -77,7 +45,8 @@ const FilterAside: React.FC<ClassProps> = ({ className }) => {
           items={ingredients.data}
           loading={ingredients.loading}
           name="ingredients"
-          onCheckboxClick={handleIngredientsClick}
+          checkedValues={ingredientSet.values}
+          onCheckboxClick={ingredientSet.toggle}
           className="pb-1"
         />
       </FilterSection>
@@ -88,7 +57,8 @@ const FilterAside: React.FC<ClassProps> = ({ className }) => {
           loading={sizes.loading}
           predictedLength={4}
           name="sizes"
-          onCheckboxClick={handleSizesClick}
+          checkedValues={sizeSet.values}
+          onCheckboxClick={sizeSet.toggle}
           className="pb-1"
         />
       </FilterSection>

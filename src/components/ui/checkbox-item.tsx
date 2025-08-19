@@ -35,4 +35,4 @@ const CheckboxItem: React.FC<CheckboxItemProps> = ({ className, value, text, che
   );
 };
 
-export default CheckboxItem;
+export default React.memo(CheckboxItem);

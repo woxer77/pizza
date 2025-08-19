@@ -15,6 +15,7 @@ interface CheckboxGroupProps extends ClassProps {
   predictedLength?: number;
   placeholder?: string;
   name: string;
+  checkedValues?: Set<string>;
   onCheckboxClick: (id: string) => void;
 }
 
@@ -26,6 +27,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   predictedLength,
   placeholder = 'Search...',
   name,
+  checkedValues,
   onCheckboxClick
 }) => {
   const defaultItems = items.length > limit ? items.slice(0, limit) : items;
@@ -57,7 +59,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
     }
     setDisplayedItems(items.slice(0, limit));
   }, [inputText, items, limit]);
-
+  console.log('rerender', name);
   if (loading) {
     return Array.from({ length: predictedLength ? predictedLength : limit }).map((_, idx) => (
       <Skeleton key={idx} className="mb-2 h-6" />
@@ -77,6 +79,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
             key={item.value}
             value={item.value}
             text={item.text}
+            checked={checkedValues?.has(item.value)}
             onCheckedChange={() => onCheckboxClick(item.value)}
             name={name}
             className="capitalize"
