@@ -12,3 +12,8 @@ export interface FilterItem {
   value: string;
   text: string;
 }
+
+export interface PriceRange<T> {
+  from: T;
+  to: T;
+}

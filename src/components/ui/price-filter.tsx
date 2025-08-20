@@ -5,7 +5,7 @@ import React from 'react';
 import { SliderRange } from '@/ui/slider-range';
 import { Input } from '@/ui/input';
 
-import type { ClassProps } from '@/types/common';
+import type { ClassProps, PriceRange } from '@/types/common';
 import { cn } from '@/lib/utils';
 
 const InputType = {
@@ -19,23 +19,34 @@ interface PriceFilterProps extends ClassProps {
   min?: number;
   max: number;
   step: number;
-  onChange?: (range: [number, number]) => void;
+  onChange?: (range: PriceRange<number>) => void;
+  defaultValue?: PriceRange<number>;
 }
 
-const PriceFilter: React.FC<PriceFilterProps> = ({ className, step, min = 0, max, onChange }) => {
-  const [priceRange, setPriceRange] = React.useState<[number, number]>([min, max]);
-  const [inputValues, setInputValues] = React.useState<[string, string]>([min.toString(), max.toString()]);
-
-  const onSliderChange = (range: [number, number]) => {
-    setPriceRange(range);
-    setInputValues([range[0].toString(), range[1].toString()]);
+const PriceFilter: React.FC<PriceFilterProps> = ({ className, step, min = 0, max, onChange, defaultValue }) => {
+  const [priceRange, setPriceRange] = React.useState<PriceRange<number>>(defaultValue || { from: min, to: max });
+  const [inputValues, setInputValues] = React.useState<PriceRange<string>>(
+    defaultValue
+      ? {
+          from: defaultValue.from.toString(),
+          to: defaultValue.to.toString()
+        }
+      : {
+          from: min.toString(),
+          to: max.toString()
+        }
+  );
+  // TODO: fix slider bug in query url
+  const onSliderChange = (value: [number, number]) => {
+    setPriceRange({ from: value[0], to: value[1] });
+    setInputValues({ from: value[0].toString(), to: value[1].toString() });
   };
 
   const onInputChange = (value: string, type: InputTypeValue) => {
     if (type === InputType.MIN) {
-      setInputValues([value, inputValues[1]]);
+      setInputValues({ from: value, to: inputValues.to });
     } else {
-      setInputValues([inputValues[0], value]);
+      setInputValues({ from: inputValues.from, to: value });
     }
   };
 
@@ -43,40 +54,40 @@ const PriceFilter: React.FC<PriceFilterProps> = ({ className, step, min = 0, max
     const number = parseInt(value, 10);
 
     if (!isFinite(number)) {
-      setInputValues([priceRange[0].toString(), priceRange[1].toString()]);
+      setInputValues({ from: priceRange.from.toString(), to: priceRange.to.toString() });
       return;
     }
 
     switch (type) {
       case InputType.MIN:
-        if (number > priceRange[1] - minStepsBetweenThumbs) {
-          const newMin = priceRange[1] - minStepsBetweenThumbs;
-          setPriceRange([newMin, priceRange[1]]);
-          setInputValues([newMin.toString(), inputValues[1]]);
+        if (number > priceRange.to - minStepsBetweenThumbs) {
+          const newMin = priceRange.to - minStepsBetweenThumbs;
+          setPriceRange({ from: newMin, to: priceRange.to });
+          setInputValues({ from: newMin.toString(), to: inputValues.to });
           break;
         }
         if (number < min) {
-          setPriceRange([min, priceRange[1]]);
-          setInputValues([min.toString(), inputValues[1]]);
+          setPriceRange({ from: min, to: priceRange.to });
+          setInputValues({ from: min.toString(), to: inputValues.to });
           break;
         }
-        setPriceRange([number, priceRange[1]]);
-        setInputValues([number.toString(), inputValues[1]]);
+        setPriceRange({ from: number, to: priceRange.to });
+        setInputValues({ from: number.toString(), to: inputValues.to });
         break;
       case InputType.MAX:
-        if (number < priceRange[0] + minStepsBetweenThumbs) {
-          const newMax = priceRange[0] + minStepsBetweenThumbs;
-          setPriceRange([priceRange[0], newMax]);
-          setInputValues([inputValues[0], newMax.toString()]);
+        if (number < priceRange.from + minStepsBetweenThumbs) {
+          const newMax = priceRange.from + minStepsBetweenThumbs;
+          setPriceRange({ from: priceRange.from, to: newMax });
+          setInputValues({ from: inputValues.from, to: newMax.toString() });
           break;
         }
         if (number > max) {
-          setPriceRange([priceRange[0], max]);
-          setInputValues([inputValues[0], max.toString()]);
+          setPriceRange({ from: priceRange.from, to: max });
+          setInputValues({ from: inputValues.from, to: max.toString() });
           break;
         }
-        setPriceRange([priceRange[0], number]);
-        setInputValues([inputValues[0], number.toString()]);
+        setPriceRange({ from: priceRange.from, to: number });
+        setInputValues({ from: inputValues.from, to: number.toString() });
         break;
       default:
         const exhaustiveCheck: never = type;
@@ -87,34 +98,34 @@ const PriceFilter: React.FC<PriceFilterProps> = ({ className, step, min = 0, max
   const minStepsBetweenThumbs = max / 10;
 
   React.useEffect(() => {
-    if (priceRange.length > 0) {
-      onChange?.(priceRange);
-    }
-  }, [priceRange, onChange]);
+    if (priceRange.from === min && priceRange.to === max) return;
+
+    onChange?.(priceRange);
+  }, [priceRange, min, max, onChange]);
 
   return (
     <div className={cn('', className)}>
       <div className="flex-space-between mb-4 flex gap-5">
         <Input
           min={min}
-          max={priceRange[1] - minStepsBetweenThumbs}
-          value={inputValues[0]}
-          placeholder="0"
+          max={priceRange.to - minStepsBetweenThumbs}
+          value={inputValues.from}
+          placeholder={String(min)}
           onChange={(e) => onInputChange(e.currentTarget.value, InputType.MIN)}
           onBlur={(e) => onInputBlur(e.currentTarget.value, InputType.MIN)}
         />
         -
         <Input
-          min={priceRange[0] + minStepsBetweenThumbs}
+          min={priceRange.from + minStepsBetweenThumbs}
           max={max}
-          value={inputValues[1]}
-          placeholder="100"
+          value={inputValues.to}
+          placeholder={String(max)}
           onChange={(e) => onInputChange(e.currentTarget.value, InputType.MAX)}
           onBlur={(e) => onInputBlur(e.currentTarget.value, InputType.MAX)}
         />
       </div>
       <SliderRange
-        value={priceRange}
+        value={[priceRange.from, priceRange.to]}
         minStepsBetweenThumbs={minStepsBetweenThumbs / step}
         step={step}
         min={min}
