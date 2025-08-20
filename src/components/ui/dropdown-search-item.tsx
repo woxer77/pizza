@@ -1,7 +1,7 @@
 import React from 'react';
 
 import type { ClassProps } from '@/types/common';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 import type { Product } from '@/shared/types/product.interface';
 import Image from 'next/image';
 

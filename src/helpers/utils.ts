@@ -13,3 +13,7 @@ export const scrollWithOffset = (id: string, offset: number) => {
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
 };
+
+export const serializeData = <T extends object>(data: T): T => {
+  return JSON.parse(JSON.stringify(data));
+};

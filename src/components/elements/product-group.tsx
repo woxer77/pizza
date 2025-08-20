@@ -3,7 +3,7 @@
 import React from 'react';
 
 import type { ClassProps } from '@/types/common';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 import { useIntersection } from 'react-use';
 import { useCategoryStore } from '@/store/category';
 

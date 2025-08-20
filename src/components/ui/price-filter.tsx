@@ -6,7 +6,7 @@ import { SliderRange } from '@/ui/slider-range';
 import { Input } from '@/ui/input';
 
 import type { ClassProps, PriceRange } from '@/types/common';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 
 const InputType = {
   MIN: 'min',

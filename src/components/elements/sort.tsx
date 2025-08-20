@@ -3,7 +3,7 @@ import React from 'react';
 import Select from '@/ui/select';
 
 import type { ClassProps, IOption } from '@/types/common';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 
 interface SortProps<T extends string> extends ClassProps {
   options: IOption<T>[];

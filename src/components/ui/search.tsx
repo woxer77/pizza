@@ -8,7 +8,7 @@ import DropdownSearchItem from './dropdown-search-item';
 import DropdownSearch from './dropdown-search';
 
 import type { ClassProps } from '@/types/common';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 import useDebounce from '@/hooks/useDebounce';
 import Api from '@/services/api-client';
 import type { Product } from '@/shared/types/product.interface';

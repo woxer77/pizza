@@ -7,7 +7,7 @@ import { User, ShoppingCart, MoveRight } from 'lucide-react';
 import Link from 'next/link';
 
 import type { ClassProps } from '@/types/common';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 
 const Header: React.FC<ClassProps> = ({ className }) => {
   const TEMP_SUM = 150;

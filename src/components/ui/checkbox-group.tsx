@@ -6,7 +6,7 @@ import { Input } from '@/ui/input';
 import { Skeleton } from '@/ui/skeleton';
 
 import type { ClassProps, FilterItem } from '@/types/common';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 
 interface CheckboxGroupProps extends ClassProps {
   items: FilterItem[];

@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
 import type { ClassProps } from '@/types/common';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 
 const NotFound: React.FC<ClassProps> = ({ className }) => {
   const router = useRouter();

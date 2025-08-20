@@ -1,7 +1,7 @@
 import React from 'react';
 
 import type { ClassProps } from '@/types/common';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 
 interface FilterSectionProps extends ClassProps {
   title?: string;

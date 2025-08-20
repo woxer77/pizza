@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 import { Checkbox } from '@/ui/checkbox';
 import type { ClassProps } from '@/shared/types/common';
 

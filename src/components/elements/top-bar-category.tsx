@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@/ui/button';
 
 import type { ClassProps } from '@/types/common';
-import { cn, scrollWithOffset } from '@/lib/utils';
+import { cn, scrollWithOffset } from '@/helpers/utils';
 import type { CategoryWithProducts } from '@/shared/types/category.interface';
 import { PRODUCTS_SCROLL_Y_OFFSET } from '@/constants/common';
 

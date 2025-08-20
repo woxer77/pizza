@@ -5,7 +5,7 @@ import React from 'react';
 import SelectOption from '@/ui/select-option';
 
 import type { ClassProps, IOption } from '@/shared/types/common';
-import { cn, scrollWithOffset } from '@/lib/utils';
+import { cn, scrollWithOffset } from '@/helpers/utils';
 import { PRODUCTS_SCROLL_Y_OFFSET } from '@/constants/common';
 import { useCategoryStore } from '@/store/category';
 

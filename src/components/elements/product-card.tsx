@@ -6,15 +6,15 @@ import { Plus } from 'lucide-react';
 
 import type { ClassProps } from '@/types/common';
 import type { Product } from '@/shared/types/product.interface';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 
 interface ProductCardProps extends ClassProps, Omit<Product, 'createdAt' | 'updatedAt' | 'categoryId'> {}
 
 const ProductCard: React.FC<ProductCardProps> = ({ className, name, description, image, basePrice }) => {
   return (
     <div className={cn('', className)}>
-      <div className="flex-center mb-4 h-[260px] w-full rounded-2xl bg-[#FFF7EE]">
-        <Image src={image} alt={name} width={212} height={212} quality={100} />
+      <div className="flex-center mb-4 h-[260px] w-full rounded-2xl bg-[#FAF7F2]">
+        <Image src={image} alt={name} width={242} height={242} quality={100} />
       </div>
       <div className="mb-3 flex flex-col gap-2">
         <h5 className="text-2xl font-bold">{name}</h5>

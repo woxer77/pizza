@@ -8,7 +8,7 @@ import PriceFilter from '@/ui/price-filter';
 import FilterSection from '@/elements/filter-section';
 
 import type { ClassProps, PriceRange } from '@/types/common';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 import useFilterAside from '@/hooks/useFilterAside';
 import useSet from '@/hooks/useSet';
 import { useRouter, useSearchParams } from 'next/navigation';

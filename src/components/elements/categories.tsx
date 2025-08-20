@@ -7,7 +7,7 @@ import TopBarCategory from '@/elements/top-bar-category';
 import { ChevronDown } from 'lucide-react';
 
 import type { ClassProps } from '@/types/common';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 import { useCategoryStore } from '@/store/category';
 import useCategory from '@/hooks/useCategory';
 import useSegmentControl from '@/hooks/useSegmentedControl';

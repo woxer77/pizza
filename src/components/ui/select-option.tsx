@@ -1,7 +1,7 @@
 import React from 'react';
 
 import type { ClassProps, IOption } from '@/types/common';
-import { cn } from '@/lib/utils';
+import { cn } from '@/helpers/utils';
 
 interface SelectOptionProps<T> extends ClassProps {
   option: IOption<T>;
