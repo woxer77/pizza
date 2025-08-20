@@ -14,7 +14,7 @@ export default async function Home() {
       <TopBar categories={categories} />
       <div className="container mx-auto mt-10 flex gap-[72px]">
         <FilterAside />
-        <Products categories={categories} />;
+        <Products categories={categories} />
       </div>
     </div>
   );
