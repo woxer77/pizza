@@ -14,7 +14,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ className, name, description,
   return (
     <div className={cn('', className)}>
       <div className="flex-center mb-4 h-[260px] w-full rounded-2xl bg-[#FAF7F2]">
-        <Image src={image} alt={name} width={242} height={242} quality={100} />
+        <Image
+          src={image}
+          alt={name}
+          width={242}
+          height={242}
+          quality={100}
+          className="transition-transform hover:translate-y-1.5"
+        />
       </div>
       <div className="mb-3 flex flex-col gap-2">
         <h5 className="text-2xl font-bold">{name}</h5>

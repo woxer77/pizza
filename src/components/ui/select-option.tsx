@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 import type { ClassProps, IOption } from '@/types/common';
