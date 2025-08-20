@@ -107,8 +107,8 @@ const Select = <T extends string>({
       <ul
         ref={dropdownRef}
         className={cn(
-          'bg-background text-foreground invisible absolute top-full left-0 -z-10 flex w-full min-w-34 -translate-x-1 -translate-y-2 flex-col rounded-sm border p-1 opacity-0 shadow-md transition-all',
-          isOpen && 'visible z-10 translate-x-0 translate-y-1 opacity-100'
+          'bg-background text-foreground invisible absolute top-full left-0 z-10 flex w-full min-w-34 -translate-x-1 -translate-y-2 flex-col rounded-sm border p-1 opacity-0 shadow-md transition-all',
+          isOpen && 'visible translate-x-0 translate-y-1 opacity-100'
         )}>
         {options.map((option) => (
           <SelectOption
