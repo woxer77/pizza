@@ -154,6 +154,42 @@ async function generate() {
       }
     }
   });
+  const pizza5 = await prisma.product.create({
+    data: {
+      name: 'Ham and Cheese',
+      description: 'Smoked ham, mozzarella and light creamy base.',
+      image: '/pizza/ham-and-cheese.png',
+      basePrice: 9.0,
+      categoryId: 'pizza',
+      ingredients: {
+        connect: createdIngredients.slice(0, 3)
+      }
+    }
+  });
+  const pizza6 = await prisma.product.create({
+    data: {
+      name: 'Ham and Mushrooms',
+      description: 'Ham, fresh mushrooms, mozzarella and tomato sauce.',
+      image: '/pizza/ham-and-mushrooms.png',
+      basePrice: 9.2,
+      categoryId: 'pizza',
+      ingredients: {
+        connect: createdIngredients.slice(3, 6)
+      }
+    }
+  });
+  const pizza7 = await prisma.product.create({
+    data: {
+      name: 'Pepperoni',
+      description: 'Pepperoni slices, rich tomato sauce and extra mozzarella.',
+      image: '/pizza/pepperoni.png',
+      basePrice: 9.8,
+      categoryId: 'pizza',
+      ingredients: {
+        connect: createdIngredients.slice(6, 9)
+      }
+    }
+  });
 
   await prisma.productVariation.createMany({
     data: [
@@ -181,6 +217,27 @@ async function generate() {
       generateVariation(pizza4.id, 3, 2),
       generateVariation(pizza4.id, 4, 1),
 
+      generateVariation(pizza5.id, 1, 1),
+      generateVariation(pizza5.id, 2, 1),
+      generateVariation(pizza5.id, 3, 1),
+      generateVariation(pizza5.id, 3, 2),
+      generateVariation(pizza5.id, 4, 1),
+      generateVariation(pizza5.id, 4, 2),
+
+      generateVariation(pizza6.id, 1, 1),
+      generateVariation(pizza6.id, 2, 1),
+      generateVariation(pizza6.id, 3, 1),
+      generateVariation(pizza6.id, 3, 2),
+      generateVariation(pizza6.id, 4, 1),
+      generateVariation(pizza6.id, 4, 2),
+
+      generateVariation(pizza7.id, 1, 1),
+      generateVariation(pizza7.id, 2, 1),
+      generateVariation(pizza7.id, 3, 1),
+      generateVariation(pizza7.id, 3, 2),
+      generateVariation(pizza7.id, 4, 1),
+      generateVariation(pizza7.id, 4, 2),
+
       generateVariation(1),
       generateVariation(2),
       generateVariation(3),
@@ -202,7 +259,10 @@ async function generate() {
       generateVariation(19),
       generateVariation(20),
       generateVariation(21),
-      generateVariation(22)
+      generateVariation(22),
+      generateVariation(23),
+      generateVariation(24),
+      generateVariation(25)
     ]
   });
 
