@@ -37,7 +37,7 @@ const Search: React.FC<ISearch> = ({ className, placeholder }) => {
         return;
       }
       try {
-        const products = await Api.product.search(query);
+        const products = await Api.product.search(query.trim());
         setProducts(products);
       } catch (error) {
         console.error(error); // TODO: error in UI
@@ -69,15 +69,14 @@ const Search: React.FC<ISearch> = ({ className, placeholder }) => {
   return (
     <>
       <div className={cn('relative mx-16 w-full', className)}>
-        <div ref={inputRef} onFocus={() => setIsFocused(true)} className="relative z-20">
+        <div ref={inputRef} onFocus={() => setIsFocused(true)} className="relative z-30">
           <Input
             type="search"
             placeholder={placeholder}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            onBlur={() => setIsFocused(false)}
             className={cn(
-              'border-1 border-neutral-300 px-10 py-4 !text-base',
+              'border-1 border-neutral-300 px-10 !text-base',
               isFocused && 'border-white bg-white focus-visible:ring-white/0'
             )}
           />
@@ -95,7 +94,7 @@ const Search: React.FC<ISearch> = ({ className, placeholder }) => {
             )}
           />
         </div>
-        <DropdownSearch isActive={isFocused && products.length > 0}>
+        <DropdownSearch isActive={isFocused && products.length > 0} className="z-30">
           {products.map((product) => (
             <DropdownSearchItem key={product.id} product={product} />
           ))}
@@ -103,7 +102,7 @@ const Search: React.FC<ISearch> = ({ className, placeholder }) => {
       </div>
       <div
         className={cn(
-          'invisible fixed top-0 left-0 z-10 h-full w-full bg-black opacity-0 transition-opacity duration-300',
+          'invisible fixed top-0 left-0 z-20 h-full w-full bg-black opacity-0 transition-[opacity,visibility]',
           isFocused && 'visible opacity-50'
         )}
       />

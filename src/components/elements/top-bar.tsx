@@ -23,7 +23,7 @@ interface TopBarProps extends ClassProps {
 
 const TopBar: React.FC<TopBarProps> = ({ className, categories }) => {
   return (
-    <div className={cn('bg-background sticky top-0 p-6 shadow-lg shadow-neutral-200', className)}>
+    <div className={cn('bg-background sticky top-0 z-10 p-6 shadow-lg shadow-neutral-200', className)}>
       <div className="flex-space-between container mx-auto max-h-14">
         <Categories categories={categories} />
         <Sort<ProductSortByValue>

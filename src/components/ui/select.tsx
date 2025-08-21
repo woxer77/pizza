@@ -57,7 +57,7 @@ const Select = <T extends string>({
   const onKeyDownSelect = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
       setIsOpen(false);
-    } else if (e.key === 'Enter') {
+    } else if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       toggleDropdown();
     }
@@ -66,7 +66,7 @@ const Select = <T extends string>({
   const onKeyDownDropdown = (e: React.KeyboardEvent, option: IOption<T>) => {
     if (e.key === 'Escape') {
       setIsOpen(false);
-    } else if (e.key === 'Enter') {
+    } else if (e.key === 'Enter' || e.key === ' ') {
       handleOptionClick(option);
       toggleDropdown();
     }
