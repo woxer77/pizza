@@ -13,12 +13,12 @@ interface ProductCardProps extends ClassProps, Omit<Product, 'createdAt' | 'upda
 const ProductCard: React.FC<ProductCardProps> = ({ className, name, description, image, basePrice }) => {
   return (
     <div className={cn('', className)}>
-      <div className="flex-center mb-4 h-[260px] w-full rounded-2xl bg-[#FAF7F2]">
+      <div className="flex-center mb-4 h-[300px] w-full rounded-2xl">
         <Image
           src={image}
           alt={name}
-          width={242}
-          height={242}
+          width={292}
+          height={292}
           quality={100}
           className="transition-transform hover:translate-y-1.5"
         />
