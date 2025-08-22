@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/ui/button';
 import { Plus } from 'lucide-react';
@@ -10,9 +11,9 @@ import { cn } from '@/helpers/utils';
 
 interface ProductCardProps extends ClassProps, Omit<Product, 'createdAt' | 'updatedAt' | 'categoryId'> {}
 
-const ProductCard: React.FC<ProductCardProps> = ({ className, name, description, image, basePrice }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ className, name, id, description, image, basePrice }) => {
   return (
-    <div className={cn('', className)}>
+    <Link className={cn('', className)} href={`products/${id}`}>
       <div className="flex-center mb-4 h-[300px] w-full rounded-2xl">
         <Image
           src={image}
@@ -25,7 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ className, name, description,
       </div>
       <div className="mb-3 flex flex-col gap-2">
         <h5 className="text-2xl font-bold">{name}</h5>
-        <p className="min-h-[60px] text-neutral-400">{description}</p>
+        <p className="text-description min-h-[60px]">{description}</p>
       </div>
       <div className="flex-space-between">
         <span className="text-lg">
@@ -35,7 +36,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ className, name, description,
           <Plus size={20} /> Build
         </Button>
       </div>
-    </div>
+    </Link>
   );
 };
 

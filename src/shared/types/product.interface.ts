@@ -1,5 +1,6 @@
 // eslint-disable-next-line
-import type { Product as PrismaProduct } from '@prisma/client';
+import type { Prisma, Product as PrismaProduct } from '@prisma/client';
+import type { getProductWithRelations } from '@/lib/products';
 
 export const ProductSortBy = {
   POPULAR: 'popular',
@@ -13,3 +14,5 @@ export type ProductSortByValue = (typeof ProductSortBy)[keyof typeof ProductSort
 export interface Product extends Omit<PrismaProduct, 'basePrice'> {
   basePrice: number;
 }
+
+export type ProductWithRelations = Prisma.PromiseReturnType<typeof getProductWithRelations>;
