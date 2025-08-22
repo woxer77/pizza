@@ -1,3 +1,4 @@
+import type { SegmentItem } from '@/shared/types/common';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -16,4 +17,11 @@ export const scrollWithOffset = (id: string, offset: number) => {
 
 export const serializeData = <T extends object>(data: T): T => {
   return JSON.parse(JSON.stringify(data));
+};
+
+export const convertToSegmentItems = <T extends { id: string; name: string }>(
+  inputObjects: T[]
+): SegmentItem<string>[] => {
+  const segmentItems = inputObjects.map((item) => ({ value: item.id, name: item.name }));
+  return segmentItems;
 };

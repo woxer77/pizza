@@ -2,17 +2,13 @@
 
 import React from 'react';
 
-import Select from '@/ui/select';
-import TopBarCategory from '@/elements/top-bar-category';
-import { ChevronDown } from 'lucide-react';
+import SegmentGroup from '@/ui/segment-group';
 
 import type { ClassProps } from '@/types/common';
-import { cn } from '@/helpers/utils';
+import { cn, convertToSegmentItems } from '@/helpers/utils';
 import { useCategoryStore } from '@/store/category';
-import useCategory from '@/hooks/useCategory';
 import useSegmentControl from '@/hooks/useSegmentedControl';
 import type { CategoryWithProducts } from '@/shared/types/category.interface';
-import { IGNORE_INTERSECTION_DELAY } from '@/constants/common';
 
 interface CategoryProps extends ClassProps {
   categories: CategoryWithProducts[];
@@ -22,111 +18,24 @@ interface CategoryProps extends ClassProps {
 const Categories: React.FC<CategoryProps> = ({ className, categories, limit = 5 }) => {
   const activeCategoryId = useCategoryStore((state) => state.activeId);
   const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
-  const setIgnoreIntersection = useCategoryStore((state) => state.setIgnoreIntersection);
 
-  const [shouldMoveToSelect, setShouldMoveToSelect] = React.useState(false);
+  const { moveSegment, refs } = useSegmentControl();
 
-  const moveableElemRef = React.useRef<HTMLDivElement>(null);
-  const parentElemRef = React.useRef<HTMLDivElement>(null);
-  const firstElemRef = React.useRef<HTMLButtonElement>(null);
-  const selectRef = React.useRef<HTMLButtonElement>(null);
-
-  const ignoreIntersectionTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
-
-  const { displayedCategories, dropdownOptions } = useCategory(categories, limit);
-  const moveSegment = useSegmentControl(parentElemRef, moveableElemRef);
-
-  const handleCategoryChange = (categoryId: string) => {
-    setActiveCategoryId(categoryId);
-
-    setIgnoreIntersection(true);
-    if (ignoreIntersectionTimeoutRef.current) {
-      clearTimeout(ignoreIntersectionTimeoutRef.current);
-    }
-    ignoreIntersectionTimeoutRef.current = setTimeout(() => {
-      setIgnoreIntersection(false);
-    }, IGNORE_INTERSECTION_DELAY);
-  };
-
-  const onCategoryClick = (categoryId: string) => (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    moveSegment(e.currentTarget);
-    handleCategoryChange(categoryId);
-  };
-
-  const onDropdownChange = (categoryId: string) => {
-    setShouldMoveToSelect(true);
-    handleCategoryChange(categoryId);
-  };
-
-  React.useLayoutEffect(() => {
-    if (shouldMoveToSelect && selectRef.current) {
-      moveSegment(selectRef.current);
-      setShouldMoveToSelect(false);
-    }
-  }, [shouldMoveToSelect, moveSegment]);
-
-  React.useEffect(() => {
-    if (moveableElemRef.current && firstElemRef.current && parentElemRef.current) {
-      const firstElemRect = firstElemRef.current.getBoundingClientRect();
-      const parentElemRect = parentElemRef.current.getBoundingClientRect();
-
-      moveableElemRef.current.style.transform = `translateX(${firstElemRect.x - parentElemRect.x}px)`;
-      moveableElemRef.current.style.width = `${firstElemRect.width}px`;
-      moveableElemRef.current.style.height = `${firstElemRect.height}px`;
-    }
-
-    return () => {
-      if (ignoreIntersectionTimeoutRef.current) {
-        clearTimeout(ignoreIntersectionTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  React.useEffect(() => {
-    const activeIsSelect = dropdownOptions.some((option) => option.value === activeCategoryId);
-
-    if (activeIsSelect && selectRef.current) {
-      moveSegment(selectRef.current);
-    } else {
-      const target = document.querySelector(`#top-bar-${activeCategoryId}`) as HTMLElement | null;
-      if (!target) return;
-
-      moveSegment(target);
-    }
-  }, [activeCategoryId, moveSegment, dropdownOptions]);
-
-  const isSelectActive = dropdownOptions.some((option) => option.value === activeCategoryId);
+  const filteredCategories = categories.filter((category) => category.products.length > 0);
+  const segmentItems = convertToSegmentItems(filteredCategories);
 
   return (
-    <div
-      className={cn('flex-center relative gap-1 rounded-xl bg-neutral-100 p-1.5', className)}
-      ref={parentElemRef}>
-      {displayedCategories.map((category, idx) => (
-        <TopBarCategory
-          key={category.id}
-          category={category}
-          ref={idx === 0 ? firstElemRef : null}
-          onClick={onCategoryClick(category.id)}
-          isActive={category.id === activeCategoryId}
-          className="z-10 rounded-xl px-4 py-2 capitalize"
-        />
-      ))}
-      {categories.length > limit && (
-        <Select
-          ref={selectRef}
-          options={dropdownOptions}
-          onSelect={onDropdownChange}
-          postfixContent={<ChevronDown />}
-          placeholder="Other"
-          activeOptionValue={dropdownOptions.find((e) => e.value === activeCategoryId)?.content}
-          className={cn('z-10 rounded-xl px-4 py-2 capitalize', isSelectActive && 'text-red-700')}
-        />
-      )}
-      <div
-        ref={moveableElemRef}
-        className="bg-background absolute top-1/2 left-0 -translate-y-1/2 rounded-xl transition-all"
-      />
-    </div>
+    <SegmentGroup
+      items={segmentItems}
+      moveSegment={moveSegment}
+      refs={refs}
+      name="top-bar"
+      setState={setActiveCategoryId}
+      activeValue={activeCategoryId}
+      variant="scroll"
+      limit={limit}
+      itemClassName={cn('capitalize px-5 py-2.5', className)}
+    />
   );
 };
 

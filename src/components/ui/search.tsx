@@ -77,7 +77,7 @@ const Search: React.FC<ISearch> = ({ className, placeholder }) => {
             onChange={(e) => setInputText(e.target.value)}
             className={cn(
               'border-1 border-neutral-300 px-10 !text-base',
-              isFocused && 'border-white bg-white focus-visible:ring-white/0'
+              isFocused && 'bg-background border-white focus-visible:ring-white/0'
             )}
           />
           <SearchIcon
