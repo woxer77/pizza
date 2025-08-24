@@ -243,3 +243,5 @@ export const products = [
     categoryId: 'snack'
   }
 ];
+
+export const IMAGE_SIZE = 500;

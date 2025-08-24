@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import React from 'react';
@@ -5,99 +6,149 @@ import React from 'react';
 import SegmentGroup from '@/ui/segment-group';
 import { Button } from '@/ui/button';
 import Image from 'next/image';
+import DashedCircle from '@/elements/dashed-circle';
 
 import type { ClassProps } from '@/types/common';
-import { cn } from '@/helpers/utils';
-// import type { SegmentItem } from '@/types/common';
-// import type { DoughType } from '@/shared/types/dough-type.interface';
-// import type { Size } from '@/shared/types/size.interface';
-import useSegmentedControl from '@/hooks/useSegmentedControl';
+import type { SegmentItem } from '@/types/common';
 import type { ProductWithRelations } from '@/types/product.interface';
+import type { Size, SizeValues } from '@/shared/types/size.interface';
+import type { DoughType, DoughTypeValues } from '@/shared/types/dough-type.interface';
+
+import { cn } from '@/helpers/utils';
+import useSegmentedControl from '@/hooks/useSegmentedControl';
+import { DOUGH_TYPES } from '@/constants/dough-type.constants';
+import { SIZES } from '@/constants/size.constants';
+import { IMAGE_SIZE } from '@/constants/product.constants';
 
 interface ProductCustomizerProps extends ClassProps {
-  product: ProductWithRelations;
+  product: NonNullable<ProductWithRelations>;
+  sizes: Size[];
+  doughTypes: DoughType[];
 }
 
-const ProductCustomizer: React.FC<ProductCustomizerProps> = ({ className, product }) => {
-  /* const doughTypes: SegmentItem<string>[] = product.variations
-    .map((variation: unknown) => {
-      if (typeof variation === 'object' && variation !== null && 'doughType' in variation) {
-        return variation.doughType as DoughType;
-      }
-    })
-    .filter((item) => item !== null && item !== undefined)
-    .map((item) => ({ value: item.id.toString(), name: item.name })); */
-  const doughTypes = [
-    {
-      value: '1',
-      name: 'traditional'
-    },
-    {
-      value: '2',
-      name: 'thin'
-    }
-  ];
+interface AvailableOptions {
+  sizes: Partial<Record<SizeValues, DoughTypeValues[]>> & { ids: SizeValues[] };
+  doughTypes: Partial<Record<DoughTypeValues, SizeValues[]>> & { ids: DoughTypeValues[] };
+}
 
-  /* const sizes: SegmentItem<string>[] = product.variations
-    .map((variation: unknown) => {
-      if (typeof variation === 'object' && variation !== null && 'size' in variation) {
-        return variation.size as Size;
+const ProductCustomizer: React.FC<ProductCustomizerProps> = ({ className, product, sizes, doughTypes }) => {
+  // const variationsExist = product.variations.length > 0;
+
+  const availableOptions = product.variations.reduce(
+    (acc: AvailableOptions, variation) => {
+      const sizeId = variation.size?.id as SizeValues;
+      const doughTypeId = variation.doughType?.id as DoughTypeValues;
+
+      if (sizeId !== undefined && !isNaN(sizeId)) {
+        if (!acc.sizes[sizeId]) {
+          acc.sizes[sizeId] = [];
+          acc.sizes.ids.push(sizeId);
+        }
+
+        if (doughTypeId !== undefined && !acc.sizes[sizeId].includes(doughTypeId)) {
+          acc.sizes[sizeId] = [...acc.sizes[sizeId], doughTypeId];
+        }
       }
-    })
-    .filter((item) => item !== null && item !== undefined)
-    .map((item) => ({ value: item.id.toString(), name: item.name })); */
-  const sizes = [
-    {
-      value: '20',
-      name: '20 cm'
+
+      if (doughTypeId !== undefined && !isNaN(doughTypeId)) {
+        if (!acc.doughTypes[doughTypeId]) {
+          acc.doughTypes[doughTypeId] = [];
+          acc.doughTypes.ids.push(doughTypeId);
+        }
+
+        if (sizeId !== undefined && !acc.doughTypes[doughTypeId].includes(sizeId)) {
+          acc.doughTypes[doughTypeId] = [...acc.doughTypes[doughTypeId], sizeId];
+        }
+      }
+      return acc;
     },
-    {
-      value: '25',
-      name: '25 cm'
-    },
-    {
-      value: '30',
-      name: '30 cm'
-    },
-    {
-      value: '35',
-      name: '35 cm'
-    }
-  ];
+    { sizes: { ids: [] }, doughTypes: { ids: [] } }
+  );
+
+  const sizeSegItems: SegmentItem<number>[] = sizes.map((size) => ({
+    value: size.id,
+    name: size.name,
+    disabled: !availableOptions.sizes[size.id as SizeValues]?.length
+  }));
+
+  const defaultActiveSize = availableOptions.sizes.ids.includes(SIZES.LARGE)
+    ? SIZES.LARGE
+    : (availableOptions.sizes.ids.at(-1) ?? SIZES.SMALL); // delete ?? SIZES.SMALL when page with no variations be ready
+  const [activeSize, setActiveSize] = React.useState<SizeValues>(defaultActiveSize);
+  const [activeDoughType, setActiveDoughType] = React.useState<DoughTypeValues>(DOUGH_TYPES.TRADITIONAL);
+
+  const doughSegItems: SegmentItem<number>[] = doughTypes.map((dough) => ({
+    value: dough.id,
+    name: dough.name,
+    disabled: !availableOptions.sizes[activeSize]?.includes(dough.id as DoughTypeValues)
+  }));
 
   const doughSegmentControl = useSegmentedControl();
   const sizeSegmentControl = useSegmentedControl();
-  const [doughType, setDoughType] = React.useState(doughTypes[0].value);
-  const [size, setSize] = React.useState(sizes[0].value);
+
+  React.useEffect(() => {
+    const availableDoughTypes = availableOptions.sizes[activeSize];
+    if (availableDoughTypes && !availableDoughTypes.includes(activeDoughType)) {
+      switch (activeDoughType) {
+        case DOUGH_TYPES.TRADITIONAL:
+          setActiveDoughType(DOUGH_TYPES.THIN);
+          break;
+        case DOUGH_TYPES.THIN:
+          setActiveDoughType(DOUGH_TYPES.TRADITIONAL);
+          break;
+        default:
+          const _exhaustiveCheck: never = activeDoughType;
+          throw new Error(`Unexpected dough type: ${_exhaustiveCheck}`);
+      }
+    }
+  }, [activeSize, availableOptions.sizes, activeDoughType]);
 
   return (
-    <div className={cn('flex min-h-[500px] flex-col items-start justify-between', className)}>
-      <div>
-        <div className="mb-6 flex flex-col gap-3">
-          <h2 className="text-4xl font-extrabold">{product?.name}</h2>
-          <p className="text-description text-sm">{product?.description}</p>
-        </div>
-        <div className="mb-6 flex flex-col gap-5">
-          <SegmentGroup
-            items={doughTypes}
-            refs={doughSegmentControl.refs}
-            setState={setDoughType}
-            moveSegment={doughSegmentControl.moveSegment}
-            name="dough-type"
-            activeValue={doughType}
-            itemClassName="capitalize"
-          />
-          <SegmentGroup
-            items={sizes}
-            refs={sizeSegmentControl.refs}
-            setState={setSize}
-            moveSegment={sizeSegmentControl.moveSegment}
-            name="size"
-            activeValue={size}
-            itemClassName="text-sm"
-          />
-        </div>
+    <>
+      <div className="relative">
+        <Image
+          src={product.image}
+          alt={product.name}
+          width={IMAGE_SIZE}
+          height={IMAGE_SIZE}
+          className={cn(
+            `size-[${IMAGE_SIZE}px] translate-1.5 transition-transform`,
+            (activeSize === SIZES.SMALL && 'scale-[0.54]') ||
+              (activeSize === SIZES.MEDIUM && 'scale-[0.70]') ||
+              (activeSize === SIZES.LARGE && 'scale-[0.85]') ||
+              (activeSize === SIZES.EXTRA_LARGE && 'scale-100')
+          )}
+        />
+        <DashedCircle variant="outer" size={IMAGE_SIZE * 0.78} activeSize={activeSize} />
+        <DashedCircle variant="inner" size={IMAGE_SIZE * 0.64} activeSize={activeSize} />
+      </div>
+
+      <div className={cn('flex min-h-[500px] flex-col items-start justify-between', className)}>
         <div>
+          <div className="mb-6 flex flex-col gap-3">
+            <h2 className="text-4xl font-extrabold">{product?.name}</h2>
+            <p className="text-description text-sm">{product?.description}</p>
+          </div>
+          <div className="mb-6 flex flex-col gap-2">
+            <SegmentGroup
+              items={sizeSegItems}
+              refs={sizeSegmentControl.refs}
+              onClick={(value: number) => setActiveSize(value as SizeValues)}
+              moveSegment={sizeSegmentControl.moveSegment}
+              name="size"
+              activeValue={activeSize}
+              itemClassName="text-sm"
+            />
+            <SegmentGroup
+              items={doughSegItems}
+              refs={doughSegmentControl.refs}
+              onClick={(value: number) => setActiveDoughType(value as DoughTypeValues)}
+              moveSegment={doughSegmentControl.moveSegment}
+              name="dough-type"
+              activeValue={activeDoughType}
+              itemClassName="capitalize text-sm"
+            />
+          </div>
           <h4 className="mb-4 text-lg font-bold">Ingredients</h4>
           <div className="flex max-w-[640px] gap-4 overflow-auto">
             {product?.ingredients.map((ingred) => (
@@ -112,9 +163,9 @@ const ProductCustomizer: React.FC<ProductCustomizerProps> = ({ className, produc
             ))}
           </div>
         </div>
+        <Button className="mt-5 px-7 py-5">Add to cart for ${product?.basePrice} + ...</Button>
       </div>
-      <Button className="mt-5 px-7 py-5">Add to cart for ${product?.basePrice} + ...</Button>
-    </div>
+    </>
   );
 };
 

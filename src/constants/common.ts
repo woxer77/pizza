@@ -98,3 +98,8 @@ export const ingredients = [
 
 export const IGNORE_INTERSECTION_DELAY = 500;
 export const PRODUCTS_SCROLL_Y_OFFSET = 130;
+
+export const SegmentVariants = {
+  DEFAULT: 'default',
+  SCROLL: 'scroll'
+} as const;

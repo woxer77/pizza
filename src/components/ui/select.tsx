@@ -9,7 +9,7 @@ import { cn, scrollWithOffset } from '@/helpers/utils';
 import { PRODUCTS_SCROLL_Y_OFFSET } from '@/constants/common';
 import { useCategoryStore } from '@/store/category';
 
-interface SelectProps<T extends string> extends ClassProps {
+interface SelectProps<T extends string | number> extends ClassProps {
   contentClassName?: string;
   options: IOption<T>[];
   onSelect?: (value: T) => void;
@@ -21,7 +21,7 @@ interface SelectProps<T extends string> extends ClassProps {
   defaultOption?: IOption<T>;
 }
 
-const Select = <T extends string>({
+const Select = <T extends string | number>({
   className,
   contentClassName,
   options,

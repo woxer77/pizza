@@ -2,20 +2,14 @@
 
 import React from 'react';
 
-import type { ClassProps, IOption, SegmentItem } from '@/types/common';
-import { cn, scrollWithOffset } from '@/helpers/utils';
+import { ChevronDown } from 'lucide-react';
 import { Button } from '@/ui/button';
 import Select from './select';
-import { ChevronDown } from 'lucide-react';
+
+import type { ClassProps, IOption, SegmentItem, SegmentVariantValues } from '@/types/common';
+import { cn, scrollWithOffset } from '@/helpers/utils';
 import { useCategoryStore } from '@/store/category';
-import { IGNORE_INTERSECTION_DELAY, PRODUCTS_SCROLL_Y_OFFSET } from '@/constants/common';
-
-const SegmentVariants = {
-  DEFAULT: 'default',
-  SCROLL: 'scroll'
-} as const;
-
-type SegmentVariantValues = (typeof SegmentVariants)[keyof typeof SegmentVariants];
+import { IGNORE_INTERSECTION_DELAY, PRODUCTS_SCROLL_Y_OFFSET, SegmentVariants } from '@/constants/common';
 
 interface Refs {
   parent: React.Ref<HTMLDivElement>;
@@ -23,10 +17,10 @@ interface Refs {
   moveable: React.Ref<HTMLDivElement>;
 }
 
-interface SegmentGroupProps<T extends string> extends ClassProps {
+interface SegmentGroupProps<T extends string | number> extends ClassProps {
   itemClassName?: string;
   items: SegmentItem<T>[];
-  setState: (value: T) => void;
+  onClick?: (value: T) => void;
   moveSegment: (target: HTMLElement) => void;
   activeValue: T;
   name: string;
@@ -37,11 +31,11 @@ interface SegmentGroupProps<T extends string> extends ClassProps {
   variant?: SegmentVariantValues;
 }
 
-const SegmentGroup = <T extends string>({
+const SegmentGroup = <T extends string | number>({
   className,
   itemClassName,
   items,
-  setState,
+  onClick,
   moveSegment,
   activeValue,
   name,
@@ -69,33 +63,33 @@ const SegmentGroup = <T extends string>({
 
   const changeSegment = (event: React.MouseEvent<HTMLButtonElement>, value: T) => {
     const target = event.target as HTMLButtonElement;
-    setState(value);
+    onClick?.(value);
     moveSegment(target);
 
     if (variant === SegmentVariants.SCROLL) {
       stopIntersection();
-      scrollWithOffset(value, PRODUCTS_SCROLL_Y_OFFSET);
+      scrollWithOffset(String(value), PRODUCTS_SCROLL_Y_OFFSET);
     }
   };
 
   const itemsToDisplay = items.slice(0, limit);
   const dropdownOptions: IOption<T>[] =
-    limit !== undefined && items.length <= limit
-      ? []
-      : items.slice(limit).map((item) => ({
+    limit !== undefined && items.length > limit
+      ? items.slice(limit).map((item) => ({
           value: item.value,
           content: item.name,
-          href: item.value
-        }));
+          href: String(item.value)
+        }))
+      : [];
   const isDropdownOpen = dropdownOptions.some((option) => option.value === activeValue);
 
   const onDropdownSelect = (value: T) => {
     setShouldMoveToSelect(true);
-    setState(value);
+    onClick?.(value);
 
     if (variant === SegmentVariants.SCROLL) {
       stopIntersection();
-      scrollWithOffset(value, PRODUCTS_SCROLL_Y_OFFSET);
+      scrollWithOffset(String(value), PRODUCTS_SCROLL_Y_OFFSET);
     }
   };
 
@@ -134,8 +128,9 @@ const SegmentGroup = <T extends string>({
           id={`${name}-${item.value}`}
           ref={idx === 0 ? refs.first : null}
           onClick={(e) => changeSegment(e, item.value)}
+          disabled={item.disabled}
           className={cn(
-            'flex-center z-5 flex-1 cursor-pointer gap-2 rounded-xl px-2 py-1 font-semibold duration-300',
+            'flex-center z-5 flex-1 cursor-pointer gap-2 rounded-xl px-2 py-1 font-semibold duration-300 disabled:cursor-not-allowed disabled:opacity-30',
             activeValue === item.value && 'text-red-700',
             itemClassName
           )}>

@@ -5,14 +5,14 @@ import React from 'react';
 import type { ClassProps, IOption } from '@/types/common';
 import { cn } from '@/helpers/utils';
 
-interface SelectOptionProps<T> extends ClassProps {
+interface SelectOptionProps<T extends string | number> extends ClassProps {
   option: IOption<T>;
   onClick?: () => void;
   onKeyDown?: React.KeyboardEventHandler<HTMLLIElement>;
   tabIndex?: number;
 }
 
-const SelectOption = <T extends string>({
+const SelectOption = <T extends string | number>({
   className,
   option,
   onClick,
