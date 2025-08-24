@@ -203,7 +203,6 @@ async function generate() {
       generateVariation(pizza2.id, 1, 1),
       generateVariation(pizza2.id, 2, 1),
       generateVariation(pizza2.id, 3, 1),
-      generateVariation(pizza2.id, 3, 2),
 
       generateVariation(pizza3.id, 2, 1),
       generateVariation(pizza3.id, 3, 1),
@@ -211,19 +210,17 @@ async function generate() {
       generateVariation(pizza3.id, 4, 1),
       generateVariation(pizza3.id, 4, 2),
 
-      generateVariation(pizza4.id, 1, 1),
-      generateVariation(pizza4.id, 2, 1),
-      generateVariation(pizza4.id, 3, 1),
+      generateVariation(pizza4.id, 1, 2),
+      generateVariation(pizza4.id, 2, 2),
       generateVariation(pizza4.id, 3, 2),
-      generateVariation(pizza4.id, 4, 1),
+      generateVariation(pizza4.id, 4, 2),
 
       generateVariation(pizza5.id, 1, 1),
       generateVariation(pizza5.id, 2, 1),
       generateVariation(pizza5.id, 3, 1),
-      generateVariation(pizza5.id, 3, 2),
+      generateVariation(pizza5.id, 3, 1),
       generateVariation(pizza5.id, 4, 1),
-      generateVariation(pizza5.id, 4, 2),
-
+      generateVariation(pizza5.id, 4, 1),
       generateVariation(pizza6.id, 1, 1),
       generateVariation(pizza6.id, 2, 1),
       generateVariation(pizza6.id, 3, 1),

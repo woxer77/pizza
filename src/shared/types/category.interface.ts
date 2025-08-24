@@ -1,10 +1,4 @@
-import type { Category, ProductVariation } from '@prisma/client';
-import type { Product } from './product.interface';
-import type { Ingredient } from './ingredient.interface';
+import type { Prisma } from '@prisma/client';
+import { getCategories } from '@/lib/categories';
 
-export type CategoryWithProducts = Category & {
-  products: (Product & {
-    ingredients: Ingredient[];
-    variations: ProductVariation[];
-  })[];
-};
+export type CategoryWithProducts = Prisma.PromiseReturnType<typeof getCategories>[number];
