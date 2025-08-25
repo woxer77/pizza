@@ -7,6 +7,7 @@ import type { PizzaCustomizerProps } from '@/components/elements/pizza-customize
 import type { SegmentItem } from '@/shared/types/common';
 import type { DoughTypeValues } from '@/shared/types/dough-type.interface';
 import type { SizeValues } from '@/shared/types/size.interface';
+import { calculatePrice } from '@/helpers/utils';
 
 interface AvailableOptions {
   sizes: Partial<Record<SizeValues, DoughTypeValues[]>> & { ids: SizeValues[] };
@@ -51,6 +52,7 @@ const usePizzaCustomizer = ({ product, sizes, doughTypes }: Omit<PizzaCustomizer
 
   const [activeSize, setActiveSize] = React.useState<SizeValues>(defaultActiveSize);
   const [activeDoughType, setActiveDoughType] = React.useState<DoughTypeValues>(DOUGH_TYPES.TRADITIONAL);
+  const [ingredients, setIngredients] = React.useState<number[]>([]);
 
   const sizeSegments: SegmentItem<number>[] = sizes.map((size) => ({
     value: size.id,
@@ -63,6 +65,23 @@ const usePizzaCustomizer = ({ product, sizes, doughTypes }: Omit<PizzaCustomizer
     name: dough.name,
     disabled: !availableOptions.sizes[activeSize]?.includes(dough.id as DoughTypeValues)
   }));
+
+  const totalPrice = React.useMemo(
+    () =>
+      calculatePrice({
+        product,
+        sizeId: activeSize,
+        sizes,
+        doughTypeId: activeDoughType,
+        doughTypes,
+        ingredientIds: ingredients
+      }),
+    [product, activeSize, sizes, activeDoughType, doughTypes, ingredients]
+  );
+
+  const ingredientClick = (id: number) => {
+    setIngredients((prev) => (!prev.includes(id) ? [...prev, id] : prev.filter((item) => item !== id)));
+  };
 
   React.useEffect(() => {
     const availableDoughTypes = availableOptions.sizes[activeSize];
@@ -87,7 +106,10 @@ const usePizzaCustomizer = ({ product, sizes, doughTypes }: Omit<PizzaCustomizer
     activeSize,
     setActiveSize,
     activeDoughType,
-    setActiveDoughType
+    setActiveDoughType,
+    ingredients,
+    ingredientClick,
+    totalPrice
   };
 };
 

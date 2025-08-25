@@ -7,6 +7,7 @@ import SegmentGroup from '@/ui/segment-group';
 import { Button } from '@/ui/button';
 import PizzaImage from '@/elements/pizza-image';
 import Image from 'next/image';
+import { CircleCheck } from 'lucide-react';
 
 import type { ClassProps } from '@/types/common';
 import type { ProductWithRelations } from '@/types/product.interface';
@@ -25,12 +26,21 @@ export interface PizzaCustomizerProps extends ClassProps {
 }
 
 const PizzaCustomizer: React.FC<PizzaCustomizerProps> = ({ className, product, sizes, doughTypes }) => {
-  const { sizeSegments, doughSegments, activeSize, setActiveSize, activeDoughType, setActiveDoughType } =
-    usePizzaCustomizer({
-      product,
-      sizes,
-      doughTypes
-    });
+  const {
+    sizeSegments,
+    doughSegments,
+    activeSize,
+    setActiveSize,
+    activeDoughType,
+    setActiveDoughType,
+    ingredients,
+    ingredientClick,
+    totalPrice
+  } = usePizzaCustomizer({
+    product,
+    sizes,
+    doughTypes
+  });
 
   const doughSegmentControl = useSegmentedControl();
   const sizeSegmentControl = useSegmentedControl();
@@ -38,7 +48,6 @@ const PizzaCustomizer: React.FC<PizzaCustomizerProps> = ({ className, product, s
   return (
     <div className={cn('flex items-start gap-10', className)}>
       <PizzaImage src={product.image} alt={product.name} size={IMAGE_SIZE} activeSize={activeSize} />
-
       <div className="flex min-h-[500px] flex-col items-start justify-between">
         <div>
           <div className="mb-6 flex flex-col gap-3">
@@ -66,20 +75,31 @@ const PizzaCustomizer: React.FC<PizzaCustomizerProps> = ({ className, product, s
             />
           </div>
           <h4 className="mb-4 text-lg font-bold">Ingredients</h4>
-          <div className="flex max-w-[640px] gap-4 overflow-auto">
+          <div className="flex max-w-[640px] gap-2 overflow-auto px-3 pb-6">
             {product.ingredients.map((ingred) => (
               <Button
                 key={ingred.id}
                 noStyles
-                className="hover:bg-accent flex min-w-32 cursor-pointer flex-col items-center rounded-2xl px-2.5 py-3">
+                onClick={() => ingredientClick(ingred.id)}
+                className={cn(
+                  'border-background relative flex min-w-32 cursor-pointer flex-col items-center rounded-2xl border-2 px-2.5 py-3 shadow-lg transition-[border-color,box-shadow] hover:shadow-sm',
+                  ingredients.includes(ingred.id) && 'border-foreground'
+                )}>
                 <Image src={ingred.image} alt={ingred.name} width={110} height={110} className="mb-1" />
                 <p className="min-h-8 text-xs">{ingred.name}</p>
                 <p className="text-sm font-bold">${ingred.price}</p>
+                <CircleCheck
+                  size={24}
+                  className={cn(
+                    'invisible absolute top-2 right-2 opacity-0 transition-[opacity,visibility]',
+                    ingredients.includes(ingred.id) && 'visible opacity-100'
+                  )}
+                />
               </Button>
             ))}
           </div>
         </div>
-        <Button className="mt-5 px-7 py-5">Add to cart for ${product.basePrice} + ...</Button>
+        <Button className="mt-5 px-7 py-5">Add to cart for ${totalPrice}</Button>
       </div>
     </div>
   );
