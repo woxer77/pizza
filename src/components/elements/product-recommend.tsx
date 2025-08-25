@@ -20,7 +20,7 @@ const ProductRecommend: React.FC<ProductRecommendProps> = async ({ className, li
   return (
     <section className={cn('container mx-auto', className)}>
       <h3 className="mb-7 text-2xl font-bold">Recommendations</h3>
-      <ul className="grid grid-cols-4 gap-5">
+      <ul className="grid grid-cols-4 gap-12">
         {products.map(({ name, id, description, image, basePrice }) => (
           <ProductCard
             key={id}
