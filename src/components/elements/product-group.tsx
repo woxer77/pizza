@@ -46,7 +46,7 @@ const ProductGroup: React.FC<ProductGroupProps> = ({ className, children, title,
   return (
     <div ref={intersectionRef} id={categoryId} className={cn('mb-10', className)}>
       <h2 className="mb-6 text-3xl font-bold capitalize">{title}</h2>
-      <div className="grid grid-cols-3 gap-12">{children}</div>
+      <ul className="grid grid-cols-3 gap-12">{children}</ul>
     </div>
   );
 };

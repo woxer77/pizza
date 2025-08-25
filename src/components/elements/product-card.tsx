@@ -13,7 +13,7 @@ interface ProductCardProps extends ClassProps, Omit<Product, 'createdAt' | 'upda
 
 const ProductCard: React.FC<ProductCardProps> = ({ className, name, id, description, image, basePrice }) => {
   return (
-    <Link className={cn('', className)} href={`products/${id}`}>
+    <Link className={cn('', className)} href={`/products/${id}`}>
       <div className="flex-center mb-4 h-[300px] w-full rounded-2xl">
         <Image
           src={image}
