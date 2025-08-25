@@ -221,8 +221,11 @@ async function generate() {
       generateVariation(pizza5.id, 3, 1),
       generateVariation(pizza5.id, 4, 1),
       generateVariation(pizza5.id, 4, 1),
+
       generateVariation(pizza6.id, 1, 1),
+      generateVariation(pizza6.id, 1, 2),
       generateVariation(pizza6.id, 2, 1),
+      generateVariation(pizza6.id, 2, 2),
       generateVariation(pizza6.id, 3, 1),
       generateVariation(pizza6.id, 3, 2),
       generateVariation(pizza6.id, 4, 1),

@@ -1,4 +1,6 @@
+import { DOUGH_TYPES } from '@/constants/dough-type.constants';
 import type { CalculatePriceArgs, SegmentItem } from '@/shared/types/common';
+import type { DoughTypeValues } from '@/shared/types/dough-type.interface';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -45,4 +47,15 @@ export const calculatePrice = ({
 
   const total = product.basePrice + sizePrice + doughTypePrice + ingredientsPrice;
   return total.toFixed(2);
+};
+
+export const getPizzaImagePath = (baseName: string, doughType: DoughTypeValues): string => {
+  const doughTypeName = doughType === DOUGH_TYPES.THIN ? 'thin' : 'traditional';
+
+  const cleanName = baseName
+    .replace(/^\//, '')
+    .replace(/^pizza\//, '')
+    .replace(/\.(png|jpg|jpeg)$/i, '');
+
+  return `/pizza/${doughTypeName}/${cleanName}.png`;
 };
