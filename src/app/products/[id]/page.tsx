@@ -1,12 +1,13 @@
 import React from 'react';
 
-import ProductCustomizer from '@/components/elements/product-customizer';
+import PizzaCustomizer from '@/components/elements/pizza-customizer';
 
 import { serializeData } from '@/helpers/utils';
 import { getProductWithRelations } from '@/lib/products';
 import { notFound } from 'next/navigation';
 import { getSizes } from '@/lib/sizes';
 import { getDoughTypes } from '@/lib/dough-types';
+import ProductCustomizer from '@/components/elements/product-customizer';
 
 interface ProductPageProps {
   params: {
@@ -30,9 +31,11 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
   return (
     <div className="container mx-auto">
       <div className="my-10 text-sm">breadcrumbs {product.basePrice}</div>
-      <div className="flex items-start gap-10">
-        <ProductCustomizer product={product} sizes={sizes} doughTypes={doughTypes} />
-      </div>
+      {product.variations[0].size ? (
+        <PizzaCustomizer product={product} sizes={sizes} doughTypes={doughTypes} />
+      ) : (
+        <ProductCustomizer product={product} />
+      )}
     </div>
   );
 };

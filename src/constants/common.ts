@@ -1,3 +1,5 @@
+import { SIZES } from './size.constants';
+
 export const ingredients = [
   {
     name: 'Bacon',
@@ -102,4 +104,13 @@ export const PRODUCTS_SCROLL_Y_OFFSET = 130;
 export const SegmentVariants = {
   DEFAULT: 'default',
   SCROLL: 'scroll'
+} as const;
+
+type SizeKeys = keyof typeof SIZES;
+
+export const IMAGE_SCALE: Record<SizeKeys, number> = {
+  SMALL: 0.54,
+  MEDIUM: 0.7,
+  LARGE: 0.85,
+  EXTRA_LARGE: 1
 } as const;
