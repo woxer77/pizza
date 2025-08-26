@@ -44,7 +44,7 @@ const PizzaCustomizer: React.FC<PizzaCustomizerProps> = ({ className, product, s
 
   const doughSegmentControl = useSegmentedControl();
   const sizeSegmentControl = useSegmentedControl();
-  console.log(getPizzaImagePath(product.image, activeDoughType));
+
   return (
     <div className={cn('flex items-start gap-10', className)}>
       <PizzaImage

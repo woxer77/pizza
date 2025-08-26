@@ -30,7 +30,7 @@ const Categories: React.FC<CategoryProps> = ({ className, categories, limit = 5 
       moveSegment={moveSegment}
       refs={refs}
       name="top-bar"
-      setState={setActiveCategoryId}
+      onClick={setActiveCategoryId}
       activeValue={activeCategoryId}
       variant="scroll"
       limit={limit}
