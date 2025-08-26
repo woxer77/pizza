@@ -14,7 +14,7 @@ import type { ProductWithRelations } from '@/types/product.interface';
 import type { Size, SizeValues } from '@/shared/types/size.interface';
 import type { DoughType, DoughTypeValues } from '@/shared/types/dough-type.interface';
 
-import { cn, getPizzaImagePath } from '@/helpers/utils';
+import { cn, getProductImagePath } from '@/helpers/utils';
 import useSegmentedControl from '@/hooks/useSegmentedControl';
 import { IMAGE_SIZE } from '@/constants/product.constants';
 import usePizzaCustomizer from '@/hooks/usePizzaCustomizer';
@@ -48,7 +48,7 @@ const PizzaCustomizer: React.FC<PizzaCustomizerProps> = ({ className, product, s
   return (
     <div className={cn('flex items-start gap-10', className)}>
       <PizzaImage
-        src={getPizzaImagePath(product.image, activeDoughType)}
+        src={getProductImagePath(product.image, activeDoughType)}
         alt={product.name}
         size={IMAGE_SIZE}
         activeSize={activeSize}

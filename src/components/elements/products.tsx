@@ -20,14 +20,7 @@ const Products: React.FC<ProductsProps> = ({ className, categories }) => {
           return (
             <ProductGroup key={category.id} title={category.name} categoryId={category.id}>
               {category.products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  id={product.id}
-                  name={product.name}
-                  description={product.description}
-                  basePrice={product.basePrice}
-                  image={product.image}
-                />
+                <ProductCard key={product.id} product={product} />
               ))}
             </ProductGroup>
           );
