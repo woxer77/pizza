@@ -98,8 +98,6 @@ const PriceFilter: React.FC<PriceFilterProps> = ({ className, step, min = 0, max
   const minStepsBetweenThumbs = max / 10;
 
   React.useEffect(() => {
-    if (priceRange.from === min && priceRange.to === max) return;
-
     onChange?.(priceRange);
   }, [priceRange, min, max, onChange]);
 

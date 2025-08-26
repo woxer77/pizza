@@ -43,6 +43,8 @@ const FilterAside: React.FC<ClassProps> = ({ className }) => {
   const [priceRange, setPriceRange] = React.useState<PriceRange<number>>(defaultPriceRange);
 
   React.useEffect(() => {
+    if (priceRange.from === 0 && priceRange.to === MAX_PRICE) return;
+
     const filters = {
       priceFrom: priceRange.from,
       priceTo: priceRange.to,
@@ -54,6 +56,7 @@ const FilterAside: React.FC<ClassProps> = ({ className }) => {
     const query = qs.stringify(filters, {
       arrayFormat: 'comma'
     });
+
     router.push(`?${query}`, {
       scroll: false
     });
