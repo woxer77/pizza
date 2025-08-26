@@ -49,8 +49,11 @@ export const calculatePrice = ({
   return total.toFixed(2);
 };
 
-export const getProductImagePath = (baseName: string, doughType: DoughTypeValues = 1): string => {
-  if (baseName.includes('pizza')) {
+export const getProductImagePath = (
+  baseName: string,
+  doughType: DoughTypeValues = DOUGH_TYPES.TRADITIONAL
+): string => {
+  if (baseName.includes('/pizza/')) {
     const doughTypeName = doughType === DOUGH_TYPES.THIN ? 'thin' : 'traditional';
 
     const cleanName = baseName
