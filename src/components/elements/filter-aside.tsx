@@ -43,11 +43,10 @@ const FilterAside: React.FC<ClassProps> = ({ className }) => {
   const [priceRange, setPriceRange] = React.useState<PriceRange<number>>(defaultPriceRange);
 
   React.useEffect(() => {
-    if (priceRange.from === 0 && priceRange.to === MAX_PRICE) return;
-
+    const showPrices = !(priceRange.from === 0 && priceRange.to === MAX_PRICE);
     const filters = {
-      priceFrom: priceRange.from,
-      priceTo: priceRange.to,
+      priceFrom: showPrices ? priceRange.from : undefined,
+      priceTo: showPrices ? priceRange.to : undefined,
       ingredients: Array.from(ingredientSet.values),
       doughTypes: Array.from(doughTypeSet.values),
       sizes: Array.from(sizeSet.values)
@@ -60,7 +59,7 @@ const FilterAside: React.FC<ClassProps> = ({ className }) => {
     router.push(`?${query}`, {
       scroll: false
     });
-  }, [ingredientSet, doughTypeSet, sizeSet, priceRange, router]);
+  }, [ingredientSet.values, doughTypeSet.values, sizeSet.values, priceRange, router]);
 
   return (
     <aside
