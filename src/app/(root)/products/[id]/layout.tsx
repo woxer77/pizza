@@ -6,7 +6,7 @@ export default function ProductLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col gap-20 pb-20">
+    <div className="flex flex-col gap-20 pt-10 pb-20">
       {children}
       <ProductRecommend />
     </div>

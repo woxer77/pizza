@@ -12,6 +12,8 @@ const useSegmentedControl = () => {
 
       moveableElemRef.current.style.transform = `translateX(${targetRect.x - parentRect.x}px)`;
       moveableElemRef.current.style.width = `${targetRect.width}px`;
+      moveableElemRef.current.style.height = `${targetRect.height}px`;
+      console.log('moveSegment', targetRect.width, targetRect.height, parentRect.x); // fix bug in modal
     }
   };
 

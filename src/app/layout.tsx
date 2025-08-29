@@ -1,8 +1,5 @@
-import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
-import './globals.css';
-
-import Header from '@/elements/header';
+import '@/app/globals.css';
 
 const nunito = Nunito({
   variable: '--font-nunito',
@@ -10,25 +7,14 @@ const nunito = Nunito({
   display: 'swap'
 });
 
-export const metadata: Metadata = {
-  title: {
-    template: '%s - Next Pizza',
-    default: 'Next Pizza'
-  },
-  description: 'Pizza store created with NextJS'
-};
-
 export default function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${nunito.className} antialiased`}>
-        <Header />
-        {children}
-      </body>
+    <html lang="en" data-scroll-behavior="smooth">
+      <body className={`${nunito.className} antialiased`}>{children}</body>
     </html>
   );
 }

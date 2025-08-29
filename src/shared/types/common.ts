@@ -39,3 +39,9 @@ export interface CalculatePriceArgs {
   doughTypes: DoughType[];
   ingredientIds: number[];
 }
+
+export interface ProductPageProps {
+  params: {
+    id: string;
+  };
+}

@@ -27,7 +27,7 @@ const ProductCustomizer: React.FC<ProductCustomizerProps> = ({ className, produc
           <h2 className="text-4xl font-extrabold">{product.name}</h2>
           <p className="text-description text-sm">{product.description}</p>
         </div>
-        <Button className="px-7 py-5">Add to cart for ${product?.basePrice} + ...</Button>
+        <Button className="px-7 py-5">Add to cart for ${product.basePrice}</Button>
       </div>
     </div>
   );

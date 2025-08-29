@@ -8,12 +8,7 @@ import { notFound } from 'next/navigation';
 import { getSizes } from '@/lib/sizes';
 import { getDoughTypes } from '@/lib/dough-types';
 import ProductCustomizer from '@/components/elements/product-customizer';
-
-interface ProductPageProps {
-  params: {
-    id: string;
-  };
-}
+import type { ProductPageProps } from '@/shared/types/common';
 
 const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
   const { id } = await params;
@@ -30,7 +25,6 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
 
   return (
     <div className="container mx-auto">
-      <div className="my-10 text-sm">breadcrumbs {product.basePrice}</div>
       {product.variations[0].size ? (
         <PizzaCustomizer product={product} sizes={sizes} doughTypes={doughTypes} />
       ) : (
