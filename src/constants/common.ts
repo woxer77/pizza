@@ -98,7 +98,7 @@ export const ingredients = [
   }
 ];
 
-export const IGNORE_INTERSECTION_DELAY = 500;
+export const IGNORE_INTERSECTION_DELAY = 750;
 export const PRODUCTS_SCROLL_Y_OFFSET = 130;
 
 export const SegmentVariants = {
