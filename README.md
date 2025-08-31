@@ -1,36 +1,147 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<a id="readme-top"></a>
 
-## Getting Started
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://pizza-umber-five.vercel.app">
+    <img src="public/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-First, run the development server:
+<h3 align="center">Pizza Store</h3>
+  <p align="center">
+    An interactive pizza ordering platform that allows users to build custom pizzas by choosing dough, size, and ingredients. Users can filter, sort, and search products, add items to the cart, order without signing in, and pay through a real payment provider, with SSR ensuring instant product display and modal product views for a seamless experience.
+    <br />
+    <br />
+    <a href="https://pizza-umber-five.vercel.app">View Demo</a>
+    &middot;
+    <a href="https://github.com/woxer77/pizza/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    &middot;
+    <a href="https://github.com/woxer77/pizza/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+![Pizza Store Screen Shot][product-screenshot]
 
-## Deploy on Vercel
+Pizza Store is a modern web platform designed to make ordering pizza convenient, interactive, and personalized. Users can build custom pizzas, choose dough, size, and ingredients, browse ready-made options, and complete orders quickly with or without an account.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Key Features:**
+- Interactive main page with instant product display using SSR, filters, sorting, and search for easy navigation between products.
+- Custom pizza builder allowing users to select dough, size, and ingredients to create their own unique pizzas.
+- Shopping cart with the ability to place orders without registration, or securely log in via NextAuth for a personalized experience.
+- Real payment integration for seamless and secure checkout.
+- Modal product views implemented with parallel routes for quick previews without leaving the page.
+- Intuitive interface design focused on user experience, making browsing, selecting, and ordering pizzas fast and enjoyable.
+- Fully responsive layout powered by TailwindCSS, ensuring a smooth experience across devices.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+### Built With
+
+* [![TypeScript][TypeScript.js]][TypeScript-url]
+* [![Next.js][Next.js]][Next-url]
+* [![Prisma][Prisma]][Prisma-url]
+* [![TailwindCSS][TailwindCSS]][Tailwind-url]
+* [![shadcn-ui][shadcn-ui]][shadcn-ui-url]
+* [![NextAuth][NextAuth]][NextAuth-url]
+* [![Zustand][Zustand]][Zustand-url]
+
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+### 1. Open the Website
+<a href="https://pizza-umber-five.vercel.app">Visit the platform</a> in your browser.
+
+### 2. Choose a Pizza or Product
+Browse the available pizzas and select one you like. You have two options:  
+- Click on the pizza card to go to a dedicated product page.  
+- Click the **Build** button to open a modal window and create a custom pizza.
+
+### 3. Build a Custom Pizza
+In the modal (or dedicated page), customize your pizza by selecting:  
+- **Dough type:** Traditional or Thin  
+- **Size:** 20, 25, 30, or 35 cm  
+- **Additional ingredients:** Choose any toppings you like  
+
+Once satisfied, add the pizza to your cart.
+
+<img src="public/product-page.png" alt="product-page" height="400">
+<br/>
+
+### 4. Manage Your Cart
+Add the desired quantity of products and review your selections in the cart before proceeding to checkout.
+
+### 5. Checkout and Payment
+Fill in all required fields on the checkout page, including delivery and contact information.  
+Click **Pay** to be redirected to the payment provider. Confirm your payment to complete the order.
+
+### 6. Track Your Order
+After payment, you can view the status of your order on the corresponding page to see updates until it is delivered.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [x] Next.js parallel routes modal
+- [x] Orders for unauthorized guests
+- [ ] Create admin dashboard
+- [ ] Add different images for each pizza size
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- CONTACT -->
+## Contact
+
+Denis Ohrimenko - woxer77@gmail.com
+
+Project Link: [https://github.com/woxer77/pizza](https://github.com/woxer77/pizza)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[product-screenshot]: public/main-page.png
+[TypeScript.js]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+[TypeScript-url]: https://www.typescriptlang.org/
+[Next.js]: https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white
+[Next-url]: https://nextjs.org/
+[Prisma]: https://img.shields.io/badge/Prisma-0C344B?style=for-the-badge&logo=prisma&logoColor=white
+[Prisma-url]: https://www.prisma.io/
+[TailwindCSS]: https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white
+[Tailwind-url]: https://tailwindcss.com/
+[NextAuth]: https://img.shields.io/badge/NextAuth-000000?style=for-the-badge&logo=nextauth.js&logoColor=white
+[NextAuth-url]: https://next-auth.js.org/
+[Zustand]: https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=zustand&logoColor=white
+[Zustand-url]: https://zustand-demo.pmnd.rs/
+[shadcn-ui]: https://img.shields.io/badge/shadcn--ui-000000?style=for-the-badge&logo=figma&logoColor=white
+[shadcn-ui-url]: https://ui.shadcn.com/
+
