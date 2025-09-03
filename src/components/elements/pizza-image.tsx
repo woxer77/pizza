@@ -31,7 +31,10 @@ const PizzaImage: React.FC<PizzaImageProps> = ({ className, src, alt, size, acti
         alt={alt}
         width={size}
         height={size}
-        className={cn(`translate-1.5 transition-transform`, SCALE_CLASSES[activeSize])}
+        className={cn(
+          `absolute top-1/2 left-1/2 mt-[1%] ml-[1%] -translate-1/2 transition-transform`,
+          SCALE_CLASSES[activeSize]
+        )}
       />
       <DashedCircle variant="outer" size={size * 0.78} activeSize={activeSize} />
       <DashedCircle variant="inner" size={size * 0.64} activeSize={activeSize} />

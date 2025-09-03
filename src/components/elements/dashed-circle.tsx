@@ -36,7 +36,7 @@ const DashedCircle: React.FC<DashedCircle> = ({ className, size, variant, active
   return (
     <div
       className={cn(
-        'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dashed transition-[opacity,visibility]',
+        'absolute top-1/2 left-1/2 -translate-1/2 rounded-full border-2 border-dashed transition-[opacity,visibility]',
         getVisibilityClass(variant, activeSize),
         className
       )}

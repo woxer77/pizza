@@ -6,8 +6,7 @@ import React from 'react';
 import SegmentGroup from '@/ui/segment-group';
 import { Button } from '@/ui/button';
 import PizzaImage from '@/elements/pizza-image';
-import Image from 'next/image';
-import { CircleCheck } from 'lucide-react';
+import IngredientCart from '@/elements/ingredient-cart';
 
 import type { ClassProps } from '@/types/common';
 import type { ProductWithRelations } from '@/types/product.interface';
@@ -46,7 +45,7 @@ const PizzaCustomizer: React.FC<PizzaCustomizerProps> = ({ className, product, s
   const sizeSegmentControl = useSegmentedControl();
 
   return (
-    <div className={cn('flex items-start gap-10', className)}>
+    <div className={cn('grid grid-cols-[3fr_5fr] gap-10', className)}>
       <PizzaImage
         src={getProductImagePath(product.image, activeDoughType)}
         alt={product.name}
@@ -81,26 +80,13 @@ const PizzaCustomizer: React.FC<PizzaCustomizerProps> = ({ className, product, s
           </div>
           <h4 className="mb-4 text-lg font-bold">Ingredients</h4>
           <div className="flex max-w-[640px] gap-2 overflow-auto px-3 pb-6">
-            {product.ingredients.map((ingred) => (
-              <Button
-                key={ingred.id}
-                noStyles
-                onClick={() => ingredientClick(ingred.id)}
-                className={cn(
-                  'border-background relative flex min-w-32 cursor-pointer flex-col items-center rounded-2xl border-2 px-2.5 py-3 shadow-lg transition-[border-color,box-shadow] hover:shadow-sm',
-                  ingredients.includes(ingred.id) && 'border-foreground'
-                )}>
-                <Image src={ingred.image} alt={ingred.name} width={110} height={110} className="mb-1" />
-                <p className="min-h-8 text-xs">{ingred.name}</p>
-                <p className="text-sm font-bold">${ingred.price}</p>
-                <CircleCheck
-                  size={24}
-                  className={cn(
-                    'invisible absolute top-2 right-2 opacity-0 transition-[opacity,visibility]',
-                    ingredients.includes(ingred.id) && 'visible opacity-100'
-                  )}
-                />
-              </Button>
+            {product.ingredients.map((ingredient) => (
+              <IngredientCart
+                key={ingredient.id}
+                ingredient={ingredient}
+                isActive={ingredients.includes(ingredient.id)}
+                onClick={() => ingredientClick(ingredient.id)}
+              />
             ))}
           </div>
         </div>
