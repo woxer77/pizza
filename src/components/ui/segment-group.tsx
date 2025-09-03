@@ -107,7 +107,10 @@ const SegmentGroup = <T extends string | number>({
       const target = document.querySelector(`#${name}-${activeValue}`) as HTMLElement | null;
       if (!target) return;
 
-      moveSegment(target);
+      setTimeout(() => {
+        // TODO: TEMP! FIX IN THE FUTURE! (it occurs bc uselayouteffect in hook doesnt work in modal component)
+        moveSegment(target);
+      }, 100);
     }
   }, [activeValue, moveSegment, isDropdownOpen, name]);
 
