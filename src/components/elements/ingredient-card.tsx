@@ -8,13 +8,13 @@ import type { ClassProps } from '@/types/common';
 import { cn } from '@/helpers/utils';
 import type { Ingredient } from '@/shared/types/ingredient.interface';
 
-interface IngredientCartProps extends ClassProps {
+interface IngredientCardProps extends ClassProps {
   ingredient: Ingredient;
   onClick?: () => void;
   isActive?: boolean;
 }
 
-const IngredientCart: React.FC<IngredientCartProps> = ({ className, ingredient, onClick, isActive }) => {
+const IngredientCard: React.FC<IngredientCardProps> = ({ className, ingredient, onClick, isActive }) => {
   return (
     <Button
       className={cn(
@@ -38,4 +38,4 @@ const IngredientCart: React.FC<IngredientCartProps> = ({ className, ingredient, 
   );
 };
 
-export default IngredientCart;
+export default IngredientCard;

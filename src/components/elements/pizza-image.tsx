@@ -32,7 +32,7 @@ const PizzaImage: React.FC<PizzaImageProps> = ({ className, src, alt, size, acti
         width={size}
         height={size}
         className={cn(
-          `absolute top-1/2 left-1/2 mt-[1%] ml-[1%] -translate-1/2 transition-transform`,
+          `absolute top-1/2 left-1/2 mt-[1%] ml-[1%] -translate-1/2 transition-transform select-none`,
           SCALE_CLASSES[activeSize]
         )}
       />
