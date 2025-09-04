@@ -22,7 +22,9 @@ const NotFound: React.FC<ClassProps> = ({ className }) => {
           <p className="mb-11 text-xl text-gray-400">Check if the entered address is correct or try again later</p>
           <div className="flex gap-5">
             <Button onClick={() => router.push('/')}>
-              <MoveLeft className="mr-3" />
+              <div className="transition-transform duration-300 group-hover:-translate-x-2">
+                <MoveLeft />
+              </div>
               <p className="font-bold">Home</p>
             </Button>
             <Button onClick={() => router.refresh()} variant="outline">

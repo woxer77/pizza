@@ -13,9 +13,9 @@ import useDebounce from '@/hooks/useDebounce';
 import Api from '@/services/api-client';
 import type { Product } from '@/shared/types/product.interface';
 
-interface ISearch extends ClassProps, React.ComponentProps<'input'> {}
+interface SearchProps extends ClassProps, React.ComponentProps<'input'> {}
 
-const Search: React.FC<ISearch> = ({ className, placeholder }) => {
+const Search: React.FC<SearchProps> = ({ className, placeholder }) => {
   const [inputText, setInputText] = React.useState('');
   const [products, setProducts] = React.useState<Product[]>([]);
   const [isFocused, setIsFocused] = React.useState(false);
@@ -68,7 +68,7 @@ const Search: React.FC<ISearch> = ({ className, placeholder }) => {
 
   return (
     <>
-      <div className={cn('relative mx-16 w-full', className)}>
+      <div className={cn('group relative mx-16 w-full', className)}>
         <div ref={inputRef} onFocus={() => setIsFocused(true)} className="relative z-30">
           <Input
             type="search"
@@ -76,7 +76,7 @@ const Search: React.FC<ISearch> = ({ className, placeholder }) => {
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             className={cn(
-              'border-1 border-neutral-300 px-10 !text-base',
+              'border-1 border-neutral-300 px-10 !text-base transition-shadow duration-300 group-hover:shadow-md',
               isFocused && 'bg-background border-white focus-visible:ring-white/0'
             )}
           />
