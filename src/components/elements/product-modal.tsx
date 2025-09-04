@@ -22,7 +22,7 @@ export interface ProductModalProps extends ClassProps {
 
 const ProductModal: React.FC<ProductModalProps> = ({ className, product, sizes, doughTypes }) => {
   const router = useRouter();
-  console.log(product.name, product.variations);
+
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
       <DialogContent

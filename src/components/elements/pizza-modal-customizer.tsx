@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 import PizzaImage from '@/elements/pizza-image';

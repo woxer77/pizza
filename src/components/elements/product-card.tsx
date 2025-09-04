@@ -35,7 +35,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ className, product }) => {
           from <strong className="text-xl font-extrabold">${product.basePrice}</strong>
         </span>
         <Button variant="secondary" className="flex gap-2 px-6 py-5 text-lg font-bold">
-          <Plus size={20} /> Build
+          <Plus size={20} /> Add
         </Button>
       </div>
     </Link>

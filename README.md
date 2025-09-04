@@ -20,8 +20,6 @@
   </p>
 </div>
 
-
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -33,10 +31,8 @@
   </ol>
 </details>
 
-
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 ![Pizza Store Screen Shot][product-screenshot]
@@ -44,6 +40,7 @@
 Pizza Store is a modern web platform designed to make ordering pizza convenient, interactive, and personalized. Users can build custom pizzas, choose dough, size, and ingredients, browse ready-made options, and complete orders quickly with or without an account.
 
 **Key Features:**
+
 - Interactive main page with instant product display using SSR, filters, sorting, and search for easy navigation between products.
 - Custom pizza builder allowing users to select dough, size, and ingredients to create their own unique pizzas.
 - Shopping cart with the ability to place orders without registration, or securely log in via NextAuth for a personalized experience.
@@ -52,59 +49,61 @@ Pizza Store is a modern web platform designed to make ordering pizza convenient,
 - Intuitive interface design focused on user experience, making browsing, selecting, and ordering pizzas fast and enjoyable.
 - Fully responsive layout powered by TailwindCSS, ensuring a smooth experience across devices.
 
-
 ### Built With
 
-* [![TypeScript][TypeScript.js]][TypeScript-url]
-* [![Next.js][Next.js]][Next-url]
-* [![Prisma][Prisma]][Prisma-url]
-* [![TailwindCSS][TailwindCSS]][Tailwind-url]
-* [![shadcn-ui][shadcn-ui]][shadcn-ui-url]
-* [![NextAuth][NextAuth]][NextAuth-url]
-* [![Zustand][Zustand]][Zustand-url]
-
-
+- [![TypeScript][TypeScript.js]][TypeScript-url]
+- [![Next.js][Next.js]][Next-url]
+- [![Prisma][Prisma]][Prisma-url]
+- [![TailwindCSS][TailwindCSS]][Tailwind-url]
+- [![shadcn-ui][shadcn-ui]][shadcn-ui-url]
+- [![NextAuth][NextAuth]][NextAuth-url]
+- [![Zustand][Zustand]][Zustand-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
 ### 1. Open the Website
+
 <a href="https://pizza-umber-five.vercel.app">Visit the platform</a> in your browser.
 
 ### 2. Choose a Pizza or Product
-Browse the available pizzas and select one you like. You have two options:  
-- Click on the pizza card to go to a dedicated product page.  
-- Click the **Build** button to open a modal window and create a custom pizza.
+
+Browse the available pizzas and select one you like.
+
+- Click on the pizza card to open a modal window and create a custom pizza.
 
 ### 3. Build a Custom Pizza
-In the modal (or dedicated page), customize your pizza by selecting:  
-- **Dough type:** Traditional or Thin  
-- **Size:** 20, 25, 30, or 35 cm  
-- **Additional ingredients:** Choose any toppings you like  
+
+In the modal (or dedicated page), customize your pizza by selecting:
+
+- **Dough type:** Traditional or Thin
+- **Size:** 20, 25, 30, or 35 cm
+- **Additional ingredients:** Choose any toppings you like
 
 Once satisfied, add the pizza to your cart.
 
 <img src="public/product-page.png" alt="product-page" height="400">
 
 ### 4. Manage Your Cart
+
 Add the desired quantity of products and review your selections in the cart before proceeding to checkout.
 
 ### 5. Checkout and Payment
+
 Fill in all required fields on the checkout page, including delivery and contact information.  
 Click **Pay** to be redirected to the payment provider. Confirm your payment to complete the order.
 
 ### 6. Track Your Order
+
 After payment, you can view the status of your order on the corresponding page to see updates until it is delivered.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- ROADMAP -->
+
 ## Roadmap
 
 - [x] Next.js parallel routes modal
@@ -114,8 +113,8 @@ After payment, you can view the status of your order on the corresponding page t
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- CONTACT -->
+
 ## Contact
 
 Denis Ohrimenko - woxer77@gmail.com
@@ -124,10 +123,9 @@ Project Link: [https://github.com/woxer77/pizza](https://github.com/woxer77/pizz
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [product-screenshot]: public/main-page.png
 [TypeScript.js]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
 [TypeScript-url]: https://www.typescriptlang.org/
@@ -143,4 +141,3 @@ Project Link: [https://github.com/woxer77/pizza](https://github.com/woxer77/pizz
 [Zustand-url]: https://zustand-demo.pmnd.rs/
 [shadcn-ui]: https://img.shields.io/badge/shadcn--ui-000000?style=for-the-badge&logo=figma&logoColor=white
 [shadcn-ui-url]: https://ui.shadcn.com/
-
