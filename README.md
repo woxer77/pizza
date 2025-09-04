@@ -85,7 +85,7 @@ In the modal (or dedicated page), customize your pizza by selecting:
 
 Once satisfied, add the pizza to your cart.
 
-<img src="public/product-page.png" alt="product-page" height="400">
+<img src="public/pizza-modal-customizer.png" alt="pizza-modal-customizer" height="400">
 
 ### 4. Manage Your Cart
 
