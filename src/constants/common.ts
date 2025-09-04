@@ -114,3 +114,6 @@ export const IMAGE_SCALE: Record<SizeKeys, number> = {
   LARGE: 0.85,
   EXTRA_LARGE: 1
 } as const;
+
+export const MIN_CART_QUANTITY = 1;
+export const MAX_CART_QUANTITY = 100;

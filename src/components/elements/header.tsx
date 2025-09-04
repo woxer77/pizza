@@ -3,16 +3,14 @@ import React from 'react';
 import Search from '@/ui/search';
 import Image from 'next/image';
 import { Button } from '@/ui/button';
-import { User, ShoppingCart, MoveRight } from 'lucide-react';
+import { User } from 'lucide-react';
 import Link from 'next/link';
+import CartButton from '@/ui/cart-button';
 
 import type { ClassProps } from '@/types/common';
 import { cn } from '@/helpers/utils';
 
 const Header: React.FC<ClassProps> = ({ className }) => {
-  const TEMP_SUM = 150;
-  const TEMP_PRODUCT_COUNT = 3;
-
   return (
     <header className={cn('w-full border-b-1 border-neutral-300', className)}>
       <div className="container mx-auto flex items-center py-10">
@@ -29,19 +27,7 @@ const Header: React.FC<ClassProps> = ({ className }) => {
             <User size={16} />
             Sign In
           </Button>
-          <Button className="group flex gap-3.5">
-            <p className="font-bold">{`$${TEMP_SUM}`}</p>
-            <span className="h-full w-[1px] bg-neutral-500" />
-            <div className="relative">
-              <div className="flex items-center justify-center gap-1.5 transition-all duration-300 group-hover:-translate-x-1 group-hover:opacity-0">
-                <ShoppingCart size={16} />
-                <p className="font-bold">{TEMP_PRODUCT_COUNT}</p>
-              </div>
-              <div className="absolute top-1/2 -left-3 -translate-y-1/2 opacity-0 transition-all duration-300 group-hover:translate-x-4 group-hover:opacity-100">
-                <MoveRight size={24} />
-              </div>
-            </div>
-          </Button>
+          <CartButton />
         </div>
       </div>
     </header>

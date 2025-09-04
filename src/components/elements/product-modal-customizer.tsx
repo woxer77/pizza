@@ -23,8 +23,7 @@ const ProductModalCustomizer: React.FC<ProductModalCustomizerProps> = ({ product
           className="absolute top-1/2 left-1/2 mt-[1%] ml-[1%] -translate-1/2 scale-[0.85] select-none"
         />
       </div>
-
-      <div className="flex flex-col items-start justify-between overflow-hidden rounded-r-3xl bg-[#F6F7F8] pt-10">
+      <div className="bg-background-second flex flex-col items-start justify-between overflow-hidden rounded-r-3xl pt-10">
         <div className="w-full overflow-auto px-10">
           <div className="mb-6 flex flex-col gap-3">
             <DialogTitle className="text-4xl font-extrabold">{product.name}</DialogTitle>

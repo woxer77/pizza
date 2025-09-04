@@ -41,6 +41,7 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --color-description: var(--color-neutral-400);
+  --color-background-second: #f6f7f8;
 }
 
 @utility flex-* {

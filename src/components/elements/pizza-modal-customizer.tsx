@@ -46,7 +46,7 @@ const PizzaModalCustomizer: React.FC<PizzaModalCustomizerProps> = ({ product, si
         size={IMAGE_SIZE}
         activeSize={activeSize}
       />
-      <div className="flex flex-col items-start justify-between overflow-hidden rounded-r-3xl bg-[#F6F7F8] pt-10">
+      <div className="bg-background-second flex flex-col items-start justify-between overflow-hidden rounded-r-3xl pt-10">
         <div className="w-full overflow-auto px-10">
           <div className="mb-6 flex flex-col gap-3">
             <DialogTitle className="text-4xl font-extrabold">{product.name}</DialogTitle>
