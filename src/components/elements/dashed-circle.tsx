@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { ClassProps } from '@/types/common';
 import { cn } from '@/helpers/utils';
-import { SIZES } from '@/constants/size.constants';
+import { SIZE_VALUES } from '@/constants/size.constants';
 import type { SizeValues } from '@/shared/types/size.interface';
 
 type DashedCircleVariant = 'outer' | 'inner';
@@ -17,15 +17,15 @@ const DashedCircle: React.FC<DashedCircle> = ({ className, size, variant, active
   const getVisibilityClass = (variant: DashedCircleVariant, activeSize: SizeValues) => {
     if (variant === 'outer') {
       switch (activeSize) {
-        case SIZES.LARGE:
-        case SIZES.EXTRA_LARGE:
+        case SIZE_VALUES.LARGE:
+        case SIZE_VALUES.EXTRA_LARGE:
           return 'invisible opacity-0';
         default:
           return 'visible opacity-100';
       }
     } else {
       switch (activeSize) {
-        case SIZES.SMALL:
+        case SIZE_VALUES.SMALL:
           return 'visible opacity-100';
         default:
           return 'invisible opacity-0';

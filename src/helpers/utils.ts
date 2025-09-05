@@ -1,4 +1,4 @@
-import { DOUGH_TYPES } from '@/constants/dough-type.constants';
+import { DOUGH_TYPE_VALUES } from '@/constants/dough-type.constants';
 import type { CalculatePriceArgs, SegmentItem } from '@/shared/types/common';
 import type { DoughTypeValues } from '@/shared/types/dough-type.interface';
 import { clsx, type ClassValue } from 'clsx';
@@ -51,10 +51,10 @@ export const calculatePrice = ({
 
 export const getProductImagePath = (
   baseName: string,
-  doughType: DoughTypeValues = DOUGH_TYPES.TRADITIONAL
+  doughType: DoughTypeValues = DOUGH_TYPE_VALUES.TRADITIONAL
 ): string => {
   if (baseName.includes('/pizza/')) {
-    const doughTypeName = doughType === DOUGH_TYPES.THIN ? 'thin' : 'traditional';
+    const doughTypeName = doughType === DOUGH_TYPE_VALUES.THIN ? 'thin' : 'traditional';
 
     const cleanName = baseName
       .replace(/^\//, '')

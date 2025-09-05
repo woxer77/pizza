@@ -1,4 +1,4 @@
-import { SIZES } from './size.constants';
+import type { SizeKeys } from '@/shared/types/size.interface';
 
 export const ingredients = [
   {
@@ -105,8 +105,6 @@ export const SegmentVariants = {
   DEFAULT: 'default',
   SCROLL: 'scroll'
 } as const;
-
-type SizeKeys = keyof typeof SIZES;
 
 export const IMAGE_SCALE: Record<SizeKeys, number> = {
   SMALL: 0.54,

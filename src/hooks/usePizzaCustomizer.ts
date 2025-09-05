@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { DOUGH_TYPES } from '@/constants/dough-type.constants';
-import { SIZES } from '@/constants/size.constants';
+import { DOUGH_TYPE_VALUES } from '@/constants/dough-type.constants';
+import { SIZE_VALUES } from '@/constants/size.constants';
 
 import type { PizzaCustomizerProps } from '@/components/elements/pizza-customizer';
 import type { SegmentItem } from '@/shared/types/common';
@@ -46,12 +46,12 @@ const usePizzaCustomizer = ({ product, sizes, doughTypes }: Omit<PizzaCustomizer
     { sizes: { ids: [] }, doughTypes: { ids: [] } }
   );
 
-  const defaultActiveSize = availableOptions.sizes.ids.includes(SIZES.LARGE)
-    ? SIZES.LARGE
-    : (availableOptions.sizes.ids.at(-1) ?? SIZES.SMALL);
+  const defaultActiveSize = availableOptions.sizes.ids.includes(SIZE_VALUES.LARGE)
+    ? SIZE_VALUES.LARGE
+    : (availableOptions.sizes.ids.at(-1) ?? SIZE_VALUES.SMALL);
 
   const [activeSize, setActiveSize] = React.useState<SizeValues>(defaultActiveSize);
-  const [activeDoughType, setActiveDoughType] = React.useState<DoughTypeValues>(DOUGH_TYPES.TRADITIONAL);
+  const [activeDoughType, setActiveDoughType] = React.useState<DoughTypeValues>(DOUGH_TYPE_VALUES.TRADITIONAL);
   const [ingredients, setIngredients] = React.useState<number[]>([]);
 
   const sizeSegments: SegmentItem<number>[] = sizes.map((size) => ({
@@ -87,11 +87,11 @@ const usePizzaCustomizer = ({ product, sizes, doughTypes }: Omit<PizzaCustomizer
     const availableDoughTypes = availableOptions.sizes[activeSize];
     if (availableDoughTypes && !availableDoughTypes.includes(activeDoughType)) {
       switch (activeDoughType) {
-        case DOUGH_TYPES.TRADITIONAL:
-          setActiveDoughType(DOUGH_TYPES.THIN);
+        case DOUGH_TYPE_VALUES.TRADITIONAL:
+          setActiveDoughType(DOUGH_TYPE_VALUES.THIN);
           break;
-        case DOUGH_TYPES.THIN:
-          setActiveDoughType(DOUGH_TYPES.TRADITIONAL);
+        case DOUGH_TYPE_VALUES.THIN:
+          setActiveDoughType(DOUGH_TYPE_VALUES.TRADITIONAL);
           break;
         default:
           const _exhaustiveCheck: never = activeDoughType;

@@ -45,7 +45,7 @@ const useFilterAside = () => {
     [doughTypesData, doughLoading, doughError]
   );
 
-  const { data: sizesData, loading: sizesLoading, error: sizesError } = useFetch({ fetchFunc: Api.sizes.getAll });
+  const { data: sizesData, loading: sizesLoading, error: sizesError } = useFetch({ fetchFunc: Api.size.getAll });
   const sizes: FilterAsideDataGroup = React.useMemo(
     () => ({
       data: sizesData?.map((item) => ({ value: String(item.id), text: item.name })) || [],
