@@ -5,12 +5,37 @@ import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/ui/button';
 
-import type { ClassProps } from '@/types/common';
-import { cn } from '@/helpers/utils';
+import { cn, getProductImagePath } from '@/helpers/utils';
+import { SIZE_NAMES } from '@/constants/size.constants';
 import { MIN_CART_QUANTITY, MAX_CART_QUANTITY } from '@/constants/common';
+import { DOUGH_TYPE_NAMES } from '@/constants/dough-type.constants';
+import type { ClassProps } from '@/types/common';
+import type { CartItem } from '@/shared/types/cart.interface';
+import type { Ingredient } from '@/shared/types/ingredient.interface';
+import type { SizeValues } from '@/shared/types/size.interface';
+import type { DoughTypeValues } from '@/shared/types/dough-type.interface';
 
-const CartItem: React.FC<ClassProps> = ({ className }) => {
-  const [quantity, setQuantity] = React.useState(1); // by default - from props
+interface CartItemProps extends ClassProps {
+  name: string;
+  size?: number | null;
+  doughType?: number | null;
+  quantity: number;
+  image: string;
+  ingredients?: Ingredient[];
+  totalPrice: number;
+}
+
+const CartItem: React.FC<CartItemProps> = ({
+  className,
+  name,
+  size,
+  doughType,
+  quantity: initialQuantity,
+  image,
+  ingredients,
+  totalPrice
+}) => {
+  const [quantity, setQuantity] = React.useState(initialQuantity);
 
   const decreaseQuantity = () => {
     setQuantity((prev) => {
@@ -26,19 +51,20 @@ const CartItem: React.FC<ClassProps> = ({ className }) => {
     });
   };
 
+  const sizeName = SIZE_NAMES[size as SizeValues];
+  const doughTypeName = DOUGH_TYPE_NAMES[doughType as DoughTypeValues];
+
   return (
     <section className={cn('bg-background flex w-full gap-6 p-5', className)}>
-      <Image
-        src="/pizza/traditional/four-cheese.png"
-        alt="pizza image"
-        width={65}
-        height={65}
-        className="mr-6 size-[65px]"
-      />
+      <Image src={getProductImagePath(image)} alt={name} width={65} height={65} className="mr-6 size-[65px]" />
       <div className="flex w-full flex-col">
         <div className="flex flex-col">
-          <h3 className="font-bold">Test pizza</h3>
-          <p className="text-description">Description test</p>
+          <h3 className="font-bold">{name}</h3>
+          <p className="text-description lowercase">
+            {size && sizeName ? `${sizeName} pizza` : ''}
+            {doughType && doughTypeName ? `, ${doughTypeName} dough` : ''}
+            {ingredients ? ` + ${ingredients.map((ingred) => ingred.name).join(', ')}` : ''}
+          </p>
         </div>
         <hr className="my-3" />
         <div className="flex-space-between">
@@ -51,7 +77,7 @@ const CartItem: React.FC<ClassProps> = ({ className }) => {
               +
             </Button>
           </div>
-          <p className="font-bold">$54</p>
+          <p className="font-bold">${totalPrice.toFixed(2)}</p>
         </div>
       </div>
     </section>

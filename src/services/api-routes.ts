@@ -3,8 +3,9 @@ const ApiRoutes = {
   PRODUCTS: 'products',
   CATEGORIES: 'categories',
   INGREDIENTS: 'ingredients',
-  DOUGH_TYPE: 'dough-types',
-  SIZES: 'sizes'
+  DOUGH_TYPES: 'dough-types',
+  SIZES: 'sizes',
+  CARTS: 'carts'
 } as const;
 
 export default ApiRoutes;

@@ -1,10 +1,7 @@
-'use client';
-
 import React from 'react';
 
 import { Button } from '@/ui/button';
 import { MoveRight, ShoppingCart } from 'lucide-react';
-import { Sheet, SheetTrigger } from '@/ui/sheet';
 import CartSheet from '@/elements/cart-sheet';
 
 import type { ClassProps } from '@/types/common';
@@ -15,9 +12,9 @@ const CartButton: React.FC<ClassProps> = ({ className }) => {
   const TEMP_PRODUCT_COUNT = 3;
 
   return (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button className={cn('group flex gap-3.5', className)}>
+    <CartSheet>
+      <Button asChild className={cn('group flex gap-3.5', className)}>
+        <div>
           <p className="font-bold">{`$${TEMP_SUM}`}</p>
           <span className="h-full w-[1px] bg-neutral-500" />
           <div className="relative">
@@ -29,10 +26,9 @@ const CartButton: React.FC<ClassProps> = ({ className }) => {
               <MoveRight size={24} />
             </div>
           </div>
-        </Button>
-      </SheetTrigger>
-      <CartSheet />
-    </Sheet>
+        </div>
+      </Button>
+    </CartSheet>
   );
 };
 

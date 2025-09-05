@@ -292,6 +292,18 @@ async function generate() {
       }
     }
   });
+
+  await prisma.cartItem.create({
+    data: {
+      cartId: 1,
+      productVariationId: 2,
+      quantity: 2,
+      totalPrice: 12.67,
+      ingredients: {
+        connect: [{ id: 6 }, { id: 7 }, { id: 9 }, { id: 11 }]
+      }
+    }
+  });
 }
 
 async function clear() {

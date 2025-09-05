@@ -66,7 +66,8 @@ const eslintConfig = [
             }
           ]
         }
-      ]
+      ],
+      '@typescript-eslint/ban-ts-comment': 'off'
     }
   },
   eslintConfigPrettier

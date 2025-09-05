@@ -2,14 +2,16 @@ import * as product from './product';
 import * as category from './category';
 import * as ingredient from './ingredient';
 import * as doughType from './dough-type';
-import * as sizes from './size';
+import * as size from './size';
+import * as cart from './cart';
 
 const Api = {
   product,
   category,
   ingredient,
   doughType,
-  sizes
+  size,
+  cart
 };
 
 export default Api;
