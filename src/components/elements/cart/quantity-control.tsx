@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/ui/button';
 
 import { cn } from '@/helpers/utils';
 import type { ClassProps } from '@/types/common';

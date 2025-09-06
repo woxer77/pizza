@@ -5,7 +5,7 @@ import { serializeData } from '@/helpers/utils';
 import { Suspense } from 'react';
 
 import { getCategories } from '@/lib/categories';
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from '@/ui/skeleton';
 
 export default async function Home() {
   const categoriesRaw = await getCategories();
