@@ -304,6 +304,15 @@ async function generate() {
       }
     }
   });
+
+  await prisma.cartItem.create({
+    data: {
+      cartId: 1,
+      productVariationId: 39,
+      quantity: 7,
+      totalPrice: 9.99
+    }
+  });
 }
 
 async function clear() {
