@@ -5,9 +5,9 @@ import React from 'react';
 import { Button } from '@/ui/button';
 import { SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from '@/ui/sheet';
 import Link from 'next/link';
-import EmptyCart from '@/elements/empty-cart';
+import EmptyCart from '@/components/elements/cart/empty-cart';
 // @ts-ignore
-import CartItem from '@/elements/cart-item';
+import CartItem from '@/components/elements/cart/cart-item';
 
 import { cn } from '@/helpers/utils';
 import useFetch from '@/hooks/useFetch';
@@ -16,7 +16,7 @@ import type { ClassProps } from '@/types/common';
 
 const CartSheetContent: React.FC<ClassProps> = ({ className }) => {
   const cart = useFetch({ fetchFunc: Api.cart.getByToken, args: [123] });
-  console.log(cart);
+
   const itemsNumber = cart.data?.items.length || 0;
   const moreThanOne = cart.data?.items && cart.data?.items.length > 1;
 
@@ -41,7 +41,7 @@ const CartSheetContent: React.FC<ClassProps> = ({ className }) => {
                 image={item.productVariation?.product?.image}
                 size={item.productVariation?.sizeId}
                 doughType={item.productVariation?.doughTypeId}
-                ingredients={item.ingredients}
+                ingredients={item.ingredients.length > 0 ? item.ingredients : null}
                 quantity={item.quantity}
                 totalPrice={item.totalPrice}
               />

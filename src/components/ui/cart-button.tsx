@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button } from '@/ui/button';
 import { MoveRight, ShoppingCart } from 'lucide-react';
-import CartSheet from '@/elements/cart-sheet';
+import CartSheet from '@/elements/cart/cart-sheet';
 
 import type { ClassProps } from '@/types/common';
 import { cn } from '@/helpers/utils';

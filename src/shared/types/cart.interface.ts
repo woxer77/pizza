@@ -12,3 +12,7 @@ export interface CartItem extends Omit<PrismaCartItem, 'totalPrice'> {
 }
 
 export type CartWithRelations = Prisma.PromiseReturnType<typeof getCartByToken>;
+
+export type QuantityControlType = 'decrease' | 'increase';
+
+export type ButtonStates = Record<QuantityControlType, boolean>;
