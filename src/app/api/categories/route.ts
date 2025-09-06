@@ -4,23 +4,29 @@ import type { Category } from '@prisma/client';
 import { NextResponse, NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
-  const query = request.nextUrl.searchParams.get('include');
-  let categories: Category[] | CategoryWithProducts[];
+  try {
+    const query = request.nextUrl.searchParams.get('include');
+    let categories: Category[] | CategoryWithProducts[];
 
-  if (query === 'products') {
-    categories = await prisma.category.findMany({
-      include: {
-        products: {
-          include: {
-            ingredients: true,
-            variations: true
+    if (query === 'products') {
+      categories = await prisma.category.findMany({
+        include: {
+          products: {
+            include: {
+              ingredients: true,
+              variations: true
+            }
           }
         }
-      }
-    });
-  } else {
-    categories = await prisma.category.findMany();
-  }
+      });
+    } else {
+      categories = await prisma.category.findMany();
+    }
 
-  return NextResponse.json(categories);
+    return NextResponse.json(categories);
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+
+    return NextResponse.json({ error: 'Failed to fetch categories' }, { status: 500 });
+  }
 }
