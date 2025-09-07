@@ -89,6 +89,7 @@ Once satisfied, add the pizza to your cart.
 
 ### 4. Manage Your Cart
 
+Open the sidebar of the cart by clicking on the corresponding button in the upper right corner of the main page (in the header).
 Add the desired quantity of products and review your selections in the cart before proceeding to checkout.
 
 ### 5. Checkout and Payment
@@ -110,6 +111,7 @@ After payment, you can view the status of your order on the corresponding page t
 - [x] Orders for unauthorized guests
 - [ ] Create admin dashboard
 - [ ] Add different images for each pizza size
+- [ ] Implement user profile with order history and re-order option
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
