@@ -115,3 +115,4 @@ export const IMAGE_SCALE: Record<SizeKeys, number> = {
 
 export const MIN_CART_QUANTITY = 1;
 export const MAX_CART_QUANTITY = 100;
+export const BLUR_RESET_DELAY_MS = 150;
