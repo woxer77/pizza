@@ -7,7 +7,7 @@ import type { PizzaCustomizerProps } from '@/components/elements/pizza-customize
 import type { SegmentItem } from '@/shared/types/common';
 import type { DoughTypeValues } from '@/shared/types/dough-type.interface';
 import type { SizeValues } from '@/shared/types/size.interface';
-import { calculatePrice } from '@/helpers/utils';
+import { calculatePrice } from '@/helpers/cart.utils';
 
 interface AvailableOptions {
   sizes: Partial<Record<SizeValues, DoughTypeValues[]>> & { ids: SizeValues[] };

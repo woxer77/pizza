@@ -10,22 +10,26 @@ import EmptyCart from '@/components/elements/cart/empty-cart';
 import CartItem from '@/components/elements/cart/cart-item';
 
 import { cn } from '@/helpers/utils';
-import useFetch from '@/hooks/useFetch';
-import Api from '@/services/api-client';
+import { useCartStore } from '@/store/cart';
 import type { ClassProps } from '@/types/common';
 
 const CartSheetContent: React.FC<ClassProps> = ({ className }) => {
-  const cart = useFetch({ fetchFunc: Api.cart.getByToken, args: [123] });
+  const fetchCartItems = useCartStore((state) => state.fetchItems);
+  const cartItems = useCartStore((state) => state.items);
 
-  const itemsNumber = cart.data?.items.length || 0;
-  const moreThanOne = cart.data?.items && cart.data?.items.length > 1;
+  React.useEffect(() => {
+    fetchCartItems();
+  }, [fetchCartItems]);
+
+  const itemsNumber = cartItems.length || 0;
+  const moreThanOne = cartItems && cartItems.length > 1;
 
   return (
     <SheetContent
       className={cn('bg-background-second flex flex-col gap-0', className)}
       showX={itemsNumber > 0}
       sizeX="medium">
-      {cart && cart.data ? (
+      {itemsNumber > 0 ? (
         <>
           <SheetHeader className="flex flex-row items-end">
             <SheetTitle className="text-lg">Cart -</SheetTitle>
@@ -34,16 +38,16 @@ const CartSheetContent: React.FC<ClassProps> = ({ className }) => {
             </SheetDescription>
           </SheetHeader>
           <div className="flex flex-1 flex-col gap-2 overflow-auto">
-            {cart.data.items.map((item) => (
+            {cartItems.map((item) => (
               <CartItem
                 key={item.id}
-                name={item.productVariation?.product?.name}
-                image={item.productVariation?.product?.image}
-                size={item.productVariation?.sizeId}
-                doughType={item.productVariation?.doughTypeId}
-                ingredients={item.ingredients.length > 0 ? item.ingredients : null}
+                name={item.name}
+                image={item.image}
+                sizeId={item.sizeId}
+                doughTypeId={item.doughTypeId}
+                ingredients={item.ingredients}
                 quantity={item.quantity}
-                totalPrice={item.totalPrice}
+                price={item.price}
               />
             ))}
           </div>

@@ -1,0 +1,27 @@
+import { getCartDetails } from '@/helpers/cart.utils';
+import Api from '@/services/api-client';
+import type { CartState } from '@/shared/types/cart.interface';
+import { create } from 'zustand';
+
+export const useCartStore = create<CartState>()((set) => ({
+  totalPrice: 0,
+  items: [],
+  loading: false,
+  error: false,
+
+  fetchItems: async () => {
+    try {
+      set({ loading: true });
+      const cart = await Api.cart.getByToken();
+      set(getCartDetails(cart));
+    } catch (error) {
+      console.error(error);
+      set({ error: true });
+    } finally {
+      set({ loading: false });
+    }
+  },
+  updateItemQuantity: async (id: number, quantity: number) => {},
+  createItem: async (item: any) => {},
+  deleteItem: async (id: number) => {}
+}));

@@ -7,6 +7,9 @@ const getCartByToken = async (token: string) => {
     },
     include: {
       items: {
+        orderBy: {
+          createdAt: 'desc'
+        },
         include: {
           productVariation: {
             include: {
@@ -20,5 +23,34 @@ const getCartByToken = async (token: string) => {
   });
   return cart;
 };
+
+/* const updateCartTotalPrice   = async (token: string) => {
+  const cart = await prisma.cart.findFirst({
+    where: {
+      token: parseInt(token)
+    },
+    include: {
+      items: {
+        orderBy: {
+          createdAt: 'desc'
+        },
+        include: {
+          productVariation: {
+            include: {
+              product: true
+            }
+          },
+          ingredients: true
+        }
+      }
+    }
+  });
+
+  if (!cart) return;
+
+  const totalPrice = 
+
+  return cart;
+}; */
 
 export { getCartByToken };

@@ -1,5 +1,5 @@
 import { DOUGH_TYPE_VALUES } from '@/constants/dough-type.constants';
-import type { CalculatePriceArgs, SegmentItem } from '@/shared/types/common';
+import type { SegmentItem } from '@/shared/types/common';
 import type { DoughTypeValues } from '@/shared/types/dough-type.interface';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -26,27 +26,6 @@ export const convertToSegmentItems = <T extends { id: string; name: string }>(
 ): SegmentItem<string>[] => {
   const segmentItems = inputObjects.map((item) => ({ value: item.id, name: item.name }));
   return segmentItems;
-};
-
-export const calculatePrice = ({
-  product,
-  sizeId,
-  sizes,
-  doughTypeId,
-  doughTypes,
-  ingredientIds
-}: CalculatePriceArgs): string => {
-  const sizePrice = sizes.find((size) => size.id === sizeId)?.price ?? 0;
-  const doughTypePrice = doughTypes.find((doughType) => doughType.id === doughTypeId)?.price ?? 0;
-  const ingredientsPrice = product.ingredients.reduce((acc, ingred) => {
-    if (ingredientIds.includes(ingred.id)) {
-      return acc + ingred.price;
-    }
-    return acc;
-  }, 0);
-
-  const total = product.basePrice + sizePrice + doughTypePrice + ingredientsPrice;
-  return total.toFixed(2);
 };
 
 export const getProductImagePath = (
