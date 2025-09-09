@@ -9,8 +9,8 @@ import FilterSection from '@/elements/filter-section';
 
 import type { ClassProps, PriceRange } from '@/types/common';
 import { cn } from '@/helpers/utils';
-import useFilterAside from '@/hooks/useFilterAside';
-import useSet from '@/hooks/useSet';
+import useFilterAside from '@/hooks/use-filter-aside';
+import useSet from '@/hooks/use-set';
 import { useRouter, useSearchParams } from 'next/navigation';
 import qs from 'qs';
 

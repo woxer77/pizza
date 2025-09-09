@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import type { Prisma, Product as PrismaProduct } from '@prisma/client';
-import type { getProductWithRelations } from '@/lib/products';
+import type { getProductWithRelations } from '@/services/db/products';
 
 export const ProductSortBy = {
   POPULAR: 'popular',

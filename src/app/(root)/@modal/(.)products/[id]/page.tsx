@@ -2,10 +2,10 @@ import ProductModal from '@/components/elements/product-modal';
 import { notFound } from 'next/navigation';
 
 import type { ProductPageProps } from '@/shared/types/common';
-import { getProductWithRelations } from '@/lib/products';
+import { getProductWithRelations } from '@/services/db/products';
 import { serializeData } from '@/helpers/utils';
-import { getSizes } from '@/lib/sizes';
-import { getDoughTypes } from '@/lib/dough-types';
+import { getSizes } from '@/services/db/sizes';
+import { getDoughTypes } from '@/services/db/dough-types';
 
 const ModalProductPage: React.FC<ProductPageProps> = async ({ params }) => {
   const { id } = await params;

@@ -14,9 +14,9 @@ import type { Size, SizeValues } from '@/shared/types/size.interface';
 import type { DoughType, DoughTypeValues } from '@/shared/types/dough-type.interface';
 
 import { cn, getProductImagePath } from '@/helpers/utils';
-import useSegmentedControl from '@/hooks/useSegmentedControl';
+import useSegmentedControl from '@/hooks/use-segmented-control';
 import { IMAGE_SIZE } from '@/constants/product.constants';
-import usePizzaCustomizer from '@/hooks/usePizzaCustomizer';
+import usePizzaCustomizer from '@/hooks/use-pizza-customizer';
 
 export interface PizzaCustomizerProps extends ClassProps {
   product: NonNullable<ProductWithRelations>;

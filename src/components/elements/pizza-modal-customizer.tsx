@@ -10,8 +10,8 @@ import { Button } from '@/ui/button';
 import SegmentGroup from '@/ui/segment-group';
 
 import { getProductImagePath } from '@/helpers/utils';
-import usePizzaCustomizer from '@/hooks/usePizzaCustomizer';
-import useSegmentedControl from '@/hooks/useSegmentedControl';
+import usePizzaCustomizer from '@/hooks/use-pizza-customizer';
+import useSegmentedControl from '@/hooks/use-segmented-control';
 import { IMAGE_SIZE } from '@/constants/product.constants';
 import type { SizeValues } from '@/shared/types/size.interface';
 import type { DoughTypeValues } from '@/shared/types/dough-type.interface';

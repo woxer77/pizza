@@ -2,8 +2,8 @@
 
 import React from 'react';
 
-import Api from '@/services/api-client';
-import useFetch from './useFetch';
+import Api from '@/services/api/api-client';
+import useFetch from './use-fetch';
 import type { FilterItem } from '@/shared/types/common';
 
 interface FilterAsideDataGroup {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import useDebounce from '@/hooks/useDebounce';
-import Api from '@/services/api-client';
+import useDebounce from '@/hooks/use-debounce';
+import Api from '@/services/api/api-client';
 import type { Product } from '@/shared/types/product.interface';
 
 export const useSearch = () => {

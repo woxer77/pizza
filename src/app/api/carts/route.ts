@@ -1,5 +1,5 @@
 import { CART_TOKEN_COOKIE_NAME } from '@/constants/common';
-import { getCartByToken } from '@/lib/carts';
+import { getCartByToken } from '@/services/db/carts';
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {

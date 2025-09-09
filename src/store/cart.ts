@@ -1,5 +1,5 @@
 import { getCartDetails } from '@/helpers/cart.utils';
-import Api from '@/services/api-client';
+import Api from '@/services/api/api-client';
 import type { CartState } from '@/shared/types/cart.interface';
 import { create } from 'zustand';
 

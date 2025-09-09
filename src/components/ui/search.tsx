@@ -8,8 +8,8 @@ import DropdownSearchItem from './dropdown-search-item';
 import DropdownSearch from './dropdown-search';
 
 import { cn } from '@/helpers/utils';
-import { useSearch } from '@/hooks/search/useSearch';
-import { useSearchUI } from '@/hooks/search/useSearchUI';
+import { useSearch } from '@/hooks/search/use-search';
+import { useSearchUI } from '@/hooks/search/use-search-ui';
 import type { ClassProps } from '@/types/common';
 
 interface SearchProps extends ClassProps, React.ComponentProps<'input'> {}

@@ -7,7 +7,7 @@ import SegmentGroup from '@/ui/segment-group';
 import type { ClassProps } from '@/types/common';
 import { cn, convertToSegmentItems } from '@/helpers/utils';
 import { useCategoryStore } from '@/store/category';
-import useSegmentControl from '@/hooks/useSegmentedControl';
+import useSegmentControl from '@/hooks/use-segmented-control';
 import type { CategoryWithProducts } from '@/shared/types/category.interface';
 
 interface CategoryProps extends ClassProps {

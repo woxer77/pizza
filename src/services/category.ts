@@ -1,7 +1,7 @@
 import type { Category } from '@prisma/client';
-import axiosInstance from './instance';
+import axiosInstance from './api/instance';
 import type { CategoryWithProducts } from '@/shared/types/category.interface';
-import ApiRoutes from './api-routes';
+import ApiRoutes from './api/api-routes';
 
 export const getAll = async () => {
   const { data } = await axiosInstance.get<Category[]>(ApiRoutes.CATEGORIES);

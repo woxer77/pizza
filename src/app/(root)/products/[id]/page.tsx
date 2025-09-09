@@ -3,10 +3,10 @@ import React from 'react';
 import PizzaCustomizer from '@/components/elements/pizza-customizer';
 
 import { serializeData } from '@/helpers/utils';
-import { getProductWithRelations } from '@/lib/products';
+import { getProductWithRelations } from '@/services/db/products';
 import { notFound } from 'next/navigation';
-import { getSizes } from '@/lib/sizes';
-import { getDoughTypes } from '@/lib/dough-types';
+import { getSizes } from '@/services/db/sizes';
+import { getDoughTypes } from '@/services/db/dough-types';
 import ProductCustomizer from '@/components/elements/product-customizer';
 import type { ProductPageProps } from '@/shared/types/common';
 

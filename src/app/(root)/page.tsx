@@ -4,7 +4,7 @@ import TopBar from '@/elements/top-bar';
 import { serializeData } from '@/helpers/utils';
 import { Suspense } from 'react';
 
-import { getCategories } from '@/lib/categories';
+import { getCategories } from '@/services/db/categories';
 import { Skeleton } from '@/ui/skeleton';
 
 export default async function Home() {
