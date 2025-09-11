@@ -5,7 +5,8 @@ const ApiRoutes = {
   INGREDIENTS: 'ingredients',
   DOUGH_TYPES: 'dough-types',
   SIZES: 'sizes',
-  CARTS: 'carts'
+  CARTS: 'carts',
+  CARTS_ITEMS: 'carts/items'
 } as const;
 
 export default ApiRoutes;

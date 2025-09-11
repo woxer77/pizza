@@ -16,6 +16,7 @@ import type { ClassProps } from '@/types/common';
 const CartSheetContent: React.FC<ClassProps> = ({ className }) => {
   const fetchCartItems = useCartStore((state) => state.fetchItems);
   const cartItems = useCartStore((state) => state.items);
+  const totalPrice = useCartStore((state) => state.totalPrice);
 
   React.useEffect(() => {
     fetchCartItems();
@@ -41,6 +42,7 @@ const CartSheetContent: React.FC<ClassProps> = ({ className }) => {
             {cartItems.map((item) => (
               <CartItem
                 key={item.id}
+                id={item.id}
                 name={item.name}
                 image={item.image}
                 sizeId={item.sizeId}
@@ -56,12 +58,12 @@ const CartSheetContent: React.FC<ClassProps> = ({ className }) => {
               <div className="flex items-end gap-2">
                 <p className="leading-none">Total:</p>
                 <span className="w-full border-b border-dashed border-neutral-400" />
-                <p className="text-lg leading-none font-bold">$84</p>
+                <p className="text-lg leading-none font-bold">${totalPrice}</p>
               </div>
               <div className="flex items-end gap-2">
                 <p className="leading-none">Taxes:</p>
                 <span className="w-full border-b border-dashed border-neutral-400" />
-                <p className="text-lg leading-none font-bold">$4</p>
+                <p className="text-lg leading-none font-bold">${(totalPrice * 0.04).toFixed(2)}</p>
               </div>
               <Button asChild type="submit" className="py-5">
                 <Link href="/checkout">Place an order</Link>

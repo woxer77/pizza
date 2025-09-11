@@ -21,7 +21,18 @@ export const useCartStore = create<CartState>()((set) => ({
       set({ loading: false });
     }
   },
-  updateItemQuantity: async (id: number, quantity: number) => {},
-  createItem: async (item: any) => {},
-  deleteItem: async (id: number) => {}
+  updateItemQuantity: async (id: number, quantity: number) => {
+    try {
+      set({ loading: true });
+      const cart = await Api.cart.updateItemQuantity(id, quantity);
+      set(getCartDetails(cart));
+    } catch (error) {
+      console.error(error);
+      set({ error: true });
+    } finally {
+      set({ loading: false });
+    }
+  }
+  /* createItem: async (item: any) => {},
+  deleteItem: async (id: number) => {} */
 }));

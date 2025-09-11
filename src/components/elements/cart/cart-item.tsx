@@ -11,11 +11,13 @@ import { MIN_CART_QUANTITY, MAX_CART_QUANTITY } from '@/constants/common';
 import type { ClassProps } from '@/types/common';
 import type { CartItem, CartItemState, QuantityControlType } from '@/shared/types/cart.interface';
 import type { ButtonStates } from '@/shared/types/cart.interface';
+import { useCartStore } from '@/store/cart';
 
-interface CartItemProps extends ClassProps, Omit<CartItemState, 'id'> {}
+interface CartItemProps extends ClassProps, CartItemState {}
 
 const CartItem: React.FC<CartItemProps> = ({
   className,
+  id,
   name,
   sizeId,
   doughTypeId,
@@ -25,18 +27,25 @@ const CartItem: React.FC<CartItemProps> = ({
   price
 }) => {
   const [quantity, setQuantity] = React.useState(initialQuantity);
+  const updateItemQuantity = useCartStore((state) => state.updateItemQuantity);
 
   const quantityControlHandler = (type: QuantityControlType) => {
     switch (type) {
       case 'decrease':
         setQuantity((prev) => {
-          if (prev - 1 >= MIN_CART_QUANTITY) return prev - 1;
+          if (prev - 1 >= MIN_CART_QUANTITY) {
+            updateItemQuantity(id, prev - 1);
+            return prev - 1;
+          }
           return prev;
         });
         break;
       case 'increase':
         setQuantity((prev) => {
-          if (prev + 1 <= MAX_CART_QUANTITY) return prev + 1;
+          if (prev + 1 <= MAX_CART_QUANTITY) {
+            updateItemQuantity(id, prev + 1);
+            return prev + 1;
+          }
           return prev;
         });
         break;

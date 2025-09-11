@@ -1,7 +1,8 @@
 import type { SegmentVariants } from '@/constants/common';
-import type { ProductWithRelations } from './product.interface';
-import type { Size, SizeValues } from './size.interface';
-import type { DoughType, DoughTypeValues } from './dough-type.interface';
+import type { Product } from './product.interface';
+import type { Size } from './size.interface';
+import type { DoughType } from './dough-type.interface';
+import type { Ingredient } from './ingredient.interface';
 
 export interface ClassProps {
   className?: string;
@@ -31,13 +32,12 @@ export interface SegmentItem<T extends string | number> {
 
 export type SegmentVariantValues = (typeof SegmentVariants)[keyof typeof SegmentVariants];
 
-export interface CalculatePriceArgs {
-  product: NonNullable<ProductWithRelations>;
-  sizeId: SizeValues;
-  sizes: Size[];
-  doughTypeId: DoughTypeValues;
-  doughTypes: DoughType[];
-  ingredientIds: number[];
+export interface CalcCartItemPriceArgs {
+  product: Product;
+  size: Size | null;
+  doughType: DoughType | null;
+  ingredients: Ingredient[];
+  quantity: number;
 }
 
 export interface ProductPageProps {

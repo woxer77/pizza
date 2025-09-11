@@ -7,3 +7,9 @@ export const getByToken = async () => {
 
   return data;
 };
+
+export const updateItemQuantity = async (id: number, quantity: number) => {
+  const { data } = await axiosInstance.patch<CartWithRelations>(`${ApiRoutes.CARTS_ITEMS}/${id}`, { quantity });
+
+  return data;
+};
