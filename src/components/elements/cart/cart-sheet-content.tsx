@@ -17,6 +17,7 @@ const CartSheetContent: React.FC<ClassProps> = ({ className }) => {
   const fetchCartItems = useCartStore((state) => state.fetchItems);
   const cartItems = useCartStore((state) => state.items);
   const totalPrice = useCartStore((state) => state.totalPrice);
+  const loading = useCartStore((state) => state.loading);
 
   React.useEffect(() => {
     fetchCartItems();
@@ -58,12 +59,14 @@ const CartSheetContent: React.FC<ClassProps> = ({ className }) => {
               <div className="flex items-end gap-2">
                 <p className="leading-none">Total:</p>
                 <span className="w-full border-b border-dashed border-neutral-400" />
-                <p className="text-lg leading-none font-bold">${totalPrice}</p>
+                <p className={cn('text-lg leading-none font-bold', loading && 'animate-pulse')}>${totalPrice}</p>
               </div>
               <div className="flex items-end gap-2">
                 <p className="leading-none">Taxes:</p>
                 <span className="w-full border-b border-dashed border-neutral-400" />
-                <p className="text-lg leading-none font-bold">${(totalPrice * 0.04).toFixed(2)}</p>
+                <p className={cn('text-lg leading-none font-bold', loading && 'animate-pulse')}>
+                  ${(totalPrice * 0.04).toFixed(2)}
+                </p>
               </div>
               <Button asChild type="submit" className="py-5">
                 <Link href="/checkout">Place an order</Link>

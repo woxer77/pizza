@@ -24,10 +24,10 @@ const getCartByToken = async (token: string) => {
   return cart;
 };
 
-/* const updateCartTotalPrice   = async (token: string) => {
+const updateCartTotalPrice = async (token: string) => {
   const cart = await prisma.cart.findFirst({
     where: {
-      token: parseInt(token)
+      token: Number(token)
     },
     include: {
       items: {
@@ -37,7 +37,9 @@ const getCartByToken = async (token: string) => {
         include: {
           productVariation: {
             include: {
-              product: true
+              product: true,
+              size: true,
+              doughType: true
             }
           },
           ingredients: true
@@ -46,11 +48,39 @@ const getCartByToken = async (token: string) => {
     }
   });
 
-  if (!cart) return;
+  if (!cart) {
+    return { error: 'Cart not found' };
+  }
 
-  const totalPrice = 
+  const totalPrice = cart.items.reduce((acc, item) => acc + item.totalPrice, 0);
 
-  return cart;
-}; */
+  const updatedCart = await prisma.cart.update({
+    where: {
+      id: cart.id
+    },
+    data: {
+      totalPrice: totalPrice
+    },
+    include: {
+      items: {
+        orderBy: {
+          createdAt: 'desc'
+        },
+        include: {
+          productVariation: {
+            include: {
+              product: true,
+              size: true,
+              doughType: true
+            }
+          },
+          ingredients: true
+        }
+      }
+    }
+  });
 
-export { getCartByToken };
+  return updatedCart;
+};
+
+export { getCartByToken, updateCartTotalPrice };

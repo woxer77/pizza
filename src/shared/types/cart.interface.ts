@@ -36,6 +36,6 @@ export interface CartState {
 
   fetchItems: () => Promise<void>;
   updateItemQuantity: (id: number, quantity: number) => Promise<void>;
-  /*  createItem: () => Promise<void>;
-  deleteItem: (id: number) => Promise<void>; */
+  /*  createItem: () => Promise<void>;*/
+  deleteItem: (id: number) => Promise<void>;
 }
